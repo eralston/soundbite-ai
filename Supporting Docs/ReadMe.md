@@ -1,0 +1,2 @@
+# Supporting Docs
+This directory contains various supporting documentation that may be a useful demonstration of the kind of non-code artifacts a company must be able to offer to provide enterprise-grade compliance and communication during the evaluation and delivery phases of a project dealing with large companies.
