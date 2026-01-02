@@ -1,0 +1,152 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Configurations>Debug;Release;DebugWithCodeGen;DebugNoSecurity</Configurations>
+		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Remove="Migrations\20201021131700_1.cs" />
+		<Compile Remove="Migrations\20201021131700_1.Designer.cs" />
+		<Compile Remove="Migrations\20201107212204_1.cs" />
+		<Compile Remove="Migrations\20201107212204_1.Designer.cs" />
+		<Compile Remove="Migrations\20201122162554_2.cs" />
+		<Compile Remove="Migrations\20201122162554_2.Designer.cs" />
+		<Compile Remove="Migrations\20201122162849_2.cs" />
+		<Compile Remove="Migrations\20201122162849_2.Designer.cs" />
+		<Compile Remove="Migrations\20201124152249_2.cs" />
+		<Compile Remove="Migrations\20201124152249_2.Designer.cs" />
+		<Compile Remove="Migrations\20201124152524_2.cs" />
+		<Compile Remove="Migrations\20201124152524_2.Designer.cs" />
+		<Compile Remove="Migrations\20201128190527_1.cs" />
+		<Compile Remove="Migrations\20201128190527_1.Designer.cs" />
+		<Compile Remove="Migrations\20201128191545_1.cs" />
+		<Compile Remove="Migrations\20201128191545_1.Designer.cs" />
+		<Compile Remove="Migrations\20201206162936_3.cs" />
+		<Compile Remove="Migrations\20201206162936_3.Designer.cs" />
+		<Compile Remove="Migrations\20201128010457_TokenSupport.cs" />
+		<Compile Remove="Migrations\20201128010457_TokenSupport.Designer.cs" />
+		<Compile Remove="Migrations\20201128011824_TokenSupport.cs" />
+		<Compile Remove="Migrations\20201128011824_TokenSupport.Designer.cs" />
+		<Compile Remove="Migrations\20201128012410_TokenSupport.cs" />
+		<Compile Remove="Migrations\20201128012410_TokenSupport.Designer.cs" />
+		<Compile Remove="Migrations\20201212173211_1.cs" />
+		<Compile Remove="Migrations\20201212173211_1.Designer.cs" />
+		<Compile Remove="Migrations\20201212174141_CalendarSettings.cs" />
+		<Compile Remove="Migrations\20201212174141_CalendarSettings.Designer.cs" />
+		<Compile Remove="Migrations\20201220195621_Sms.cs" />
+		<Compile Remove="Migrations\20201220195621_Sms.Designer.cs" />
+		<Compile Remove="Migrations\20201230200508_series.cs" />
+		<Compile Remove="Migrations\20201230200508_series.Designer.cs" />
+		<Compile Remove="Migrations\20210102014056_1.cs" />
+		<Compile Remove="Migrations\20210102014056_1.Designer.cs" />
+		<Compile Remove="Migrations\20210106221947_CalendarEntryId.cs" />
+		<Compile Remove="Migrations\20210106221947_CalendarEntryId.Designer.cs" />
+		<Compile Remove="Migrations\20210220170709_2.cs" />
+		<Compile Remove="Migrations\20210220170709_2.Designer.cs" />
+		<Compile Remove="Migrations\20210724042825_3.cs" />
+		<Compile Remove="Migrations\20210724042825_3.Designer.cs" />
+		<Compile Remove="Migrations\20210914143324_3.cs" />
+		<Compile Remove="Migrations\20210914143324_3.Designer.cs" />
+		<Compile Remove="Migrations\20210915141802_3.cs" />
+		<Compile Remove="Migrations\20210915141802_3.Designer.cs" />
+		<Compile Remove="Migrations\20221009215602_10.cs" />
+		<Compile Remove="Migrations\20221009215602_10.Designer.cs" />
+		<Compile Remove="Migrations\20221010230812_11.cs" />
+		<Compile Remove="Migrations\20221010230812_11.Designer.cs" />
+		<Compile Remove="Migrations\20221010231134_11.cs" />
+		<Compile Remove="Migrations\20221010231134_11.Designer.cs" />
+		<Compile Remove="Migrations\20221219212945_12.cs" />
+		<Compile Remove="Migrations\20221219212945_12.Designer.cs" />
+		<Compile Remove="Migrations\20221229223806_13.cs" />
+		<Compile Remove="Migrations\20221229223806_13.Designer.cs" />
+		<Compile Remove="Migrations\20221229224225_13.cs" />
+		<Compile Remove="Migrations\20221229224225_13.Designer.cs" />
+		<Compile Remove="Migrations\20221229231503_13.cs" />
+		<Compile Remove="Migrations\20221229231503_13.Designer.cs" />
+		<Compile Remove="Migrations\20221230180145_13.cs" />
+		<Compile Remove="Migrations\20221230180145_13.Designer.cs" />
+		<Compile Remove="Migrations\20230102180706_13.cs" />
+		<Compile Remove="Migrations\20230102180706_13.Designer.cs" />
+		<Compile Remove="Migrations\20230307165735_13.cs" />
+		<Compile Remove="Migrations\20230307165735_13.Designer.cs" />
+		<Compile Remove="Migrations\20230517183825_15.cs" />
+		<Compile Remove="Migrations\20230517183825_15.Designer.cs" />
+		<Compile Remove="Migrations\20230517185327_15.cs" />
+		<Compile Remove="Migrations\20230517185327_15.Designer.cs" />
+		<Compile Remove="Migrations\20230517212644_15.cs" />
+		<Compile Remove="Migrations\20230517212644_15.Designer.cs" />
+		<Compile Remove="Migrations\20230615152341_16.cs" />
+		<Compile Remove="Migrations\20230615152341_16.Designer.cs" />
+		<Compile Remove="Migrations\20230922165548_18.cs" />
+		<Compile Remove="Migrations\20230922165548_18.Designer.cs" />
+		<Compile Remove="Migrations\20231207145951_19.cs" />
+		<Compile Remove="Migrations\20231207145951_19.Designer.cs" />
+		<Compile Remove="Migrations\20231228140015_19.cs" />
+		<Compile Remove="Migrations\20231228140015_19.Designer.cs" />
+		<Compile Remove="Migrations\20231229173846_19.cs" />
+		<Compile Remove="Migrations\20231229173846_19.Designer.cs" />
+		<Compile Remove="Migrations\20231229162809_19.cs" />
+		<Compile Remove="Migrations\20231229162809_19.Designer.cs" />
+		<Compile Remove="Migrations\20231230152608_19.cs" />
+		<Compile Remove="Migrations\20231230152608_19.Designer.cs" />
+		<Compile Remove="Migrations\20241016144525_21.cs" />
+		<Compile Remove="Migrations\20241016144525_21.Designer.cs" />
+		<Compile Remove="Migrations\20241016145114_21.cs" />
+		<Compile Remove="Migrations\20241016145114_21.Designer.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Remove="example_appsettings.Development.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="example_appsettings.Development.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.19" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.19" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.19" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.19">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="3.1.9" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.9" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Masticore.DirectorySync\Masticore.DirectorySync.csproj" />
+		<ProjectReference Include="..\Masticore.Entity\Masticore.Entity.csproj" />
+		<ProjectReference Include="..\Soundbite\Soundbite.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="Sql\Migration-5-Down.sql">
+			<SubType>Designer</SubType>
+			<LastGenOutput>Migration-5-Up.Designer.cs</LastGenOutput>
+			<Generator>MSDataSetGenerator</Generator>
+		</None>
+		<None Update="Sql\Migration-6-Down.sql">
+			<SubType>Designer</SubType>
+			<LastGenOutput>Migration-5-Up.Designer.cs</LastGenOutput>
+			<Generator>MSDataSetGenerator</Generator>
+		</None>
+		<None Update="Sql\Migration-6-Up.sql">
+			<SubType>Designer</SubType>
+			<LastGenOutput>Migration-5-Up.Designer.cs</LastGenOutput>
+			<Generator>MSDataSetGenerator</Generator>
+		</None>
+		<None Update="Sql\Migration-5-Up.sql">
+			<Generator>MSDataSetGenerator</Generator>
+			<LastGenOutput>Migration-5-Up.Designer.cs</LastGenOutput>
+		</None>
+	</ItemGroup>
+
+</Project>

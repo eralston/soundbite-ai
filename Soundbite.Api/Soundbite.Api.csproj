@@ -1,0 +1,109 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+		<UserSecretsId>c8cadc22-2fee-43f0-b71f-a102fdf3c495</UserSecretsId>
+		<PreserveCompilationReferences>true</PreserveCompilationReferences>
+		<PreserveCompilationContext>true</PreserveCompilationContext>
+		<Version>1.16.0</Version>
+		<Configurations>Debug;Release;DebugWithCodeGen;DebugNoSecurity</Configurations>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile></DocumentationFile>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugNoSecurity|AnyCPU'">
+	  <DocumentationFile>Soundbite.Api.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugWithCodeGen|AnyCPU'">
+		<DocumentationFile>Soundbite.Api.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="App_Offline.htm" />
+	  <None Remove="FFMpeg\bin\ffmpeg.exe" />
+	  <None Remove="FFMpeg\bin\ffprobe.exe" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="FFMpeg\bin\ffmpeg.exe">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="FFMpeg\bin\ffprobe.exe">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="10.1.1" />
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
+		<PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.0.0" />
+		<PackageReference Include="Azure.Identity" Version="1.10.0" />
+		<PackageReference Include="Azure.Storage.Blobs" Version="12.6.0" />
+		<PackageReference Include="Azure.Storage.Files.Shares" Version="12.1.0" />
+		<PackageReference Include="Azure.Storage.Queues" Version="12.12.0" />
+		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.20.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.6" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.Extensions" Version="3.1.5" />
+		<PackageReference Include="Microsoft.AspNetCore.Razor.Language" Version="3.1.5" />
+		<PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.15.1" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.19">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.19" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.3">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Azure" Version="1.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.19" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.19" />
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Masticore.Ad\Masticore.Ad.csproj" />
+		<ProjectReference Include="..\Masticore.Azure.MediaServices\Masticore.Azure.MediaServices.csproj" />
+		<ProjectReference Include="..\Masticore.DirectorySync.Aad\Masticore.DirectorySync.Aad.csproj" />
+		<ProjectReference Include="..\Masticore.DirectorySync.Interact\Masticore.DirectorySync.Interact.csproj" />
+		<ProjectReference Include="..\Masticore.DirectorySync.Okta\Masticore.DirectorySync.Okta.csproj" />
+		<ProjectReference Include="..\Masticore.DirectorySync\Masticore.DirectorySync.csproj" />
+		<ProjectReference Include="..\Masticore.Entity\Masticore.Entity.csproj" />
+		<ProjectReference Include="..\Masticore.Mail\Masticore.Mail.csproj" />
+		<ProjectReference Include="..\Masticore.Queue\Masticore.Queue.csproj" />
+		<ProjectReference Include="..\Masticore.Services\Masticore.Services.csproj" />
+		<ProjectReference Include="..\Masticore.Storage\Masticore.Storage.csproj" />
+		<ProjectReference Include="..\Masticore.Transcription.Azure\Masticore.Transcription.Azure.csproj" />
+		<ProjectReference Include="..\Masticore.Transcription\Masticore.Transcription.csproj" />
+		<ProjectReference Include="..\Soundbite.AzBot.MsTeams\Soundbite.AzBot.MsTeams.csproj" />
+		<ProjectReference Include="..\Soundbite.Entity\Soundbite.Entity.csproj" />
+		<ProjectReference Include="..\Soundbite.Mail\Soundbite.Messaging.csproj" />
+		<ProjectReference Include="..\Soundbite.Queue\Soundbite.Queue.csproj" />
+		<ProjectReference Include="..\Soundbite.Services\Soundbite.Services.csproj" />
+		<ProjectReference Include="..\Soundbite\Soundbite.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="RazorLight">
+			<HintPath>..\Masticore.Mail\RazorLight\RazorLight.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+		<Exec Command="copy &quot;..\Masticore\Masticore.xml&quot; &quot;$(TargetDir)Masticore.xml&quot;&#xD;&#xA;xcopy &quot;..\FFMpeg\&quot; &quot;$(ProjectDir)FFMpeg\&quot; /S /I /R /Y /D" />
+	</Target>
+
+	<ProjectExtensions><VisualStudio><UserProperties appsettings_1development_1json__JsonSchema="https://appliedengdesign.github.io/cnccodes-json-schema/draft/2022-07/schema" /></VisualStudio></ProjectExtensions>
+
+</Project>

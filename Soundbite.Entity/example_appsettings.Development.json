@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "SbDb": "Server=(localdb)\\MSSQLLocalDB; Database=Soundbite; Trusted_Connection=True;"
+  }
+}

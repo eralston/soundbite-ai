@@ -1,0 +1,83 @@
+﻿@model Soundbite.MemberInviteModel
+
+@{
+    Layout = "_ExternalLayout.Html";
+}
+
+@section Preview {
+    Welcome to Soundbite.ai - A Better Way to Communicate. You're about to collaborate at the speed of sound - unlocking your calendar and bringing your team closer together.
+}
+
+@if (Model.IsAppInvite)
+{
+    <tr>
+        <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+            <div style="font-family:Nunito Sans, helvetica, sans-serif;font-size:16px;line-height:1.5;text-align:left;color:#3f5a78;">
+                Congratulations! You are one step closer to taking control of your calendar and discovering a better, more flexible way of communicating!
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+            <div style="font-family:Nunito Sans, helvetica, sans-serif;font-size:16px;line-height:1.5;text-align:left;color:#3f5a78;">
+                NOTE: The invite is linked to this e-mail address. If you log into Soundbite.ai with a different e-mail address, you will need to reach out to your team owner to be re-added using that address. Thank you.
+            </div>
+        </td>
+    </tr>
+}
+<tr>
+    <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+        <div style="font-family:Nunito Sans, helvetica, sans-serif;font-size:16px;line-height:1.5;text-align:left;color:#3f5a78;">
+            @Model.Sender.DisplayName has added you to the team '@Model.Group.Name' in the organization '@Model.Org.Name' on Soundbite.ai.
+        </div>
+    </td>
+</tr>
+@if (Model.IsMsTeamsEnabled)
+{
+    <tr>
+        <td align="center" vertical-align="middle" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+            <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;">
+                <tr>
+                    <td align="center" bgcolor="#0081d4" role="presentation" style="border:none;border-radius:3px;cursor:auto;mso-padding-alt:10px 25px;background:#0081d4;" valign="middle">
+                        <a href="@Model.MsTeamsInfoLink" style="display:inline-block;background:#0081d4;color:#ffffff;font-family:Nunito Sans, helvetica, sans-serif;font-size:16px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:3px;"
+                       target="_blank">
+                            Go to Soundbite for Microsoft Teams
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td align="center" vertical-align="middle" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+            <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;">
+                <tr>
+                    <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                        <a href="@Environment.GetEnvironmentVariable("SB_HOME_URL")" style="display:inline-block;color:#0081d4;font-family:Nunito Sans, helvetica, sans-serif;font-size:16px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:3px;"
+                       target="_blank">
+                            Go to Soundbite Studio
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+}
+else
+{
+    <tr>
+        <td align="center" vertical-align="middle" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+            <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;">
+                <tr>
+                    <td align="center" bgcolor="#0081d4" role="presentation" style="border:none;border-radius:3px;cursor:auto;mso-padding-alt:10px 25px;background:#0081d4;" valign="middle">
+                        <a href="@Environment.GetEnvironmentVariable("SB_HOME_URL")" style="display:inline-block;background:#0081d4;color:#ffffff;font-family:Nunito Sans, helvetica, sans-serif;font-size:16px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:3px;"
+                       target="_blank">
+                            Go to Soundbite Studio
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+}
+

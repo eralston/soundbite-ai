@@ -1,0 +1,62 @@
+﻿@using Soundbite
+@model SessionPublishModel
+
+@{
+    bool isPublic = Model.Session.SessionSecurity == Masticore.SessionSecurityType.Public;
+    string studioUrl = isPublic
+                        ? $"{Environment.GetEnvironmentVariable("SB_HOME_URL")}/public/organizations/{Model.Org.Route}/sessions/{Model.Session.Route}#ur={Model.Receiver.Route}"
+                        : $"{Environment.GetEnvironmentVariable("SB_HOME_URL")}/organizations/{Model.Org.Route}/feed#sbplay={Model.Session.Route}";
+
+    string mainCtaLink = !isPublic && Model.IsMsTeamsEnabled ? Model.MsTeamsActionLink : studioUrl;
+}
+
+@{
+    Layout = "_ExternalLayout.Html";
+    string sessionTypeName = Enum.GetName(typeof(SessionType), Model.Session.SessionType);
+    string receiverName = Model.Receiver?.GivenName ?? Model.Receiver.Email;
+    string senderName = Model.Sender?.DisplayName ?? Model.Sender.Email;
+}
+
+@section Preview {
+    @receiverName, you have a new message from @senderName
+}
+
+@section Footer {
+    @if (!isPublic && Model.IsMsTeamsEnabled)
+    {
+        <a href="@Environment.GetEnvironmentVariable("SB_HOME_URL")/organizations/@Model.Org.Route/feed#sbplay=@Model.Session.Route"
+           target="_blank">
+            Play in Soundbite Studio
+        </a>
+    }
+}
+
+<tr>
+    <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+        <div style="font-family:Nunito Sans, helvetica, sans-serif;font-size:16px;line-height:1.5;text-align:left;color:#3f5a78;">
+            @receiverName, you have a new message from <span style="font-weight:bold">@senderName</span>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td align="center" vertical-align="middle" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+        <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;">
+            <tr>
+                <td align="center" bgcolor="#0081d4" role="presentation" style="border:none;border-radius:3px;cursor:auto;mso-padding-alt:10px 25px;background:#0081d4;" valign="middle">
+                    <a href="@mainCtaLink" style="display:inline-block;background:#0081d4;color:#ffffff;font-family:Nunito Sans, helvetica, sans-serif;font-size:16px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:3px;"
+                       target="_blank">
+                        Play <span style="font-weight: bold">@Model.Session.Name</span>
+                        @if (!isPublic && Model.IsMsTeamsEnabled)
+                        {
+                            <span>in Microsoft Teams</span>
+                        }
+                        else
+                        {
+                            <span>in Soundbite Studio</span>
+                        }
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>

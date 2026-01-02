@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Configurations>Debug;Release;DebugWithCodeGen;DebugNoSecurity</Configurations>
+		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Azure.Storage.Blobs" Version="12.6.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.19" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Masticore\Masticore.csproj" />
+	</ItemGroup>
+
+</Project>

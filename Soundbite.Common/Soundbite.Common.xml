@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Soundbite.Common</name>
+    </assembly>
+    <members>
+        <member name="T:Soundbite.Common.CodeGenMethodAttribute">
+            <summary>
+            Attribute that describes code generation properties for the class / method / property.
+            </summary>
+        </member>
+        <member name="P:Soundbite.Common.CodeGenMethodAttribute.ClientScriptReturnType">
+            <summary>
+            Gets or sets the return type of a method when it does not match the return type in the back-end code.
+            </summary>
+        </member>
+        <member name="T:Soundbite.Common.ActivityType">
+            <summary>
+            List of audit actions one can execute on a tracked object
+            </summary>
+        </member>
+        <member name="T:Soundbite.Common.UserRole">
+            <summary>
+            User role in the system
+            </summary>
+        </member>
+        <member name="M:Soundbite.Common.DomainExtensions.NewRoute(Soundbite.Common.IResource)">
+            <summary>
+            Generates a new UniversalId for the given object if it doesn't already have one
+            NOTE: You must persist changes yourself
+            </summary>
+            <param name="resource"></param>
+            <returns>The UniversalId for the object, which may be pre-existing</returns>
+        </member>
+        <member name="M:Soundbite.Common.DomainExtensions.NewRoute">
+            <summary>
+            Generates a non-sequential, URI-safe identifier
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Common.StringExtensions.LowerFirstChar(System.String)">
+            <summary>
+            Returns the specified string with the first letter lowercased.
+            </summary>
+            <param name="s">string whose first letter should be lowercased.</param>
+            <returns>The string with the first letter lowercased.</returns>
+        </member>
+        <member name="T:Soundbite.Common.IUniversal">
+            <summary>
+            Holds a GUID-based universal ID, EG OID in AAD
+            </summary>
+        </member>
+        <member name="T:Soundbite.Common.IClaims">
+            <summary>
+            Describes an object that provides information from the logged in user directly from the authorization of the user (EG, No Graph)
+            NOTE: The combination of UniversalId and Email can for the same human under vary under certain circumstances
+            such as when the user is deleted from the directory then re-populated with the same email (EG, re-hire)
+            or if the email changes (EG, name change)
+            </summary>
+        </member>
+        <member name="P:Soundbite.Common.IClaims.Email">
+            <summary>
+            Gets the email for this user
+            </summary>
+        </member>
+        <member name="P:Soundbite.Common.IClaims.FullName">
+            <summary>
+            Gets the fullname of the user
+            </summary>
+        </member>
+        <member name="P:Soundbite.Common.IClaims.DirectoryUniversalId">
+            <summary>
+            Gets the unique ID for the directory authenticating this user
+            </summary>
+        </member>
+        <member name="T:Soundbite.Common.IGraphUser">
+            <summary>
+            User as defined in the graph provider
+            </summary>
+        </member>
+        <member name="T:Soundbite.Common.IClipService">
+            <summary>
+            Service for files related to IClip
+            NOTE: This does NOT implement RBAC
+            </summary>
+        </member>
+        <member name="T:Soundbite.Common.IImageService">
+            <summary>
+            Services for handling images, logos, etc
+            NOTE: This does NOT implement RBAC
+            </summary>
+        </member>
+        <member name="T:Soundbite.Common.IMemberService">
+            <summary>
+            Service for IMember
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Soundbite.Common.IOrganizationService" -->
+        <member name="T:Soundbite.Common.IPersonService">
+            <summary>
+            A service for IPerson
+            </summary>
+        </member>
+        <member name="T:Soundbite.Common.ISeriesService">
+            <summary>
+            ISeries, INewSeries, and ISeriesDetails
+            </summary>
+        </member>
+        <member name="T:Soundbite.Common.IService">
+            <summary>
+            Marker interface for a service, an object that provides enapsulation of logic and resources
+            </summary>
+        </member>
+        <member name="T:Soundbite.Common.ISessionService">
+            <summary>
+            ISession, INewSession, and ISessionDetails
+            via extension IPrompt, IClip, and IParticipant
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Soundbite.Common.ITeamService" -->
+        <member name="T:Soundbite.Common.IUserService">
+            <summary>
+            A service for IUser
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,114 @@
+﻿@using Soundbite
+@model SessionPublishModel
+
+@{
+    Layout = "_ExternalLayout.Html";
+    string sessionTypeName = Enum.GetName(typeof(SessionType), Model.Session.SessionType);
+    string receiverName = Model.Receiver?.GivenName ?? Model.Receiver.Email;
+    bool isPublic = Model.Session.SessionSecurity == Masticore.SessionSecurityType.Public;
+    string studioUrl = isPublic
+                       ? $"{Environment.GetEnvironmentVariable("SB_HOME_URL")}/public/organizations/{Model.Org.Route}/sessions/{Model.Session.Route}#ur={Model.Receiver.Route}"
+                       : $"{Environment.GetEnvironmentVariable("SB_HOME_URL")}/organizations/{Model.Org.Route}/feed#sbplay={Model.Session.Route}";
+
+    string mainCtaLink = !isPublic && Model.IsMsTeamsEnabled ? Model.MsTeamsActionLink : studioUrl;
+}
+
+@section Preview {
+                                                        You just published @sessionTypeName: <span style="font-weight: bold">@Model.Session.Name</span> from @Model.Org.Name on Soundbite
+}
+
+@section Footer {
+    @if (Model.IsMsTeamsEnabled)
+    {
+        <a href="@Environment.GetEnvironmentVariable("SB_HOME_URL")/organizations/@Model.Org.Route/feed#sbplay=@Model.Session.Route"
+           target="_blank">
+            Play in Soundbite Studio
+        </a>
+    }
+}
+
+<tr>
+    <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+        <div style="font-family:Nunito Sans, helvetica, sans-serif;font-size:16px;line-height:1.5;text-align:left;color:#3f5a78;">
+            @receiverName, thank you for publishing the @sessionTypeName '@Model.Session.Name' in the organization '@Model.Org.Name'
+        </div>
+    </td>
+</tr>
+<tr>
+    <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+        <div style="font-family:Nunito Sans, helvetica, sans-serif;font-size:16px;line-height:1.5;text-align:left;color:#3f5a78;">
+            There are many ways to share this session, though be sure that you already allowed access by including the desired groups and individuals to the session before sharing:
+            <ul>
+                @if (Model.Session.SessionSecurity == Masticore.SessionSecurityType.Public)
+                {
+                    <li>This is a public session that can be viewed by anyone at: @Environment.GetEnvironmentVariable("SB_HOME_URL")/public/organizations/@Model.Org.Route/sessions/@Model.Session.Route</li>
+                    <li>The same location as a hyperlink is as follows: <a href="@Environment.GetEnvironmentVariable("SB_HOME_URL")/public/organizations/@Model.Org.Route/sessions/@Model.Session.Route"> Listen to @Model.Session.Name in Soundbite Studio</a></li>
+                }
+                else if (Model.IsMsTeamsEnabled)
+                {
+                    <li>This can be viewed via Microsoft Teams following this link: @Model.MsTeamsActionLink</li>
+                    <li>The same location as a hyperlink is as follows: <a href="@Model.MsTeamsActionLink"> Listen to @Model.Session.Name in Soundbite for Microsoft Teams</a></li>
+                }
+                <li>To share the clip to others who have access via Soundbite Studio: @Environment.GetEnvironmentVariable("SB_HOME_URL")/organizations/@Model.Org.Route/feed#sbplay=@Model.Session.Route</li>
+                <li>The same Soundbite Studio location as a hyperlink is as follows: <a href="@Environment.GetEnvironmentVariable("SB_HOME_URL")/organizations/@Model.Org.Route/feed#sbplay=@Model.Session.Route"> Listen to @Model.Session.Name on Soundbite Studio</a></li>
+                <li>Copy a link to a Soundbite SharePoint web part and add this value to the end of the URL: '#sbplay=@Model.Session.Route'</li>
+            </ul>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td align="center" vertical-align="middle" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+        <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;">
+            <tr>
+                <td align="center" bgcolor="#0081d4" role="presentation" style="border:none;border-radius:3px;cursor:auto;mso-padding-alt:10px 25px;background:#0081d4;" valign="middle">
+                    <a href="@mainCtaLink" style="display:inline-block;background:#0081d4;color:#ffffff;font-family:Nunito Sans, helvetica, sans-serif;font-size:16px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:3px;"
+                       target="_blank">
+                        Play <span style="font-weight: bold">@Model.Session.Name</span>
+                        @if (!isPublic && Model.IsMsTeamsEnabled)
+                        {
+                            <span>in Microsoft Teams</span>
+                        }
+                        else
+                        {
+                            <span>in Soundbite Studio</span>
+                        }
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+@if (!Model.IsMsTeamsEnabled)
+{
+    <tr>
+        <td align="center" vertical-align="middle" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+            <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;">
+                <tr>
+                    <td align="center" role="presentation" style="border:none;border-radius:3px;cursor:auto;mso-padding-alt:10px 25px;" valign="middle">
+                        <div style="font-family:Nunito Sans, helvetica, sans-serif;font-size:16px;line-height:1.5;text-align:left;color:#3f5a78;">
+                            Did you know Soundbite loves Microsoft Teams? <a href="@Model.MsTeamsInfoLink">Get the Soundbite app for Microsoft Teams</a>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+}
+<tr>
+    <td align="center" vertical-align="middle" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+        <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;">
+            <tr>
+                <td align="center" role="presentation" style="border:none;border-radius:3px;cursor:auto;mso-padding-alt:10px 25px;" valign="middle">
+                    <div style="font-family:Nunito Sans, helvetica, sans-serif;font-size:16px;line-height:1.5;text-align:left;color:#3f5a78;">
+                        How are we doing? Reach out to
+                        <a href="mailto:Support@Soundbite.Freshdesk.Com" style="display:inline-block;color:#0081d4;font-family:Nunito Sans, helvetica, sans-serif;font-size:16px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;"
+                           target="_blank">
+                            Soundbite Support
+                        </a>
+                        to learn more about customer success, discuss product feedback, your notification settings, security, and more!
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>

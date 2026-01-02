@@ -1,0 +1,138 @@
+trigger:
+  - trunk
+pool:
+  vmImage: windows-latest
+variables:
+  buildConfiguration: Release
+stages:
+  - stage: Build
+    jobs:
+      - job: Back
+        displayName: 'Backend Build'
+        steps:
+          - task: UseDotNet@2
+            inputs:
+              packageType: sdk
+              version: 6.x
+          - task: NuGetToolInstaller@0
+            displayName: Install NuGet
+            inputs:
+              versionSpec: 6.10.1
+          - task: DotNetCoreCLI@2
+            displayName: Restore
+            inputs:
+              command: restore
+              feedsToUse: select
+              projects: Soundbite.sln
+              vstsFeed: >-
+                a3bacb10-1f2f-4587-acb9-f8746b2588b9/4c32800d-e18b-4921-aa6b-d8acdabed85e
+              verbosityRestore: Normal
+          - task: DotNetCoreCLI@2
+            displayName: Test
+            inputs:
+              command: test
+              projects: '**/*Tests.csproj'
+              arguments: '--configuration $(buildConfiguration) --collect "Code coverage" --filter Heavy!=true'
+          - task: PublishTestResults@2
+            displayName: Publish Test Results
+            inputs:
+              testRunner: VSTest
+              testResultsFiles: '**/*.trx'
+          - task: DotNetCoreCLI@2
+            displayName: Build API
+            inputs:
+              command: build
+              projects: '**/Soundbite.Api.csproj'
+              arguments: '--configuration $(buildConfiguration)'
+          - task: DotNetCoreCLI@2
+            displayName: Publish API Project
+            inputs:
+              command: publish
+              publishWebProjects: false
+              projects: '**/Soundbite.Api.csproj'
+              arguments: >-
+                --configuration $(BuildConfiguration) --output
+                $(Build.ArtifactStagingDirectory)/Api
+              zipAfterPublish: true
+          - task: PublishBuildArtifacts@1
+            displayName: Publish Api Build Artifact
+            inputs:
+              pathtoPublish: $(Build.ArtifactStagingDirectory)/Api
+              artifactName: Soundbite-Api
+          - task: DotNetCoreCLI@2
+            displayName: Build WebJobs
+            inputs:
+              command: build
+              projects: '**/Soundbite.WebJobs.*.csproj'
+              arguments: '--configuration $(buildConfiguration)'
+          - task: DotNetCoreCLI@2
+            displayName: Publish WebJobs
+            inputs:
+              command: publish
+              publishWebProjects: false
+              projects: '**/Soundbite.WebJobs.*.csproj'
+              arguments: >-
+                --configuration $(BuildConfiguration) --output
+                $(Build.ArtifactStagingDirectory)/WebJobs-Messaging
+              zipAfterPublish: true
+          - task: PublishBuildArtifacts@1
+            displayName: Publish Build Artifact - Soundbite.WebJobs.Messaging
+            inputs:
+              pathtoPublish: $(Build.ArtifactStagingDirectory)/WebJobs-Messaging
+              artifactName: WebJobs-Messaging
+          - task: DotNetCoreCLI@2
+            displayName: Build Azure Functions
+            inputs:
+              command: build
+              projects: '**/Soundbite.AzFunc.*.csproj'
+              arguments: '--configuration $(buildConfiguration)'
+          - task: DotNetCoreCLI@2
+            displayName: Publish Azure Function Projects
+            inputs:
+              command: publish
+              publishWebProjects: false
+              projects: '**/Soundbite.AzFunc.*.csproj'
+              arguments: >-
+                --configuration $(BuildConfiguration) --output
+                $(Build.ArtifactStagingDirectory)/AzFun
+              zipAfterPublish: true
+          - task: PublishBuildArtifacts@1
+            displayName: Publish Scheduler Build Artifact
+            inputs:
+              pathtoPublish: $(Build.ArtifactStagingDirectory)/AzFun
+              artifactName: Soundbite-AzFun
+      - job: Front
+        displayName: 'Front-End Build'
+        steps:
+          - task: PowerShell@2
+            displayName: Update Front-End Version Info
+            inputs:
+              targetType: filePath
+              filePath: ./update-version.ps1
+          - task: NodeTool@0
+            displayName: Install Node.js
+            inputs:
+              versionSpec: 18.19.0
+          - task: Npm@1
+            displayName: npm install
+            inputs:
+              command: install
+              workingDir: Soundbite.Client
+          - task: Npm@1
+            displayName: npm build
+            inputs:
+              command: custom
+              workingDir: Soundbite.Client
+              customCommand: run build
+          - task: PublishBuildArtifacts@1
+            displayName: Publish Build
+            inputs:
+              PathtoPublish: Soundbite.Client/packages/Soundbite.Spa/Build
+              ArtifactName: Soundbite-UI
+              publishLocation: Container
+          - task: PublishBuildArtifacts@1
+            displayName: Publish Teams Web Build Artifact
+            inputs:
+              PathtoPublish: Soundbite.Client/packages/Soundbite.Teams/build
+              artifactName: Soundbite-TeamsWeb
+              publishLocation: Container

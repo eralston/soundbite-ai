@@ -1,0 +1,15 @@
+﻿@using Soundbite
+@model SessionPublishModel
+@{
+    Layout = "_ExternalLayout.Text.cshtml";
+    string sessionTypeName = Enum.GetName(typeof(SessionType), Model.Session.SessionType);
+}
+
+
+Thank you for publishing the @sessionTypeName '@Model.Session.Name' in the organization @Model.Org.Name on <a href="https://Soundbite.AI">Soundbite.AI</a>.
+
+There are many ways to share this session with others in your organization, though be sure that you already allowed access to the session before sharing:
+
+Please reach out to Support@Soundbite.Freshdesk.Com to learn more
+
+Learn More About Soundbite.ai (https://soundbite.ai/)

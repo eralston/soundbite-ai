@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Configurations>Debug;Release;DebugWithCodeGen;DebugNoSecurity</Configurations>
+		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.Extensions" Version="3.1.5" />
+		<PackageReference Include="Microsoft.CodeAnalysis.Razor" Version="3.1.5" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="3.1.5" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="3.1.5" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.19" />
+		<PackageReference Include="Microsoft.Extensions.DependencyModel" Version="3.1.5" />
+		<PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="3.1.5" />
+		<PackageReference Include="Microsoft.Extensions.Primitives" Version="3.1.5" />
+		<PackageReference Include="SendGrid" Version="9.24.2" />
+		<PackageReference Include="System.Buffers" Version="4.5.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Masticore\Masticore.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="RazorLight">
+			<HintPath>RazorLight\RazorLight.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+</Project>

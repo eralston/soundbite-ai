@@ -1,0 +1,26 @@
+﻿@model Soundbite.MemberInviteModel
+
+@{
+    Layout = "_ExternalLayout.Text";
+}
+
+Welcome to Soundbite.ai - A Better Way to Communicate
+
+@if (Model.IsAppInvite)
+{
+    <text>Congratulations! You are one step closer to taking control of your calendar and discovering a better, more flexible way of communicating!</text>
+}
+
+@Model.Sender.GivenName @Model.Sender.FamilyName has added you to the team '@Model.Group.Name' in the organization '@Model.Org.Name' on Soundbite.ai.
+
+You will need to login to participate in meetings, listen to announcements, and provide collaborative feedback.
+
+Go to Soundbite.ai App (@Environment.GetEnvironmentVariable("SB_HOME_URL"))
+
+With Soundbite.ai, you will greatly reduce the amount of time spent in meetings and communicate better.
+
+We are excited to have you join us. We cannot wait for your feedback; this is just the beginning.
+
+The soundbite.ai team
+
+Learn More About Soundbite.ai (https://soundbite.ai/)

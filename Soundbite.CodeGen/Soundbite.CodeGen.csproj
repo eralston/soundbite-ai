@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net6.0</TargetFramework>
+		<Configurations>Debug;Release;DebugWithCodeGen;DebugNoSecurity</Configurations>
+		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="CodeGen.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="CodeGen.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Masticore.CodeGen\Masticore.CodeGen.csproj" />
+		<ProjectReference Include="..\Masticore.DirectorySync.Aad\Masticore.DirectorySync.Aad.csproj" />
+		<ProjectReference Include="..\Masticore.DirectorySync.Interact\Masticore.DirectorySync.Interact.csproj" />
+		<ProjectReference Include="..\Masticore.DirectorySync.Okta\Masticore.DirectorySync.Okta.csproj" />
+		<ProjectReference Include="..\Masticore.DirectorySync\Masticore.DirectorySync.csproj" />
+		<ProjectReference Include="..\Masticore\Masticore.csproj" />
+		<ProjectReference Include="..\Soundbite.Api\Soundbite.Api.csproj" />
+		<ProjectReference Include="..\Soundbite\Soundbite.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="CodeGen-PostBuild.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</None>
+	</ItemGroup>
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="if $(ConfigurationName) == DebugWithCodeGen (&#xD;&#xA;  echo &quot;Deleting API Typescript&quot;&#xD;&#xA;  rmdir /s /q &quot;$(SolutionDir)Soundbite.Client\packages\api\src\generated&quot;&#xD;&#xA;  echo &quot;Generating API Typescript...&quot;&#xD;&#xA;  $(ProjectDir)/bin/DebugWithCodeGen/net6.0/Soundbite.CodeGen.exe -s CodeGen-PostBuild.json&#xD;&#xA;  echo &quot;Formatting API Typescript...&quot;&#xD;&#xA;  cd $(SolutionDir)/Soundbite.Client&#xD;&#xA; echo &quot;API Typescript Generation Successful&quot;&#xD;&#xA;)" />
+	</Target>
+
+</Project>

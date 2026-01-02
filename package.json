@@ -1,0 +1,10 @@
+{
+    "name": "soundbite-utils",
+    "version": "1.0.0",
+    "description": "A set of npm utilities for supporting development of Soundbite",
+    "scripts": {
+        "storage-install":"npm install -g azurite",
+        "storage-locate":"mkdir .\\Soundbite.Client\\__azurite",
+        "storage":"azurite --silent --location .\\Soundbite.Client\\__azurite --debug .\\Soundbite.Client\\__azurite\\debug.log"
+    }
+}

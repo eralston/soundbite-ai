@@ -1,0 +1,57 @@
+{
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchUrl": "http://localhost:52313/swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "SB_EMAIL_ENABLED": "true",
+        "SB_HOME_URL": "https://localhost:3000",
+        "SB_IS_AIRPLANE_MODE": "false",
+        "SB_QUEUED_MESSAGES": "false",
+        "SB_QUEUED_SYNC": "false",
+        "SB_SMS_ENABLED": "true",
+        "SB_TEAMS_NOTIFICATIONS_ENABLED": "true"
+      }
+    },
+    "IIS Express (NGROK)": {
+      "commandName": "IISExpress",
+      "launchUrl": "http://localhost:52313/swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Ngrok",
+        "SB_EMAIL_ENABLED": "false",
+        "SB_HOME_URL": "https://localhost:3000",
+        "SB_IS_AIRPLANE_MODE": "false",
+        "SB_QUEUED_MESSAGES": "false",
+        "SB_SMS_ENABLED": "false",
+        "SB_TEAMS_NOTIFICATIONS_ENABLED": "false"
+      }
+    },
+    "IIS (Local)": {
+      "commandName": "IIS",
+      "workingDirectory": "$(ProjectDir)bin\\Debug\\net6.0",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "SB_EMAIL_ENABLED": "true",
+        "SB_HOME_URL": "https://soundbitedev:3000",
+        "SB_IS_AIRPLANE_MODE": "false",
+        "SB_QUEUED_MESSAGES": "true",
+        "SB_SMS_ENABLED": "true",
+        "SB_TEAMS_NOTIFICATIONS_ENABLED": "false"
+      }
+    }
+  },
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://localhost:52313/",
+      "sslPort": 44390
+    },
+    "iisExpress": {
+      "applicationUrl": "http://localhost:52313/",
+      "sslPort": 44390
+    }
+  }
+}

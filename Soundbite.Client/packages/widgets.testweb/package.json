@@ -1,0 +1,52 @@
+{
+  "name": "@soundbite/partner-web-react",
+  "private": true,
+  "description": "React application designed to host Soundbite widgets in an iFrame.",
+  "version": "0.1.0",
+  "author": "Soundbite.AI",
+  "dependencies": {
+    "@soundbite/api": "^1.0.0",
+    "@soundbite/api-axios": "^1.0.0",
+    "@soundbite/widgets-api": "^1.0.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^4.0.3",
+    "web-vitals": "^1.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.0.11",
+    "@types/react": "^17.0.1",
+    "@types/react-dom": "^17.0.3",
+    "@types/react-router-dom": "^5.1.7",
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.1.5"
+  },
+  "scripts": {
+    "build": "react-scripts --openssl-legacy-provider build",
+    "clean": "rimraf ./build",
+    "eject": "react-scripts eject",
+    "format": "prettier --write src/**/*.{ts,tsx,scss,css,json}",
+    "start": "set PORT=4001 && react-scripts --openssl-legacy-provider start",
+    "test": "echo \"No Tests Configured\" && exit 0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

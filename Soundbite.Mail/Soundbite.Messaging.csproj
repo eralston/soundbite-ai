@@ -1,0 +1,83 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+		<Configurations>Debug;Release;DebugWithCodeGen;DebugNoSecurity</Configurations>
+		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile></DocumentationFile>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugNoSecurity|AnyCPU'">
+	  <DocumentationFile />
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugWithCodeGen|AnyCPU'">
+	  <DocumentationFile />
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="Templates\MemberInvite.Html.cshtml" />
+		<None Remove="Templates\MemberInvite.Text.cshtml" />
+		<None Remove="Templates\PersonInvite.Html.cshtml" />
+		<None Remove="Templates\PersonInvite.Text.cshtml" />
+		<None Remove="Templates\SessionHostPublish.Html.cshtml" />
+		<None Remove="Templates\SessionHostPublish.Text.cshtml" />
+		<None Remove="Templates\SessionPublish.Html.cshtml" />
+		<None Remove="Templates\SessionPublish.Text.cshtml" />
+		<None Remove="Templates\SessionReminder.Html.cshtml" />
+		<None Remove="Templates\SessionReminder.Text.cshtml" />
+		<None Remove="Templates\UserInvite.html.cshtml" />
+		<None Remove="Templates\UserInvite.Text.cshtml" />
+		<None Remove="Templates\UserWelcome.Html.cshtml" />
+		<None Remove="Templates\UserWelcome.Text.cshtml" />
+		<None Remove="Templates\_ExternalLayout.Html.cshtml" />
+		<None Remove="Templates\_ExternalLayout.Text.cshtml" />
+		<None Remove="Templates\_InternalLayout.Html.cshtml" />
+		<None Remove="Templates\_InternalLayout.Text.cshtml" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="Templates\MemberInvite.Html.cshtml" />
+		<EmbeddedResource Include="Templates\MemberInvite.Text.cshtml" />
+		<EmbeddedResource Include="Templates\PersonInvite.Html.cshtml" />
+		<EmbeddedResource Include="Templates\PersonInvite.Text.cshtml" />
+		<EmbeddedResource Include="Templates\SessionHostPublish.Html.cshtml" />
+		<EmbeddedResource Include="Templates\SessionHostPublish.Text.cshtml" />
+		<EmbeddedResource Include="Templates\SessionPublish.Html.cshtml" />
+		<EmbeddedResource Include="Templates\SessionPublish.Text.cshtml" />
+		<EmbeddedResource Include="Templates\SessionReminder.Html.cshtml" />
+		<EmbeddedResource Include="Templates\SessionReminder.Text.cshtml" />
+		<EmbeddedResource Include="Templates\UserInvite.Html.cshtml" />
+		<EmbeddedResource Include="Templates\UserInvite.Text.cshtml" />
+		<EmbeddedResource Include="Templates\UserWelcome.Html.cshtml" />
+		<EmbeddedResource Include="Templates\UserWelcome.Text.cshtml" />
+		<EmbeddedResource Include="Templates\_ExternalLayout.Html.cshtml" />
+		<EmbeddedResource Include="Templates\_ExternalLayout.Text.cshtml" />
+		<EmbeddedResource Include="Templates\_InternalLayout.Html.cshtml" />
+		<EmbeddedResource Include="Templates\_InternalLayout.Text.cshtml" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="5.0.1" />
+		<PackageReference Include="Microsoft.Graph" Version="3.9.0" />
+		<PackageReference Include="SendGrid" Version="9.24.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Masticore.Acs\Masticore.Acs.csproj" />
+		<ProjectReference Include="..\Masticore.Entity\Masticore.Entity.csproj" />
+		<ProjectReference Include="..\Masticore.Mail\Masticore.Mail.csproj" />
+		<ProjectReference Include="..\Masticore.Services\Masticore.Services.csproj" />
+		<ProjectReference Include="..\Masticore.Sms\Masticore.Sms.csproj" />
+		<ProjectReference Include="..\Masticore\Masticore.csproj" />
+		<ProjectReference Include="..\Soundbite.Entity\Soundbite.Entity.csproj" />
+		<ProjectReference Include="..\Soundbite.Queue\Soundbite.Queue.csproj" />
+		<ProjectReference Include="..\Soundbite.Services\Soundbite.Services.csproj" />
+		<ProjectReference Include="..\Soundbite\Soundbite.csproj" />
+	</ItemGroup>
+
+</Project>

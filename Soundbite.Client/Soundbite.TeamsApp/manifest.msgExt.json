@@ -1,0 +1,120 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.9",
+    "version": "1.0.11",
+    "showLoadingIndicator": false,
+    "id": "a873eaa7-fd24-4cac-bc27-8c9228e6234b",
+    "packageName": "soundbite.teams.app",
+    "developer": {
+        "name": "Soundbite",
+        "websiteUrl": "https://www.soundbite.ai",
+        "privacyUrl": "https://soundbite.ai.ngrok.io/privacy.html",
+        "termsOfUseUrl": "https://soundbite.ai.ngrok.io/terms.html",
+        "mpnId": "6244226"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "Soundbite",
+        "full": "Soundbite Teams App"
+    },
+    "description": {
+        "short": "Soundbite Integration for Teams",
+        "full": "Provides access to your Personal and Team-Based Soundbite Feeds."
+    },
+    "accentColor": "#8965E0",
+    "configurableTabs": [
+        {
+            "configurationUrl": "https://soundbite.ai.ngrok.io/FeedTabConfig",
+            "canUpdateConfiguration": true,
+            "scopes": [
+                "team"
+            ],
+            "context": [
+                "channelTab"
+            ]
+        }
+    ],
+    "staticTabs": [
+        {
+            "entityId": "SoundbiteMyFeed",
+            "name": "My Feed",
+            "contentUrl": "https://soundbite.ai.ngrok.io/FeedTab",
+            "websiteUrl": "https://www.soundbite.ai",
+            "scopes": [
+                "personal"
+            ]
+        },
+        {
+            "entityId": "about",
+            "scopes": [
+                "personal"
+            ]
+        }
+    ],
+	"activities": {
+		"activityTypes": [
+			{
+				"type": "soundbiteCreated",
+				"description": "New Soundbite",
+				"templateText": "New Soundbite"
+			}
+		]
+	},
+	"bots": [
+		{
+			"botId": "a873eaa7-fd24-4cac-bc27-8c9228e6234b",
+			"needsChannelSelector": false,
+			"isNotificationOnly": true,
+			"scopes": [
+				"team",
+				"personal",
+				"groupchat"
+			]
+		}
+	],
+	"composeExtensions": [
+		{
+			"botId": "a873eaa7-fd24-4cac-bc27-8c9228e6234b",
+			"canUpdateConfiguration": false,
+			"commands": [
+				{
+					"id": "createSoundbite",
+					"type": "action",
+					"title": "Create Soundbite",
+					"description": "Add a Soundbite to your conversation",
+					"context":[
+						"compose",
+						"message"
+					],
+					"fetchTask": true
+				}
+			]
+		}
+	],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+	"devicePermissions": [
+		"media",
+		"notifications",
+		"openExternal"
+	],
+    "validDomains": [
+		"api.soundbite.ai.ngrok.io",
+        "soundbite.ai.ngrok.io",
+		"test.soundbite.cloud",
+		"preview.soundbite.cloud",
+		"usw.soundbite.cloud",
+        "www.soundbite.ai"
+    ],
+	"webApplicationInfo": {
+		"id": "bb8683f7-2832-4c83-adf3-14665e513e88",
+		"resource": "api://soundbite.ai.ngrok.io/bb8683f7-2832-4c83-adf3-14665e513e88",
+		"applicationPermissions": [
+		]
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "@soundbite/widgets-api",
+  "version": "1.0.0",
+  "description": "Allows a host application to interact with Soundbite widgets through an IFrame.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "format": "prettier --write src/**/*.{ts,tsx,scss,css,json}",
+    "target": "es5",
+    "test": "echo \"No tests defined\" && exit 0",
+    "watch": "tsc --watch"
+  },
+  "keywords": [
+    "soundbite",
+    "soundbite.ai",
+    "widgets"
+  ],
+  "author": "Soundbite.AI",
+  "license": "ISC",
+  "types": "dist/index.d.ts",
+  "devDependencies": {
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.7.4"
+  }
+}

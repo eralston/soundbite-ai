@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+	<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Masticore\Masticore.csproj" />
+    <ProjectReference Include="..\Soundbite.Services\Soundbite.Services.csproj" />
+    <ProjectReference Include="..\Soundbite\Soundbite.csproj" />
+  </ItemGroup>
+
+</Project>

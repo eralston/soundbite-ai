@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Soundbite.AzFunc.DirectorySync": {
+      "commandName": "Project",
+      "environmentVariables": {
+        // Soundbite API - Localhost
+        "SB_DEFAULT_APP_SECRET": "[CLIENT SECRET]",
+        "SB_DEFAULT_APP_ID": "[CLIENT ID]"
+      }
+    }
+  }
+}

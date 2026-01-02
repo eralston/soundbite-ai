@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Configurations>Debug;Release;DebugWithCodeGen;DebugNoSecurity</Configurations>
+		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="10.1.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Masticore.Ad\Masticore.Ad.csproj" />
+		<ProjectReference Include="..\Masticore.DirectorySync\Masticore.DirectorySync.csproj" />
+		<ProjectReference Include="..\Masticore.Entity\Masticore.Entity.csproj" />
+		<ProjectReference Include="..\Masticore.Storage\Masticore.Storage.csproj" />
+		<ProjectReference Include="..\Masticore\Masticore.csproj" />
+	</ItemGroup>
+
+</Project>

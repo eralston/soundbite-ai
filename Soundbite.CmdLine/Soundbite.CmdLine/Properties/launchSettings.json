@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Soundbite.CmdLine": {
+      "commandName": "Project",
+      "commandLineArgs": "/action \"Build SPFX WebParts\" VersionStable=1.0.0.3 VersionAuto=1.0.0.3 TargetEnv=USW"
+    }
+  }
+}

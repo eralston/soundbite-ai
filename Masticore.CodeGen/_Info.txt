@@ -1,0 +1,22 @@
+﻿Need to account for the following comments
+
+==========================================
+Soundbite.App/Domain/Interfaces.cs
+==========================================
+    // Interfaces sharing domain data between client and server
+    // There should be a Typescript version of this file in Domain.ts of the SDK
+    // Conversion via: https://csharptotypescript.azurewebsites.net/
+
+    // Nested data requires classes over interfaces
+
+    // IResource implementers are objects in the front-end that mirror the API
+    // I*Fields interfaces are for sharing properties with Entities
+    // I*Details interface are for object that can only be read as a single action, generally because they contain complex collections
+    // *Role enums should be able to do less-than/greater-than logic to complare on a scale
+    // *Type enums should be fixed logical categories that are open for customization
+
+==========================================
+Soundbite.App/Domain/Services/Services.cs
+==========================================
+    // Interfaces for objects that interacting with resources and provide business logic
+    // Any method taking an IClaims should implement RBAC

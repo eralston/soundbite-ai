@@ -1,0 +1,52 @@
+{
+  "name": "root",
+  "private": true,
+  "workspaces": [
+    "packages/api",
+    "packages/api.axios",
+    "packages/widgets.api",
+    "packages/widgets.react",
+    "packages/widgets.react.app",
+    "packages/widgets.react.injectable",
+    "packages/Soundbite.Spa",
+    "packages/Soundbite.Teams"
+  ],
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "run-p": "0.0.0"
+  },
+  "scripts": {
+    "build": "npm run build -ws",
+    "build:dev": "npm run build -ws --include=dev",
+    "app:react-app": "npm run start --workspace=@soundbite/widgets-react-app",
+    "app:spa": "npm run start --workspace=@soundbite/spa",
+    "app:spa:ngrok": "npm run start:ngrok --workspace=@soundbite/spa",
+    "app:testweb": "npm run start --workspace=@soundbite/partner-web-react",
+    "app:teamsweb": "npm run start --workspace=@soundbite/spa-teams",
+    "clean": "npm run clean -ws",
+    "format": "npm run format -ws",
+    "ngrok": "cd ngrok && powershell -executionpolicy bypass -File .\\run.ps1",
+    "ngrok:install": "cd ngrok && powershell -executionpolicy bypass -File .\\setup.ps1",
+    "ready": "npm run format -ws && npm test -ws && npm run build -ws",
+    "refreshVSToken": "vsts-npm-auth -config .npmrc",
+    "reset": "npm run clean && npm run ready",
+    "scrub": "npm run clean && npx rimraf ./**/package-lock.json",
+    "sp": "npm run app:sp watch",
+    "spa": "npm run app:spa watch",
+    "spa:ngrok": "npm run app:spa:ngrok watch",
+    "teams": "npm run app:teamsweb watch",
+    "test": "npm run test -ws --if-present",
+    "watch": "concurrently \"npm:watch:*\"",
+    "watch:api": "cd packages/api && npm run watch",
+    "watch:api-axios": "cd packages/api.axios && npm run watch",
+    "watch:widgets-api": "cd packages/widgets.api && npm run watch",
+    "watch:widgets-react": "cd packages/widgets.react && npm run watch",
+    "widgets": "npm run app:react-app app:testweb watch"
+  },
+  "volta": {
+    "node": "18.19.0",
+    "npm": "8.19.4"
+  }
+}

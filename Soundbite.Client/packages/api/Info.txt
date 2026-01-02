@@ -1,0 +1,1 @@
+https://medium.com/collaborne-engineering/typescript-create-library-for-nodejs-and-browser-fece291d517f

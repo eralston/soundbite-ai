@@ -1,0 +1,2304 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Soundbite.Api</name>
+    </assembly>
+    <members>
+        <member name="T:Soundbite.Api.Controllers.AzureAuthController">
+            <summary>
+            An insecure controller for pulling client-side configuration dynamically from the app
+            Unfortunately not a jacuzzi remote controller
+            </summary>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.AzureAuthController.#ctor(Masticore.Security.ISecurityContext,Soundbite.Api.Services.SpaService,Soundbite.Api.AdAuthTokenValidator,Masticore.Services.IUserService)">
+            <summary>
+            Creates a new <see cref="T:Soundbite.Api.Controllers.AzureAuthController"/> instance.
+            </summary>
+            <param name="securityContext">DI Security context reference.</param>
+            <param name="spaService">DI SPA service reference.</param>
+            <param name="authTokenValidator">DI Azure auth token validator.</param>
+            <param name="userService">DI User Service reference.</param>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.AzureAuthController.LoginAzureAD(Masticore.Models.User,System.String)">
+            <summary>
+            Responsible for authenticating request against Azure Active Directory (AAD) and sending
+            a payload containing application initialization data.
+            </summary>
+            <param name="externalUserInfo">External user information to import into Soundbite.</param>
+            <param name="orgRoute">Optional route of the organization associated with the user.</param>
+            <returns>an application payload containing data required to initialize the application.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.AzureAuthController.LoginToOrgAzureAD(System.String,Masticore.Models.User)">
+            <summary>
+            Authenticate against Azure Active Directory (AAD) for the given organization
+            </summary>
+            <param name="orgRoute">Route of the org into which the user is logging in.</param>
+            <param name="externalUserInfo">External user information used to update current user's info.</param>
+            <returns>an application payload containing data required to initialize the application.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.AzureAuthController.LoginTeams(Masticore.Services.IUserSettingsService)">
+            <summary>
+            Responsible for managing the initial login process for Soundbite's Microsoft Teams app.
+            Action is responsible for azure token validation.
+            </summary>
+            <param name="userSettingsService">DI reference.</param>
+            <returns>an application payload containing data required to initialize the application.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.AzureAuthController.LoginSharePoint">
+            <summary>
+            Responsible for managing the initial login process for Soundbite's Microsoft SharePoint app.
+            Action is responsible for azure token validation.
+            </summary>
+            <returns>an application payload containing data required to initialize the application.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.AzureAuthController.LoginToOrg(System.String)">
+            <summary>
+            Sets up an app payload for the given org, including a token based on the current user's bearer token
+            </summary>
+            <param name="orgRoute">Route of the organization the user is accessing.</param>
+            <returns>an <see cref="T:Soundbite.Api.AppPayload"/> containing application initialization data or <c>null</c> if there are any auth issues.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.AzureAuthController.FixStatusCode">
+            <summary>
+            Ensures that the status code is 200
+            </summary>
+        </member>
+        <member name="T:Soundbite.Api.Controllers.ClipController">
+            <summary>
+            Controller with endpoints for interacting with clips.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
+        </member>
+        <member name="M:Soundbite.Api.Controllers.ClipController.SimulateAmsGridEvent(Soundbite.Services.IClipOperationService,Soundbite.Services.ISbInfrastructure,Soundbite.Services.Lifecycle.ILifecycleFactory,System.String)">
+            <summary>
+            Allows for the processing of a missed AMS event from the event grid.
+            </summary>
+            <param name="clipOperationService">DI service reference.</param>
+            <param name="infrastructure">DI service reference.</param>
+            <param name="lifecycleFactory">DI service reference.</param>
+            <param name="clipOpRoute">Route of the clip operation to process.</param>
+            <returns>a string containing text about the operation</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.ClipController.NewClipFromRequest(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            Extracts a <see cref="T:Soundbite.Models.NewClip"/> object from the given <see cref="T:Microsoft.AspNetCore.Http.HttpRequest"/>
+            </summary>
+            <remarks>
+            If this does NOT have a value for <see cref="P:Soundbite.Models.NewClip.Stream"/>, then the intention is for the caller to upload direct to storage AFTER creating an initial record for the clip
+            </remarks>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Soundbite.Api.Controllers.ClipController.SessionService">
+            <summary>
+            Gets to <see cref="T:Soundbite.Services.ISessionService"/> object for this controller
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.Controllers.ClipController.ClipService">
+            <summary>
+            Gets the <see cref="T:Soundbite.Services.IClipFileService"/> object for this controller
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.Controllers.ClipController.OrgService">
+            <summary>
+            Gets the <see cref="T:Masticore.Services.IOrganizationService"/> object for this controller
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.Controllers.ClipController.TranscriptionService">
+            <summary>
+            Gets the <see cref="T:Soundbite.Services.ISbTranscriptionService"/> instance for this controller.
+            </summary>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.ClipController.#ctor(Soundbite.Services.ISessionService,Soundbite.Services.IClipService,Masticore.Services.IOrganizationService,Soundbite.Services.ISbTranscriptionService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Soundbite.Api.Controllers.SessionsController"/> class.
+            </summary>
+            <param name="sessionService">ISessionService DI reference.</param>
+            <param name="clipService">IClipService DI reference.</param>
+            <param name="orgService">IOrganizationService DI reference.</param>
+            <param name="transcriptionService">ISbTranscriptionService DI reference.</param>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.ClipController.CreateAsync_Obsolete(System.String,System.String,System.String)">
+            <summary>
+            Uploads an audio clip and associates it to a prompt within a session. 
+            This include pulling the clip stream, clip type, file type, seconds, and participant role from the form data.
+            </summary>
+            <remarks>
+            If there was a file included with the form data, that will be uploaded to Storage. 
+            This will only work if the file is les than 29MB. 
+            If no clip is given, then this unlocks a location in Azure Storage for receiving the clip within the hour. 
+            That allows a clip size of gigabytes: https://docs.microsoft.com/en-us/azure/storage/blobs/scalability-targets#scale-targets-for-blob-storage
+            </remarks>
+            <remarks>This can only accept a file in the </remarks>
+            <param name="orgRoute">Route of the organization containing the session.</param>
+            <param name="sessionRoute">Route of the session containing the prompt.</param>
+            <param name="promptRoute">Route of the prompt to which the clip should be associated.</param>
+            <returns>the URL to the location were the clip has been persisted along with client operations that need to run on the client.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.ClipController.CreateAsync(System.String,System.String,System.String)">
+            <summary>
+            Async create a clip; TODO Move to old Create clips route
+            </summary>
+            <param name="orgRoute"></param>
+            <param name="sessionRoute"></param>
+            <param name="promptRoute"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.ClipController.StateAsync(System.String,System.String,System.String,System.String)">
+            <summary>
+            Gets the current state for the given clip
+            </summary>
+            <param name="orgRoute"></param>
+            <param name="sessionRoute"></param>
+            <param name="promptRoute"></param>
+            <param name="clipRoute"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.ClipController.CreateAnnouncementClipAsync(System.String,System.String)">
+            <summary>
+            Uploads an audio clip and associates it to a only prompt within an announcement session.
+            </summary>
+            <param name="orgRoute">Route of the organization containing the session.</param>
+            <param name="sessionRoute">Route of the session containing the prompt.</param>
+            <returns>the URL to the location were the clip has been persisted along with client operations that need to run on the client.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.ClipController.GetTranscriptUrl(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Retrieves a URL w/token that can be used to request the transcript file for the specified clip.
+            </summary>
+            <param name="orgRoute">Route of the organization containing the session.</param>
+            <param name="sessionRoute">Route of the session associated with the clip.</param>
+            <param name="clipRoute">Route of the clip whose transcript is being sought.</param>
+            <param name="isPublic">Flag indicating whether the session is public.</param>
+            <returns>a string containing a URL w/token that can be used to request the transcript.</returns>
+        </member>
+        <member name="T:Soundbite.Api.Controllers.ControllerExtensions">
+            <summary>
+            Extensions to support <see cref="T:Microsoft.AspNetCore.Mvc.ControllerBase"/> and friends
+            </summary>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.ControllerExtensions.ToStream(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            Converts the body of the given requests to a stream
+            WARNIING: This should NOT be used for large files
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.ControllerExtensions.GetBearerToken(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            Responsible for parsing out the bearer token from the Authorization HTTP header.
+            </summary>
+            <returns>a string containing the bearer token value.</returns>
+        </member>
+        <member name="T:Soundbite.Api.Controllers.FormExtensions">
+            <summary>
+            Extension methods for handling HTTP context
+            </summary>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.FormExtensions.ToEnum``1(Microsoft.AspNetCore.Http.IFormCollection,System.String,``0)">
+            <summary>
+            Converts the given form field to the given enum type
+            </summary>
+            <typeparam name="TEnum">.NET type of the enum </typeparam>
+            <param name="formData">Form data from an HTTP request.</param>
+            <param name="fieldName">Name of the field containing the enum.</param>
+            <param name="defaultValue">Default value to use if the form data is missing.</param>
+            <returns>the parsed enum value</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.FormExtensions.ToEnum``1(Microsoft.AspNetCore.Http.IFormCollection,System.String)">
+            <summary>
+            Converts the given form field to the given enum type
+            </summary>
+            <typeparam name="TEnum">.NET type of the enum </typeparam>
+            <param name="formData">Form data from an HTTP request.</param>
+            <param name="fieldName">Name of the field containing the enum.</param>
+            <returns>the parsed enum value</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.FormExtensions.ToInt(Microsoft.AspNetCore.Http.IFormCollection,System.String)">
+            <summary>
+            Extension for <see cref="T:Microsoft.AspNetCore.Http.IFormCollection"/> that gives back the parsed <see cref="T:System.Int32"/> value of the given field name
+            </summary>
+            <param name="formData"></param>
+            <param name="fieldName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.FormExtensions.ToFloat(Microsoft.AspNetCore.Http.IFormCollection,System.String)">
+            <summary>
+            Extension for <see cref="T:Microsoft.AspNetCore.Http.IFormCollection"/> that parses the given form field into a <see cref="T:System.Single"/>
+            </summary>
+            <param name="formData"></param>
+            <param name="fieldName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Soundbite.Api.Controllers.GroupsController">
+            <summary>
+            Controller with endpoints for interacting with sessions.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
+        </member>
+        <member name="M:Soundbite.Api.Controllers.GroupsController.#ctor(Masticore.Services.IGroupService,Soundbite.Services.ISbOrganizationService)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="groupService"></param>
+            <param name="orgService"></param>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.GroupsController.ReadAllGroupsAsync(System.String)">
+            <summary>
+            Async read all <see cref="T:Masticore.Models.Group"/> objects for the given org
+            </summary>
+            <param name="orgRoute"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.GroupsController.ReadMyGroupsAsync(System.String)">
+            <summary>
+            Async read all <see cref="T:Masticore.Models.Group"/> objects for the given org
+            </summary>
+            <param name="orgRoute"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.GroupsController.ReadMyTargetGroupsAsync(System.String)">
+            <summary>
+            Async read all <see cref="T:Masticore.Models.Group"/> objects for the given org
+            </summary>
+            <param name="orgRoute"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.GroupsController.CreateAsync(System.String,Masticore.Resources.NewGroup)">
+            <summary>
+            Creates a new team.
+            </summary>
+            <param name="orgRoute">Route of the organization in which to create the team.</param>
+            <param name="newGroup">Team to create.</param>
+            <returns>an IGroupDetail instance populated with the newly created team info.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.GroupsController.ReadAsync(System.String,System.String)">
+            <summary>
+            Retrieves the specified team.
+            </summary>
+            <param name="orgRoute">Route of the organization in which the team resides.</param>
+            <param name="groupRoute">Route of the team to retrieve.</param>
+            <returns>the requested team if found, otherwise throws an HTTP 404 not found exception.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.GroupsController.DeleteAsync(System.String,System.String)">
+            <summary>
+            Performs a "soft" delete of the team.
+            </summary>
+            <param name="orgRoute">Route of the organization in which the team resides.</param>
+            <param name="groupRoute">Route of the team to delete.</param>
+            <returns>an HTTP response indicating success or failure of the operation.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.GroupsController.PatchAsync(System.String,System.String,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument)">
+            <summary>
+            Patches the specified team according to the patch instructions.
+            </summary>
+            <param name="orgRoute">Route of the organization to which the team belongs.</param>
+            <param name="groupRoute">Route of the team to update.</param>
+            <param name="changes">Patch instructions identifying what changes to apply to the organization.</param>
+            <returns>an ITeamDetails instance populated with the updated team information.</returns>
+        </member>
+        <member name="T:Soundbite.Api.Controllers.MediaStreamingController">
+            <summary>
+            Exposes endpoints for the Streaming Media Proxy.
+            </summary>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.MediaStreamingController.#ctor(Soundbite.Services.IMediaStreamingService,Soundbite.Services.IClipFileService)">
+            <summary>
+            Creates a new <see cref="T:Soundbite.Api.Controllers.MediaStreamingController"/> instance.
+            </summary>
+            <param name="mediaStreamingService">DI service reference.</param>
+            <param name="clipFileService">DI service reference.</param>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.MediaStreamingController.SbClipManifest(System.String,System.String)">
+            <summary>
+            Responsible for getting the m3u8 multivariant manifest for a SB hosted streaming clip.
+            The SAS token from this call can be appended to the URLs for all variant playlist files
+            and vieo segements within the multivariant playlists.
+            </summary>
+            <param name="orgRoute">Route of the organization.</param>
+            <param name="clipRoute">Route of the clip.</param>
+            <returns>a <see cref="T:Soundbite.Api.SbClipManifestResult"/> containing the URL of the manifest + SAS token</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.MediaStreamingController.Manifest(System.String,System.String)">
+            <summary>
+            Responsible for making proxy calls for top-level M3U8 playlist manifest files served 
+            from Azure Media Services (AMS). 
+            </summary>
+            <param name="sourceUrl">URL from which to acquire the top-level M3U8 playlist.</param>
+            <param name="token">Token to inject into the M3U8 playlist manifest.</param>
+            <returns>content from the specified <paramref name="sourceUrl"/> with updated media links containing embedded <paramref name="token"/>.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.MediaStreamingController.ManifestPart(System.String,System.String)">
+            <summary>
+            Responsible for making proxy calls for quality-stream-level M3U8 playlist manifest 
+            files served from Azure Media Services (AMS). The "quality stream" playlist is
+            referenced by the top-level manifest and points to all of the "files" associated
+            with a specific encoding quality / bitrate supported by the streaming media source.
+            </summary>
+            <param name="sourceUrl">URL from which to acquire the quality-stream-level M3U8 playlist.</param>
+            <param name="token">Token to inject into the M3U8 playlist manifest.</param>
+            <returns>content from the specified <paramref name="sourceUrl"/> with updated media links containing embedded <paramref name="token"/>.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.MediaStreamingController.ReadVariantPlaylist(System.String,System.String,System.String,System.String)">
+            <summary>
+            Async read the laylist for the given clip, offering it as an API-based content with relative paths to the level playlists
+            </summary>
+            <remarks>To the outside world this looks like an m3u8 file, but really it's a dynamic mapping of one</remarks>
+            <param name="orgRoute"></param>
+            <param name="sessionRoute"></param>
+            <param name="promptRoute"></param>
+            <param name="clipRoute"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.MediaStreamingController.ReadVariantPlaylistByClip(System.String)">
+            <summary>
+            Async read by given clip route
+            </summary>
+            <param name="clipRoute"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.MediaStreamingController.ReadLevelPlaylist(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Async read the playlist file for the given clip at the given level, offering API-based content that behaves like an HLS m38 files with absolute paths into content storage with secure tokens
+            </summary>
+            <remarks>To the outside world this looks like an m3u8 file; however, it's actually a dynamic mapping with security tokens</remarks>
+            <param name="orgRoute"></param>
+            <param name="sessionRoute"></param>
+            <param name="promptRoute"></param>
+            <param name="clipRoute"></param>
+            <param name="level"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.MediaStreamingController.ReadLevelPlaylistByClip(System.String,System.String)">
+            <summary>
+            Async read by the given clip route and level m3u8 file contents
+            </summary>
+            <param name="clipRoute"></param>
+            <param name="level"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Soundbite.Api.Controllers.MembersController">
+            <summary>
+            Controller with endpoints for interacting with Members.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
+        </member>
+        <member name="M:Soundbite.Api.Controllers.MembersController.#ctor(Masticore.Services.IMemberService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Soundbite.Api.Controllers.MembersController"/> class.
+            </summary>
+            <param name="memberService">IMemberService DI reference.</param>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.MembersController.ReadAllAsync_Obsolete(System.String,System.String)">
+            <summary>
+            Async read all <see cref="T:Masticore.Models.Member"/> objects for the given group in the given org
+            </summary>
+            <param name="orgRoute">Route of the organization in which the group resides.</param>
+            <param name="groupRoute">Route of the group whose members are being requested.</param>
+            <returns>A list containing the members in the specified group.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.MembersController.ReadAllAsync(System.String,System.String,Masticore.Models.IndexPageRequest)">
+            <summary>
+            Query for the org's list of people in a paged manner
+            </summary>
+            <param name="orgRoute">Route of the organization in which the group resides.</param>
+            <param name="groupRoute">Route of the group whose members are being requested.</param>
+            <param name="pageRequest">Determine by picking apart the querystring into associated paging parameters</param>
+            <returns>A page of the list of members in the specified group.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.MembersController.InviteAsync(System.String,System.String,Masticore.Models.Invite[])">
+            <summary>
+            Invites one or more users to a team, sending notifications to the new users that they have been added.
+            </summary>
+            <param name="orgRoute">Route of the organization to which the team belongs.</param>
+            <param name="groupRoute">Route of the team.</param>
+            <param name="invites">One or more invitations identifying the people to invite to the team; each token is either a Person route OR an email address.</param>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.MembersController.UpdateAsync(System.String,System.String,System.String,Masticore.Models.Member)">
+            <summary>
+            Updates a member
+            </summary>
+            <param name="orgRoute">Route of the organization in which the member exists.</param>
+            <param name="groupRoute">Route of the team to which the member is associated.</param>
+            <param name="memberRoute">Route of the member.</param>
+            <param name="member">Member information to persist.</param>
+            <returns>a member with updated member information</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.MembersController.DeleteAsync(System.String,System.String,System.String)">
+            <summary>
+            Performs a "soft" delete of the member removing them from the team.
+            </summary>
+            <param name="orgRoute">Route of the organization to which the team belongs.</param>
+            <param name="groupRoute">Route of the team to which the member is associated.</param>
+            <param name="memberRoute">Route of the member to remove.</param>
+        </member>
+        <member name="T:Soundbite.Api.Controllers.MsTeamsBotController">
+            <summary>
+            Controller for responding to requests from the Azure Bot Framework on behalf of Microsoft teams.
+            </summary>
+            <remarks>
+            As of Feb 2022, this API is hidden from integration with partners and should only be consumed by our first-party Teams app
+            </remarks>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.MsTeamsBotController.#ctor(Microsoft.Bot.Builder.Integration.AspNet.Core.IBotFrameworkHttpAdapter,Microsoft.Bot.Builder.IBot)">
+            <summary>
+            Creates a new <see cref="T:Soundbite.Api.Controllers.MsTeamsBotController"/> instance.
+            </summary>
+            <param name="adapter">DI reference to a Bot Framework HTTP adapter.</param>
+            <param name="bot">DI reference to a Bot Framework bot.</param>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.MsTeamsBotController.PostAsync">
+            <summary>
+            Responsible for responding to bot requests from the Azure bot service.  
+            </summary>
+            <returns>an async task response from the bot via the adapter.</returns>
+        </member>
+        <member name="T:Soundbite.Api.Controllers.OktaAuthController">
+            <summary>
+            An insecure controller for pulling client-side configuration dynamically from the app
+            Unfortunately not a jacuzzi remote controller
+            </summary>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.OktaAuthController.#ctor(Masticore.Security.ISecurityContext,Masticore.Services.ISecurityContextService,Soundbite.Api.Services.SpaService,Soundbite.Services.IOktaDataService,Masticore.Services.IUserService,System.Net.Http.IHttpClientFactory,Masticore.DirectorySync.IOrgSyncStore)">
+            <summary>
+            Creates a new <see cref="T:Soundbite.Api.Controllers.AzureAuthController"/> instance.
+            </summary>
+            <param name="securityContext">DI Security context reference.</param>
+            <param name="securityContextService">DI reference to the security context service.</param>
+            <param name="oktaDataService">DI reference to an OKTA data service.</param>
+            <param name="spaService">DI SPA service reference.</param>
+            <param name="userService">DI User Service reference.</param>        
+            <param name="httpClientFactory">DI HTTP client factory.</param>
+            <param name="orgSyncStore">DI organization sync store.</param>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.OktaAuthController.GetSettingsByEmail(System.String)">
+            <summary>
+            Gets the OKTA settings associated with the specified user.  Returns <c>null</c> if the
+            user is not associated with any organizations with a valid OKTA configuration. If the
+            user is associated with multiple organizations with OKTA settings the first is returned.
+            </summary>
+            <param name="email">Email of the person who is attempting to login with OKTA.</param>
+            <returns>a list of all the active organizations to which the current user has access.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.OktaAuthController.GetSettingsByRoute(System.String)">
+            <summary>
+            Responsible for retrieving the OKTA settings for the specified organization.
+            </summary>
+            <param name="orgRoute">Route of the organization whose OKTA settings are being sought.</param>
+            <returns>a reference to the organization's OKTA settings if found otherwise <c>null</c>.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.OktaAuthController.Login(System.String)">
+            <summary>
+            Login path for Okta based on given org
+            </summary>
+            <param name="orgRoute"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Soundbite.Api.Controllers.ReadAllPeopleIndexPageRequest">
+            <summary>
+            Expands <see cref="T:Masticore.Models.IndexPageRequest"/> to includes additional filter fields
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.Controllers.ReadAllPeopleIndexPageRequest.PersonRole">
+            <summary>
+            The exact person role for desired query results
+            </summary>
+        </member>
+        <member name="T:Soundbite.Api.Controllers.PeopleController">
+            <summary>
+            Controller with endpoints for interacting with people (i.e. members of an organization).
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
+        </member>
+        <member name="M:Soundbite.Api.Controllers.PeopleController.#ctor(Masticore.Services.IPersonService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Soundbite.Api.Controllers.PeopleController"/> class.
+            </summary>
+            <param name="people">The people.</param>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.PeopleController.ReadMeAsync(System.String)">
+            <summary>
+            Gets the current user's person record for the specified organization.
+            </summary>
+            <param name="orgRoute">Route of the organization.</param>
+            <returns>a person record for the current user if found, otherwise throws an HTTP 404 not found exception.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.PeopleController.InviteAsync(System.String,Masticore.Models.Invite[])">
+            <summary>
+            Invites one or more user's to an organization.
+            </summary>
+            <param name="orgRoute">Route of the organization to which to invite users.</param>
+            <param name="invites">One or more invitations identifying the users to invite to the organization.</param>
+            <returns>a list of <see cref="T:Masticore.InviteResult"/> instances with user and person route information identifying the person record linking the user to the organization.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.PeopleController.UpdateAsync(System.String,System.String,Masticore.Models.Person)">
+            <summary>
+            Updates the person record associating a user to an organization.
+            </summary>
+            <param name="orgRoute">Route of the organization to which the user is associated.</param>
+            <param name="personRoute">Route of the person record to update.</param>
+            <param name="personFields">Person record containing updates to store.</param>
+            <returns>a Person instance containing update information (if found), otherwise throws an HTTP 404 not found exception</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.PeopleController.ReadAllAsync(System.String,Soundbite.Api.Controllers.ReadAllPeopleIndexPageRequest)">
+            <summary>
+            Query for the org's list of people in a paged manner
+            </summary>
+            <param name="orgRoute"></param>
+            <param name="pageRequest">Determine by picking apart the querystring into associated paging parameters</param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.PeopleController.Delete(System.String,System.String)">
+            <summary>
+            Performs a "soft" delete of the person record associating a user to an organization.
+            </summary>
+            <param name="orgRoute">Route of the organization associated with the person record.</param>        
+            <param name="personRoute">Route of the person record to "soft" delete.</param>
+        </member>
+        <member name="T:Soundbite.Api.Controllers.ReportController">
+            <summary>
+            General-purpose reporting controler
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
+        </member>
+        <member name="P:Soundbite.Api.Controllers.ReportController.ReportService">
+            <summary>
+            <see cref="T:Soundbite.Services.IReportService"/> for this current request
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.Controllers.ReportController.BillingService">
+            <summary>
+            <see cref="T:Soundbite.Services.IBillingService"/> for the current request
+            </summary>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.ReportController.#ctor(Soundbite.Services.IReportService,Soundbite.Services.IBillingService)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="reportService"></param>
+            <param name="billingService"></param>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.ReportController.ActivityReportAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Returns a <see cref="T:Soundbite.Services.ActivityReport"/> loaded for the given org and timespan
+            </summary>
+            <param name="orgRoute"></param>
+            <param name="startUtc"></param>
+            <param name="endUtc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.ReportController.ContentReportAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Async gets the <see cref="T:Soundbite.Models.OrgContentReport"/> for the given org and time period
+            </summary>
+            <param name="orgRoute"></param>
+            <param name="startUtc"></param>
+            <param name="endUtc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.ReportController.SessionReportAsync(System.String,System.String)">
+            <summary>
+            Async get the <see cref="T:Soundbite.Models.SessionContentReport"/> for the given session in the given org
+            </summary>
+            <remarks>This is ALWAYS for all time on the report; we may implement time limitation or group by in the future</remarks>
+            <param name="orgRoute"></param>
+            <param name="sessionRoute"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.ReportController.SessionDetailsReportAsync(System.String,System.String)">
+            <summary>
+            Async get the <see cref="T:Soundbite.Models.SessionContentDetailsReport"/> for the given session in the given org
+            </summary>
+            <param name="orgRoute"></param>
+            <param name="sessionRoute"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Soundbite.Api.Controllers.SeriesController">
+            <summary>
+            Controller with endpoints for interacting with series definitions for sessions.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
+        </member>
+        <member name="P:Soundbite.Api.Controllers.SeriesController.Series">
+            <summary>
+            Gets the <see cref="T:Soundbite.Services.ISeriesService"/> underlying this controller
+            </summary>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SeriesController.#ctor(Soundbite.Services.ISeriesService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Soundbite.Api.Controllers.SeriesController"/> class.
+            </summary>
+            <param name="seriesService">ISeriesService DI reference.</param>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SeriesController.ReadAsync(System.String,System.String)">
+            <summary>
+            Retrieves a series by route.
+            </summary>
+            <param name="orgRoute">Route of the organization containing the series.</param>
+            <param name="seriesRoute">Route of the series to retrieve.</param>
+            <returns>a series details instance populated with the requested series information, otherwise throws an HTTP 404 not found exception.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SeriesController.ReadAllAsync(System.String)">
+            <summary>
+            Async get the collection of <see cref="T:Soundbite.Models.SeriesPreview"/> objects for the given org
+            </summary>
+            <param name="orgRoute"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SeriesController.ReadAllGroupAsync(System.String,System.String)">
+            <summary>
+            Async get the collection of <see cref="T:Soundbite.Models.SeriesPreview"/> associated with the given team in the given org
+            </summary>
+            <param name="orgRoute"></param>
+            <param name="groupRoute"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SeriesController.DeleteAsync(System.String,System.String)">
+            <summary>
+            Performs a "soft" delete of the series.
+            </summary>
+            <param name="orgRoute">Route of the organization containing the series.</param>
+            <param name="seriesRoute">Route of the series to "soft" delete.</param>
+        </member>
+        <member name="T:Soundbite.Api.Controllers.SessionCommentsController">
+            <summary>
+            Controller with endpoints for interacting with sessions.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
+        </member>
+        <member name="P:Soundbite.Api.Controllers.SessionCommentsController.SessionService">
+            <summary>
+            Gets the <see cref="T:Soundbite.Services.ISessionCommentService"/> object for this controller; specialized to CRUD actions on <see cref="T:Soundbite.Services.SessionComment"/> and similar objects
+            </summary>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SessionCommentsController.#ctor(Soundbite.Services.ISessionCommentService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Soundbite.Api.Controllers.SessionCommentsController"/> class.
+            </summary>
+            <param name="sessionCommentService"> DI reference.</param>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SessionCommentsController.ReadAllSessionComments(System.String,System.String,Masticore.Models.IndexPageRequest)">
+             <summary>
+             Retrieves the comments for the given session in the given org
+             </summary>
+             <param name="orgRoute">Route of the organization to which the session belongs.</param>
+             <param name="sessionRoute">Route of the session to retrieve.</param>
+             <param name="page">Optional paging token</param>
+            <returns>A page of comments for the given session</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SessionCommentsController.CreateSessionComment(System.String,System.String,Soundbite.Services.NewSessionComment)">
+             <summary>
+             Retrieves the comments for the given session in the given org
+             </summary>
+             <param name="orgRoute">Route of the organization to which the session belongs.</param>
+             <param name="sessionRoute">Route of the session to retrieve.</param>
+             <param name="newComment">Content for the newly created comment</param>
+            <returns>A page of comments for the given session</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SessionCommentsController.UpdateSessionComment(System.String,System.String,System.String,Soundbite.Services.NewSessionComment)">
+            <summary>
+            Updates the given comment on the given session in the given org
+            </summary>
+            <param name="orgRoute"></param>
+            <param name="sessionRoute"></param>
+            <param name="commentRoute"></param>
+            <param name="newComment"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SessionCommentsController.DeleteSessionComment(System.String,System.String,System.String)">
+            <summary>
+            Deletes the given comment on the given session within the given org
+            </summary>
+            <param name="orgRoute"></param>
+            <param name="sessionRoute"></param>
+            <param name="commentRoute"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Soundbite.Api.Controllers.SessionsController">
+            <summary>
+            Controller with endpoints for interacting with sessions.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
+        </member>
+        <member name="P:Soundbite.Api.Controllers.SessionsController.SessionService">
+            <summary>
+            Gets the <see cref="T:Soundbite.Services.ISessionService"/> object for this controller; specialized to CRUD actions on <see cref="T:Soundbite.Models.SessionDetails"/> and similar objects
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.Controllers.SessionsController.SessionFeedService">
+            <summary>
+            Gets the <see cref="T:Soundbite.ISessionFeedService"/> object for this controller; specialized to user-contextual collections of <see cref="T:Soundbite.Models.SessionPreview"/> and similar objects
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.Controllers.SessionsController.OrgService">
+            <summary>
+            Gets the <see cref="T:Masticore.Services.IOrganizationService"/> object for this controller; specialized in CRUD and collection actions on <see cref="T:Soundbite.Models.OrganizationWithSettings"/> and similar objects
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.Controllers.SessionsController.AiService">
+            <summary>
+            Gets the <see cref="T:Soundbite.Services.IAiService"/> object for this controller
+            </summary>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SessionsController.#ctor(Soundbite.Services.ISessionService,Soundbite.ISessionFeedService,Masticore.Services.IOrganizationService,Soundbite.Services.IAiService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Soundbite.Api.Controllers.SessionsController"/> class.
+            </summary>
+            <param name="sessionService"> DI reference.</param>
+            <param name="sessionFeedService">ISessionService DI reference.</param>
+            <param name="orgService">IOrganizationService DI reference.</param>
+            <param name="aiService">IAiService DI reference.</param>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SessionsController.ParseRoles(System.String,System.String)">
+            <summary>
+            Responsible for parsing a comma delimited string into <see cref="T:Soundbite.ParticipantRole"/>
+            values.  This utility method exists to help manage passing arrays through the querystring.
+            </summary>
+            <param name="delimitedString">String containing delimited values.</param>
+            <param name="delimiter">(Optional) delimiter to break apart values.</param>
+            <returns>an array of values from the parsed string or <c>null</c> if the string is <c>null</c> or empty.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SessionsController.CreateAsync_Obsolete(System.String,Soundbite.Models.NewSession)">
+            <summary>
+            Creates a new session.
+            </summary>
+            <param name="orgRoute">Route of the organization to which the session belongs.</param>
+            <param name="newSession">Session to create.</param>
+            <returns>a ClientOpWrapper containing session details about the newly created session.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SessionsController.CreateAsync(System.String,Soundbite.Models.NewSession)">
+            <summary>
+            Async create a new session from the given description
+            </summary>
+            <param name="orgRoute"></param>
+            <param name="newSession"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SessionsController.ReadAllAsync(System.String)">
+            <summary>
+            Gets a list of all sessions in the specified organization to which the user has access, 
+            including sessions outside of the user feed that are visible to the user due to 
+            administrative rights.
+            </summary>
+            <param name="orgRoute">Route of the organization whose sessions should be retrieved.</param>
+            <returns>a list of all sessions in the organization to which the user has access.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SessionsController.ReadPendingAsync(System.String,Masticore.Models.IndexPageRequest)">
+            <summary>
+            Gets a paging collection of <see cref="T:Soundbite.Models.SessionPreview"/> relevant to the given org for the current user
+            </summary>
+            <param name="orgRoute"></param>
+            <param name="page"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SessionsController.ReadPastAsync(System.String,Masticore.Models.IndexPageRequest)">
+            <summary>
+            Gets a paging collection of <see cref="T:Soundbite.Models.SessionPreview"/> objects relevant to the given org for the current user
+            </summary>
+            <param name="orgRoute"></param>
+            <param name="page"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SessionsController.ReadFeedAsync(System.String)">
+            <summary>
+            Gets a list containing the "feed" of sessions for the current user in the specified organization.
+            </summary>
+            <param name="orgRoute">Route of the organization whose feed should be retrieved.</param>
+            <returns>a list containing the "feed" of sessions for the user in the specified organization.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SessionsController.ReadPublicFeedAsync(System.String)">
+            <summary>
+            Gets a list containing the public feed of sessions for the specified organization.
+            </summary>
+            <param name="orgRoute">Route of the organization whose public feed should be retrieved.</param>
+            <returns>a list containing the public feed of sessions in the specified organization.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SessionsController.ReadAllGroupSessionsAsync(System.String,System.String)">
+            <summary>
+            Gets a list of all sessions in the specified team to which the user has access, 
+            including sessions outside of the user feed that are visible to the user due to 
+            administrative rights.
+            </summary>
+            <param name="orgRoute">Route of the organization to which the team belongs.</param>
+            <param name="groupRoute">Route of the team whose sessions should be retrieved.</param>
+            <returns>a list of all sessions in the specified team to which the user has access.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SessionsController.ReadGroupPendingAsync(System.String,System.String,Masticore.Models.IndexPageRequest)">
+            <summary>
+            Gets a paging collection of still waiting to be published <see cref="T:Soundbite.Models.SessionPreview"/> objects relevant to the given group in the given org for the current user
+            </summary>
+            <param name="orgRoute"></param>
+            <param name="groupRoute"></param>
+            <param name="page"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SessionsController.ReadGroupPastAsync(System.String,System.String,Masticore.Models.IndexPageRequest)">
+            <summary>
+            Reads a paging collection of already published <see cref="T:Soundbite.Models.SessionPreview"/> objects relevant to the given group in the given org for the current user
+            </summary>
+            <param name="orgRoute"></param>
+            <param name="groupRoute"></param>
+            <param name="page"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SessionsController.ReadGroupFeedAsync(System.String,System.String)">
+            <summary>
+            Gets a list containing the "feed" of sessions for the user in the specified team.
+            </summary>
+            <param name="orgRoute">Route of the organization containing the team.</param>
+            <param name="groupRoute">Route of the team whose feed should be retrieved.</param>
+            <returns>a list containing the "feed" of sessions for the user in the specified organization.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SessionsController.ReadGroupPublicFeedAsync(System.String,System.String)">
+            <summary>
+            Gets a list containing the "feed" of sessions for the user in the specified team.
+            </summary>
+            <param name="orgRoute">Route of the organization containing the team.</param>
+            <param name="groupRoute">Route of the team whose feed should be retrieved.</param>
+            <returns>a list containing the "feed" of sessions for the user in the specified organization.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SessionsController.ReadRecentlyPublishedAsync(System.String,System.Int32,System.Int32)">
+            <summary>
+            Reads the recently published sessions for the given org; paged by most recent publishing date descending (newest on top)
+            </summary>
+            <param name="orgRoute"></param>
+            <param name="skip"></param>
+            <param name="take"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SessionsController.ReadAsync(System.String,System.String)">
+            <summary>
+            Retrieves the session details for the specified session.
+            </summary>
+            <param name="orgRoute">Route of the organization to which the session belongs.</param>
+            <param name="sessionRoute">Route of the session to retrieve.</param>
+            <returns>session details for the requested session if found, otherwise throws an HTTP 404 not found exception.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SessionsController.ReadReactionsAsync(System.String,System.String)">
+            <summary>
+            Read the <see cref="T:Soundbite.Models.ReactionSummary"/> objects for the given session in the given org
+            </summary>
+            <param name="orgRoute"></param>
+            <param name="sessionRoute"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SessionsController.SummaryAsync(System.String,System.String,Soundbite.Services.SessionSummaryType)">
+            <summary>
+            Generates a <see cref="T:Soundbite.Services.SessionSummary"/> for the given session based on AI analysis of the session's transcript content
+            </summary>
+            <param name="orgRoute"></param>
+            <param name="sessionRoute"></param>
+            <returns></returns>
+            <remarks>This does require a transcript to work, so if it doesn't have one or it's not ready, this returns null</remarks>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SessionsController.ReadPublicAsync(System.String,System.String)">
+            <summary>
+            Retrieves the session details for the specified session.
+            </summary>
+            <param name="orgRoute">Route of the organization to which the session belongs.</param>
+            <param name="sessionRoute">Route of the session to retrieve.</param>
+            <returns>session details for the requested session if found, otherwise throws an HTTP 404 not found exception.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SessionsController.UpdateAsync(System.String,System.String,Soundbite.Models.NewSession)">
+            <summary>
+            Updates the specified session.  
+            </summary>
+            <param name="orgRoute">Route of the organization to which the session belongs.</param>
+            <param name="sessionRoute">Route of the session to update.</param>
+            <param name="session">Updated session information to store.</param>
+            <returns>a session detail instance populated with updated values.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SessionsController.UpdateStateAsync(System.String,System.String,Soundbite.Models.ParticipantStateUpdate)">
+            <summary>
+            Updates the state of all participants in the session.
+            </summary>
+            <param name="orgRoute">Route of the organization to which the session belongs.</param>
+            <param name="sessionRoute">Route of the session whose participants are being updated.</param>
+            <param name="partUpdate">State and role data indicating the state to update participants and what role (if any) to limit the updates.</param>        
+            <returns>an HTTP response indicating success or failure of the operation.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SessionsController.UpdateReactionAsync(System.String,System.String,Soundbite.ParticipantReactionType)">
+            <summary>
+            Updates the reaction for the given session for the current user
+            </summary>
+            <param name="orgRoute"></param>
+            <param name="sessionRoute"></param>
+            <param name="reactionType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SessionsController.AcknowledgePublicSession(System.String,System.String,System.String)">
+            <summary>
+            Anonymous PUT to apply the <see cref="F:Soundbite.ParticipantState.Consumed"/> state to the given session for the given user; doing nothing if not found
+            </summary>
+            <param name="orgRoute"></param>
+            <param name="sessionRoute"></param>
+            <param name="userRoute"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SessionsController.DeleteAsync(System.String,System.String)">
+            <summary>
+            Performs a "soft" delete of the session.
+            </summary>
+            <param name="orgRoute">Route of the organization to which the session belongs.</param>
+            <param name="sessionRoute">Route of the session to "soft" delete.</param>
+            <returns>an HTTP response indicating success or failure of the operation.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SessionsController.SetReminderCalendarEntryId(System.String,System.String,System.String)">
+            <summary>
+            Sets the ReminderCalendarEventId property on a session.  This value is often identified
+            on the client-side and needs to be sent back to Soundbite for storage.
+            </summary>
+            <param name="orgRoute">Route identifying the organization containing the session.</param>
+            <param name="sessionRoute">Route identifying the session.</param>
+            <param name="reminderCalendarEventId">Provider-specific calendar event ID to associate with the session.</param>
+            <returns>HTTP response indicating success or failure of the operation.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SessionsController.ReadParticipants(System.String,System.String,System.String,Masticore.Models.IndexPageRequest)">
+            <summary>
+            Gets a paged resultset containing the members of a group associated with a session.
+            </summary>
+            <param name="orgRoute">Route of the organization in which the session resides.</param>
+            <param name="sessionRoute">Route of the session with which the group is associated.</param>
+            <param name="includeRoles">Specifies which roles to include in the results. A null or empty array returns all roles.</param>
+            <param name="page">Specifies which page of data to retrieve.</param>
+            <returns>a page of participant information</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SessionsController.ReadPariticpantsInGroup(System.String,System.String,System.String,System.String,Masticore.Models.IndexPageRequest)">
+            <summary>
+            Gets a paged resultset containing the members of a group associated with a session.
+            </summary>
+            <param name="orgRoute">Route of the organization in which the session resides.</param>
+            <param name="sessionRoute">Route of the session with which the group is associated.</param>
+            <param name="groupRoute">Route of the group whose members are being sought.</param>
+            <param name="includeRoles">Specifies which roles to include in the results. A null or empty array returns all roles.</param>
+            <param name="page">Specifies which page of data to retrieve.</param>
+            <returns>a page of group participant information</returns>
+        </member>
+        <member name="T:Soundbite.Api.Controllers.SpaController">
+            <summary>
+            An insecure controller for pulling client-side configuration dynamically from the app
+            Unfortunately not a jacuzzi remote controller
+            </summary>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SpaController.#ctor(Soundbite.Api.Services.SpaService)">
+            <summary>
+            Creates a new <see cref="T:Soundbite.Api.Controllers.SpaController"/> instance.
+            </summary>
+            <param name="spaService">DI SPA service reference.</param>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SpaController.GetBearerToken">
+            <summary>
+            Responsible for parsing out the bearer token from the Authorization HTTP header.
+            </summary>
+            <returns>a string containing the bearer token value.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SpaController.SpaInit(System.String)">
+            <summary>
+            GET login info for the current users, including <see cref="T:Soundbite.Api.AppPayload"/> to bootstrap client
+            </summary>
+            <param name="orgRoute"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SpaController.Load(System.String)">
+            <summary>
+            A streamlined login processor that returns a minimal response
+            </summary>
+            <param name="orgRoute"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SpaController.GetToken(System.String)">
+            <summary>
+            GET a token for the given org
+            </summary>
+            <param name="orgRoute"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SpaController.Ping">
+            <summary>
+            Returns a default value to indicate we're alive
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SpaController.Version">
+            <summary>
+            Returns a default value to indicate we're alive
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SpaController.FixStatusCode">
+            <summary>
+            Ensures that the status code is 200
+            </summary>
+        </member>
+        <member name="T:Soundbite.Api.Controllers.SyncController">
+            <summary>
+            Controller with endpoints for configuration and execution of sync
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SyncController.#ctor(Masticore.DirectorySync.IOrgSyncService,Masticore.DirectorySync.IOrgSyncRunner)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Soundbite.Api.Controllers.SessionsController"/> class.
+            </summary>
+            <param name="syncService"><see cref="T:Masticore.DirectorySync.IOrgSyncService"/> object for the current request</param>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SyncController.ValidateAsync(System.String,Masticore.Models.OrgSyncConfig)">
+            <summary>
+            Returns a complete analysis of either the current <see cref="T:Masticore.Models.OrgSyncConfig"/> or the given one
+            </summary>
+            <param name="orgRoute">Target organization</param>
+            <param name="orgConfig">Null is always valid for saving as a config, but passing it here causes an error</param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SyncController.ReadConfigAsync(System.String)">
+            <summary>
+            Async gets the current sync settings for the given org
+            </summary>
+            <param name="orgRoute"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SyncController.UpdateConfigAsync(System.String,Masticore.Models.OrgSyncConfig)">
+            <summary>
+            Sets the config for the given org
+            Keep in mind that the orgConfig coming up will have been stripped of sensitive data
+            it will likely NOT contains any secrets or continue context, so it must be restored from the DB where appropriate
+            </summary>
+            <param name="orgRoute"></param>
+            <param name="orgConfig"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SyncController.SyncAsync(System.String)">
+            <summary>
+            Executes the sync for this org
+            </summary>
+            <param name="orgRoute"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SyncController.ReadResults(System.String,Masticore.Models.IndexPageRequest)">
+            <summary>
+            Gets the sync run results for the given org, optionally starting on the given page
+            </summary>
+            <param name="orgRoute"></param>
+            <param name="page"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SyncController.ReadUsersAsync(System.String,Masticore.Models.TokenPageRequest)">
+            <summary>
+            Gets a page of sync-able users for the given org
+            </summary>
+            <param name="orgRoute"></param>
+            <param name="page"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SyncController.ReadUserAsync(System.String,System.String)">
+            <summary>
+            Reads one specific <see cref="T:Masticore.DirectorySync.SyncTarget"/> record for the given userId, returning 404 if not found or the sync integration is not yet configured
+            </summary>
+            <param name="orgRoute"></param>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SyncController.ReadGroupsAsync(System.String,Masticore.Models.TokenPageRequest)">
+            <summary>
+            Gets a page of sync-able groups in the given org
+            </summary>
+            <param name="orgRoute"></param>
+            <param name="page"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.SyncController.ReadGroupAsync(System.String,System.String)">
+            <summary>
+            Gets one specific <see cref="T:Masticore.DirectorySync.SyncTarget"/> for the given group ID, returning 404 if not found or the sync integration is not yet configured
+            </summary>
+            <param name="orgRoute"></param>
+            <param name="groupId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Soundbite.Api.Controllers.UsersController">
+            <summary>
+            Controller with endpoints for interacting with sessions.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
+        </member>
+        <member name="M:Soundbite.Api.Controllers.UsersController.#ctor(Masticore.Services.IUserService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Soundbite.Api.Controllers.UsersController"/> class.
+            </summary>
+            <param name="userService">IUserService DI reference.</param>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.UsersController.UpsertMeAsync(Masticore.Models.User)">
+            <summary>
+            Updates the current user's information.
+            </summary>
+            <param name="userInfo">User information to update.</param>
+            <returns>an <see cref="T:Masticore.Models.User"/> instance populated with updated user information for the current user.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.UsersController.UpdateNotificationAsync(Masticore.Models.UserNotifications)">
+            <summary>
+            Async update the current user's notification settings
+            </summary>
+            <param name="notificationSettings"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.UsersController.UpsertMyImageAsync">
+            <summary>
+            Uploads a new "avatar" image for the current user.  The URL returned in the ImageSrc
+            property contains a short-lived token used to access the image.
+            </summary>
+            <returns>an <see cref="T:Masticore.Models.User"/> instance with an updated ImageSrc property containing the URL of the uploaded image.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.UsersController.ReadMeAsync">
+            <summary>
+            Retrieves user details for the current user.
+            </summary>
+            <returns>an <see cref="T:Masticore.Models.User"/> instance populated with the current user's information.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.UsersController.GetRouteFromUniversalId(System.String)">
+            <summary>
+            Gets the route of a user based on the user's universal ID.
+            </summary>
+            <param name="universalId">Universal ID of the user whose route is being sought.</param>
+            <returns>The route associated with the user with the specified universal ID or <c>null</c> if the user is not found.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Controllers.UsersController.InviteAsync(Masticore.Models.Invite[])">
+            <summary>
+            Invites a user to the application.
+            </summary>
+            <param name="invites">One or more invitations identifying the people to invite to the application.</param>
+            <returns>an HTTP response indicating success or failure of the operation.</returns>
+        </member>
+        <member name="T:Soundbite.Api.JsonConverters.InterfaceToModelCollectionConverter`2">
+            <summary>
+            Defines the interface to concrete type mapping that allows the JSON deserializer to 
+            process a request to deserialize a JSON string to an interface (for collections).
+            </summary>
+            <typeparam name="TInterface">.NET type of the interface that JSON deserializer must handle.</typeparam>
+            <typeparam name="TConcrete">.NET type of the conrete type to use when the specified interface type is requested.</typeparam>
+        </member>
+        <member name="M:Soundbite.Api.JsonConverters.InterfaceToModelCollectionConverter`2.CanConvert(System.Type)">
+            <summary>
+            Determines whether this instance can convert the specified object type.
+            </summary>
+            <param name="objectType">.NET type of the object.</param>
+            <returns><c>true</c> if this instance can convert the specified object type; otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:Soundbite.Api.JsonConverters.InterfaceToModelCollectionConverter`2.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Reads the JSON representation of the object.
+            </summary>
+            <param name="reader">The Newtonsoft.Json.JsonReader to read from.</param>
+            <param name="objectType">Type of the object.</param>
+            <param name="existingValue">The existing value of object being read.</param>
+            <param name="serializer">The calling serializer.</param>
+            <returns>The object value.</returns>
+        </member>
+        <member name="M:Soundbite.Api.JsonConverters.InterfaceToModelCollectionConverter`2.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Writes the JSON representation of the object.
+            </summary>
+            <param name="writer">The Newtonsoft.Json.JsonWriter to write to.</param>
+            <param name="value">The value</param>
+            <param name="serializer">The calling serializer.</param>
+        </member>
+        <member name="T:Soundbite.Api.InterfaceToModelConverter`2">
+            <summary>
+            Defines the interface to concrete type mapping that allows the JSON deserializer to 
+            process a request to deserialize a JSON string to an interface.
+            </summary>
+            <typeparam name="TInterface">.NET type of the interface that JSON deserializer must handle.</typeparam>
+            <typeparam name="TConcrete">.NET type of the concrete type to use when the specified interface type is requested.</typeparam>
+        </member>
+        <member name="M:Soundbite.Api.InterfaceToModelConverter`2.CanConvert(System.Type)">
+            <summary>
+            Determines whether this instance can convert the specified object type.
+            </summary>
+            <param name="objectType">.NET type of the object.</param>
+            <returns><c>true</c> if this instance can convert the specified object type; otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:Soundbite.Api.InterfaceToModelConverter`2.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Reads the JSON representation of the object.
+            </summary>
+            <param name="reader">The Newtonsoft.Json.JsonReader to read from.</param>
+            <param name="objectType">Type of the object.</param>
+            <param name="existingValue">The existing value of object being read.</param>
+            <param name="serializer">The calling serializer.</param>
+            <returns>The object value.</returns>
+        </member>
+        <member name="M:Soundbite.Api.InterfaceToModelConverter`2.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Writes the JSON representation of the object.
+            </summary>
+            <param name="writer">The Newtonsoft.Json.JsonWriter to write to.</param>
+            <param name="value">The value</param>
+            <param name="serializer">The calling serializer.</param>
+        </member>
+        <member name="T:Soundbite.Api.Middleware.ApiError">
+            <summary>
+            Converts an <see cref="P:Soundbite.Api.Middleware.ApiError.Exception"/> during a request into helpful logs and response body format
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.Middleware.ApiError.IsEnvirionmentVariableEnabled">
+            <summary>
+            Reads the error flag state from environment variables
+            </summary>
+            <remarks> This is a utility property and does NOT intrinsically set the system to enabled unit you call <see cref="M:Soundbite.Api.Middleware.ApiError.Init(System.Boolean)"/></remarks>
+        </member>
+        <member name="P:Soundbite.Api.Middleware.ApiError.IsDevErrorMode">
+            <summary>
+            A flag indicating if the feature is enabled
+            </summary>
+        </member>
+        <member name="M:Soundbite.Api.Middleware.ApiError.Init(System.Boolean)">
+            <summary>
+            Initializes this error system as enabled or disabled
+            </summary>
+            <param name="enabled"></param>
+        </member>
+        <member name="P:Soundbite.Api.Middleware.ApiError.Exception">
+            <summary>
+            Gets or sets the <see cref="P:Soundbite.Api.Middleware.ApiError.Exception"/>
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.Middleware.ApiError.IsApiError">
+            <summary>
+            A sentinel property in the JSON to indicate this is an error details object.
+            </summary>
+            <remarks>
+            Check for this property to determine if it's an error details with extra info
+            </remarks>
+        </member>
+        <member name="P:Soundbite.Api.Middleware.ApiError.IsUserSafe">
+            <summary>
+            A sentinel property in the JSON to indicate the message can be shown raw to the user
+            </summary>
+            <remarks>
+            Check for this property to determine if the error's message has anything useful for the user
+            </remarks>
+        </member>
+        <member name="P:Soundbite.Api.Middleware.ApiError.Method">
+            <summary>
+            Gets or sets the HTTP Method (EG, GET)
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.Middleware.ApiError.Path">
+            <summary>
+            Gets or sets the path for this error's request
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.Middleware.ApiError.StatusCode">
+            <summary>
+            Gets or sets the <see cref="T:System.Net.HttpStatusCode"/> for this error
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.Middleware.ApiError.Message">
+            <summary>
+            Gets or sets the error message for this error
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.Middleware.ApiError.Name">
+            <summary>
+            The name for this error, enabling the client-side type to be compatible with JavaScript's native error; defaults to simply "Error"
+            </summary>
+        </member>
+        <member name="M:Soundbite.Api.Middleware.ApiError.ToString">
+            <summary>
+            Implements JSON serialization
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Middleware.ApiError.#ctor(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="httpCtx"></param>
+            <param name="handler"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:Soundbite.Api.Middleware.ApiError.ExtractDetails(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature)">
+            <summary>
+            Load up this object with information about the <see cref="P:Soundbite.Api.Middleware.ApiError.Exception"/>
+            </summary>
+            <param name="httpCtx"></param>
+            <param name="handler"></param>
+        </member>
+        <member name="M:Soundbite.Api.Middleware.ApiError.LogError(Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Given an <see cref="T:Microsoft.Extensions.Logging.ILogger"/>, log the full context of the <see cref="P:Soundbite.Api.Middleware.ApiError.Exception"/> and optionally its inner exception
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="M:Soundbite.Api.Middleware.ApiError.Apply(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Applies the details of the given <see cref="T:Soundbite.Api.Middleware.ApiError"/> to the given <see cref="T:Microsoft.AspNetCore.Http.HttpContext"/>
+            </summary>
+            <param name="httpCtx"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Soundbite.Api.Middleware.MiddlewareExtensions">
+            <summary>
+            Extension methods interacting with <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/> to add middleware components
+            </summary>
+        </member>
+        <member name="M:Soundbite.Api.Middleware.MiddlewareExtensions.UseSbErrorDetails(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Adds a middleware handler that transform and logs all exceptions
+            </summary>
+            <param name="app"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:Soundbite.Api.Middleware.MiddlewareExtensions.UsePerfLogging(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.Extensions.Logging.ILogger,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Adds <see cref="T:Soundbite.Api.Middleware.PerformanceMiddleware"/> to the pipeline
+            </summary>
+            <param name="app"></param>
+            <param name="logger"></param>
+            <param name="env"></param>
+        </member>
+        <member name="T:Soundbite.Api.Middleware.PerformanceMiddleware">
+            <summary>
+            A middleware component that measures performance with custom logging
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.Middleware.PerformanceMiddleware.Next">
+            <summary>
+            Then ext <see cref="T:Microsoft.AspNetCore.Http.RequestDelegate"/> in the middleware pipeline
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.Middleware.PerformanceMiddleware.Logger">
+            <summary>
+            <see cref="T:Microsoft.Extensions.Logging.ILogger"/> for this middleware
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.Middleware.PerformanceMiddleware.Enabled">
+            <summary>
+            Gets if this middleware is enabled
+            </summary>
+            <remarks>
+            Consider disabling for PROD environments since it's more overhead
+            </remarks>
+        </member>
+        <member name="P:Soundbite.Api.Middleware.PerformanceMiddleware.EmitHeaders">
+            <summary>
+            Flag that indicates if headers should return metadate
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.Middleware.PerformanceMiddleware.AppInsights">
+            <summary>
+            The <see cref="T:Microsoft.ApplicationInsights.TelemetryClient"/> instance for this middleware
+            </summary>
+        </member>
+        <member name="M:Soundbite.Api.Middleware.PerformanceMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger,System.Boolean,System.Boolean,Microsoft.ApplicationInsights.TelemetryClient)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="next"></param>
+            <param name="logger"></param>
+            <param name="enabled"></param>
+            <param name="emitHeaders"></param>
+            <param name="appInsights"></param>
+        </member>
+        <member name="M:Soundbite.Api.Middleware.PerformanceMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Is invoked by ASP.Net MVC to measure the lifecycle of a request
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Middleware.PerformanceMiddleware.Process(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Processes the given context
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Middleware.PerformanceMiddleware.MeasurePerformance(Microsoft.AspNetCore.Http.HttpContext,System.IO.MemoryStream)">
+            <summary>
+            Measures the performance from the request to response
+            </summary>
+            <param name="context"></param>
+            <param name="stream"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Middleware.PerformanceMiddleware.CapturePerformance(Microsoft.AspNetCore.Http.HttpContext,System.IO.MemoryStream,System.Diagnostics.Stopwatch,System.Int64)">
+            <summary>
+            Captures the performance measures for this request into the log and app insights
+            </summary>
+            <param name="context"></param>
+            <param name="stream"></param>
+            <param name="watch"></param>
+            <param name="startBytes"></param>
+        </member>
+        <member name="T:Soundbite.Api.AdClientConfig">
+            <summary>
+            Captures the client-side configuration necessary for MSAL.js powered client auth strategies
+            https://github.com/AzureAD/microsoft-authentication-library-for-js
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.AdClientConfig.ClientId">
+            <summary>
+            Gets or sets the Client ID for the app in AAD
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.AdClientConfig.ApiUri">
+            <summary>
+            Gets or sets the API app's location on the net
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.AdClientConfig.RedirectUri">
+            <summary>
+            Gets or sets the URI that will receive the login redirect
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.AdClientConfig.PostLogoutRedirectUri">
+            <summary>
+            Gets or sets the URI that will receive the logout redirect
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.AdClientConfig.AdScopes">
+            <summary>
+            Gets or sets the list of AAD scopes that the client-side app will use
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.AdClientConfig.ApiScopes">
+            <summary>
+            Gets or sets the list of scopes the server-side app will use
+            </summary>
+        </member>
+        <member name="T:Soundbite.Api.AdPlatformConfig">
+            <summary>
+            Holds the platform-level configuration
+            TODO: This likely needs to be auth aware such that there is a flavor for AAD and Okta; this is AAD only
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.AdPlatformConfig.AppId">
+            <summary>
+            Gets or sets the App ID for this instance of the platform
+            </summary>
+        </member>
+        <member name="T:Soundbite.Api.AppPayload">
+            <summary>
+            Contains a "payload" of application initialization data for the client application. Data
+            within the model may or may not be populated based on the authentication status of the 
+            user.  An authenticated user will receive the full payload, but a non-authenticated user
+            may only received a subset of the data.
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.AppPayload.User">
+            <summary>
+            Gets or sets a reference to the user who is logged into the system.
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.AppPayload.Token">
+            <summary>
+            Gets or sets an authorization token that can be used to authenticate against the API.
+            This value is populated in the <see cref="T:Soundbite.Api.AppPayload"/> in response to receiving an
+            HTTP-only cookie containing a valid refresh token.
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.AppPayload.RefreshToken">
+            <summary>
+            Gets or sets the refresh token that can be used to request a new API token.  This value 
+            is populated in the <see cref="T:Soundbite.Api.AppPayload"/> in response to receiving an HTTP-only 
+            cookie containing a valid refresh token.
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.AppPayload.Config">
+            <summary>
+            Gets or sets SPA configuration settings to send to the client.
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.AppPayload.Organization">
+            <summary>
+            Gets or sets a reference to the organization the user is logging into.  This contains 
+            additional information about the current organization that is not present in the list
+            of organizations stored in <see cref="P:Soundbite.Api.AppPayload.Organizations"/>.
+            </summary>        
+        </member>
+        <member name="P:Soundbite.Api.AppPayload.Organizations">
+            <summary>
+            Gets a list of organization to which the user belongs (across all tenants).
+            </summary>        
+        </member>
+        <member name="T:Soundbite.Api.AppPayload_Obsolete">
+            <summary>
+            An obsolete version of <see cref="T:Soundbite.Api.AppPayload"/>
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.AppPayload_Obsolete.User">
+            <summary>
+            Gets or sets a reference to the user who is logged into the system.
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.AppPayload_Obsolete.Token">
+            <summary>
+            Gets or sets an authorization token that can be used to authenticate against the API.
+            This value is populated in the <see cref="T:Soundbite.Api.AppPayload"/> in response to receiving an
+            HTTP-only cookie containing a valid refresh token.
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.AppPayload_Obsolete.RefreshToken">
+            <summary>
+            Gets or sets the refresh token that can be used to request a new API token.  This value 
+            is populated in the <see cref="T:Soundbite.Api.AppPayload"/> in response to receiving an HTTP-only 
+            cookie containing a valid refresh token.
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.AppPayload_Obsolete.Config">
+            <summary>
+            Gets or sets SPA configuration settings to send to the client.
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.AppPayload_Obsolete.Organization">
+            <summary>
+            Gets or sets a reference to the organization the user is logging into.  This contains 
+            additional information about the current organization that is not present in the list
+            of organizations stored in <see cref="P:Soundbite.Api.AppPayload_Obsolete.Organizations"/>.
+            </summary>        
+        </member>
+        <member name="P:Soundbite.Api.AppPayload_Obsolete.Organizations">
+            <summary>
+            Gets a list of organization to which the user belongs (across all tenants).
+            </summary>        
+        </member>
+        <member name="T:Soundbite.Api.FeatureFlags">
+            <summary>
+            Client-side feature flags orchestrating what visual interactions are possible
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.FeatureFlags.ReferralEnabled">
+            <summary>
+            Enable/Disable the generic Invite capabilities that allow sending messages to non-members
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.FeatureFlags.TeamCreationEnabled">
+            <summary>
+            Enable/Disable the team create buttons and dialog
+            </summary>
+        </member>
+        <member name="T:Soundbite.Api.IAppPayload">
+            <summary>
+            Base interface for an app payload
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.IAppPayload.Config">
+            <summary>
+            Front-end app config
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.IAppPayload.RefreshToken">
+            <summary>
+            User's org refresh token
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.IAppPayload.Token">
+            <summary>
+            User's org token
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.IAppPayload.User">
+            <summary>
+            Current user attibutes
+            </summary>
+        </member>
+        <member name="T:Soundbite.Api.OrganizationDetails_Obsolete">
+            <summary>
+            Obsolete version of org details
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.OrganizationDetails_Obsolete.ConfigJson">
+            <summary>
+            Gets the config JSON for this org
+            </summary>
+            <remarks>
+            This is for returning a consolidated view to the server and this should NEVER be sent to clients
+            </remarks>
+        </member>
+        <member name="P:Soundbite.Api.OrganizationDetails_Obsolete.Me">
+            <summary>
+            A Person record for the current user
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.OrganizationDetails_Obsolete.Groups">
+            <summary>
+            A collection of Group records for collections of people in the Organization
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.OrganizationDetails_Obsolete.MyGroups">
+            <summary>
+            A collection of Group records for all of the Groups to which the current user has access
+            </summary>
+        </member>
+        <member name="T:Soundbite.Api.SpaConfig">
+            <summary>
+            Complete configuration object for the front-end
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.SpaConfig.AdPlatformConfig">
+            <summary>
+            Gets or sets the platform configuration that the SPA needs to know about
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.SpaConfig.AdClientConfig">
+            <summary>
+            The Active Directory client configuration, with key fields like URLs, keys, and scopes
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.SpaConfig.FeatureFlags">
+            <summary>
+            Features flags for the front-end of the application
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.SpaConfig.TelemetryKey">
+            <summary>
+            The credentials for connecting to the client-side telemetry tooling; in most cases this should be Azure App Insights
+            </summary>
+        </member>
+        <member name="T:Soundbite.Api.SyncValidation">
+            <summary>
+            DTO for sending back indication that the given config is valid and available
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.SyncValidation.OrgRoute">
+            <summary>
+            Org for which we checked access
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.SyncValidation.ValidationMessage">
+            <summary>
+            Null if the config is valid; otherwise, a string describing issues with the config
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.SyncValidation.HasAccess">
+            <summary>
+            Flag for whether or not the given org has access
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.SyncValidation.SanitizedConfig">
+            <summary>
+            A sanitized version of the config used for the check
+            </summary>
+        </member>
+        <member name="T:Soundbite.Api.Program">
+            <summary>
+            Entry point class for the app
+            </summary> 
+        </member>
+        <member name="M:Soundbite.Api.Program.Main(System.String[])">
+            <summary>
+            Bootstraps the app and runs it
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:Soundbite.Api.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            Create the initial configuration object for the system
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Soundbite.Api.SbApiUtils">
+            <summary>
+            A class for accumulating all the basic dependencies for injecting in the project
+            </summary>
+        </member>
+        <member name="M:Soundbite.Api.SbApiUtils.AddSbApi(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.Boolean)">
+            <summary>
+            Adds the Soundbite-related services
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="isUserInteractive"></param>
+        </member>
+        <member name="M:Soundbite.Api.SbApiUtils.AddAdAuthToken(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Add the AD token check system
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:Soundbite.Api.SbApiUtils.AddRbac(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Boolean)">
+            <summary>
+            Adds <see cref="T:Masticore.Security.IRbac"/> concretion for the given settings
+            </summary>
+            <param name="services"></param>
+            <param name="isInteractiveUser">True if the app is handling "real" user requests; otherwise, false to indicate this is a system background process with unlimited access</param>
+        </member>
+        <member name="M:Soundbite.Api.SbApiUtils.AddMessaging(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.Boolean)">
+            <summary>
+            Add <see cref="T:Masticore.Services.INotificationService"/> and supporting services
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="isQueueMessaging"></param>
+        </member>
+        <member name="M:Soundbite.Api.SbApiUtils.AddSpaConfig(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Loads the SpaConfig from the application configuration settings.
+            </summary>
+            <param name="services">Reference to the services container for the application.</param>
+            <param name="configuration"></param>
+        </member>
+        <member name="T:Soundbite.Api.AdAuthTokenValidator">
+            <summary>
+            Responsible for validating tokens issued by Azure Active Directory for Authentication.
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.AdAuthTokenValidator.AllowEmailClaim">
+            <summary>
+            Gets or sets a flag indicating whether the email claim can be used if a user 
+            cannot be found by Universal ID.
+            </summary>
+        </member>
+        <member name="M:Soundbite.Api.AdAuthTokenValidator.#ctor(Masticore.Security.ISecurityContext,Masticore.Services.ISecurityContextService,Soundbite.Api.SpaConfig,Soundbite.TeamsAppAzureSettings,Masticore.Services.IUserService)">
+            <summary>
+            Instantiates a new <see cref="T:Soundbite.Api.AdAuthTokenValidator"/> instance.
+            </summary>
+            <param name="securityContext">DI reference to the security context.</param>
+            <param name="securityContextService">DI reference to the security context service.</param>
+            <param name="spaConfig">DI reference to the application configuration settings.</param>
+            <param name="teamsConfig">DI reference to the teams configuration settings.</param>
+            <param name="users">DI reference to the user service.</param>
+        </member>
+        <member name="M:Soundbite.Api.AdAuthTokenValidator.UseSpaTokenValidation">
+            <summary>
+            Configures the token validator to validate tokens from the Soundbite SPA application.
+            </summary>
+        </member>
+        <member name="M:Soundbite.Api.AdAuthTokenValidator.UsePlatformTokenValidation">
+            <summary>
+            Configures the token validator to validate tokens from the Soundbite Platform application.
+            </summary>
+        </member>
+        <member name="M:Soundbite.Api.AdAuthTokenValidator.UseTeamsAppTokenValidation">
+            <summary>
+            Configures the token validator to validate tokens from the Teams application.
+            </summary>
+        </member>
+        <member name="M:Soundbite.Api.AdAuthTokenValidator.ValidateToken(System.String,System.Boolean)">
+            <summary>
+            Determines whether the specified <paramref name="token"/> is valid.
+            </summary>
+            <param name="token">A string representing a JWT token.</param>
+            <param name="updateSecurityContext">Flag indicating whether to update the security context with information from the token.</param>
+            <returns>a flag indicating whether the token is valid (<c>true</c>) or invalid (<c>false</c>).</returns>
+        </member>
+        <member name="M:Soundbite.Api.AdAuthTokenValidator.GetUnvalidatedToken(System.String,System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler)">
+            <summary>
+            Responsible for parsing the raw token string into a <see cref="T:System.IdentityModel.Tokens.Jwt.JwtSecurityToken"/> instance.
+            </summary>
+            <param name="token">Raw JWT token.</param>
+            <param name="tokenHandler">JWT token handler instance.</param>
+            <returns>a <see cref="T:System.IdentityModel.Tokens.Jwt.JwtSecurityToken"/> populated with info.</returns>
+        </member>
+        <member name="M:Soundbite.Api.AdAuthTokenValidator.GetTokenVersionHandler(System.IdentityModel.Tokens.Jwt.JwtSecurityToken)">
+            <summary>
+            Extracts the version claim and returns an appropriate version handler.
+            </summary>
+            <param name="jwtToken">JWT token containing version information.</param>
+            <returns>an <see cref="T:Soundbite.Api.AdAuthTokenVersionHandler"/> instance ready for use.</returns>
+        </member>
+        <member name="M:Soundbite.Api.AdAuthTokenValidator.PopulateSecurityContext(Soundbite.Api.AdAuthTokenVersionHandler)">
+            <summary>
+            Populates the security context with user information based on claims data in the token.
+            </summary>
+            <param name="handler">Token version handler containing information about the token.</param>
+            <returns>a task indicating success or failure of the operation.</returns>
+        </member>
+        <member name="T:Soundbite.Api.AdAuthTokenVersionHandler">
+            <summary>
+            Base class for auth token version handlers.
+            </summary>
+        </member>
+        <member name="T:Soundbite.Api.AdAuthTokenVersion1Handler">
+            <summary>
+            Version 1 auth token handler.
+            </summary>
+        </member>
+        <member name="T:Soundbite.Api.AdAuthTokenVersion2Handler">
+            <summary>
+            Version 2 auth token handler.
+            </summary>
+        </member>
+        <member name="T:Soundbite.Api.OktaTokenValidator">
+            <summary>
+            Responsible for validating tokens issued by Azure Active Directory for Authentication.
+            </summary>
+        </member>
+        <member name="M:Soundbite.Api.OktaTokenValidator.#ctor(Soundbite.OrgOktaSettings)">
+            <summary>
+            Instantiates a new <see cref="T:Soundbite.Api.AdAuthTokenValidator"/> instance.
+            </summary>
+        </member>
+        <member name="M:Soundbite.Api.OktaTokenValidator.ValidateToken(System.String)">
+            <summary>
+            Responsible for parsing and validating a JWT token.
+            </summary>
+            <param name="bearerToken">String-based representation of the JTW token.</param>
+            <returns>JWT token if valid, otherwise <c>null</c>.</returns>
+        </member>
+        <member name="T:Soundbite.Api.Services.SpaService">
+            <summary>
+            Service exposing methods for managing the single page application (SPA). 
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.Services.SpaService.SpaConfig">
+            <summary>
+            Gets a reference to the application configuration settings.
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.Services.SpaService.Logger">
+            <summary>
+            Logger for accessing output
+            </summary>
+        </member>
+        <member name="M:Soundbite.Api.Services.SpaService.#ctor(Masticore.Security.ISecurityContext,Masticore.Security.IRbac,Soundbite.Api.SpaConfig,Masticore.Services.IUserService,Masticore.Services.IOrganizationService,Soundbite.Services.ISbOrganizationService,Masticore.Services.ITokenDataService,Microsoft.Extensions.Logging.ILogger{Soundbite.Api.Services.SpaService})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Soundbite.Api.Services.SpaService"/> class
+            </summary>
+            <param name="securityContext"></param>
+            <param name="rbac"></param>
+            <param name="spaConfig"></param>
+            <param name="userService"></param>
+            <param name="orgService"></param>
+            <param name="sbOrgService"></param>
+            <param name="tokenDataService"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:Soundbite.Api.Services.SpaService.DetermineOrgRouteForPayload(System.String,Soundbite.Api.AppPayload)">
+            <summary>
+            Find the orgRoute for the current request
+            </summary>
+            <param name="orgRoute"></param>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.Api.Services.SpaService.ProcessRefreshToken(System.String)">
+            <summary>
+            Determines whether the refresh token is valid and if so setups up the security context
+            for the user specified in the refresh token.
+            </summary>
+            <param name="refreshToken">Refresh token.</param>
+            <returns><c>true</c> if the security context was successfully updated with user information otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Services.SpaService.GetAppPayload(System.Boolean,System.Boolean,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Retrieves the initial application payload containing information required for the
+            application to load.  
+            </summary>
+            <param name="includeConfig">Flag indicating whether the application configuration should be included in the payload.</param>
+            <param name="includeUserInfo">Flag indicating whether user information should be included (if available) in the payload.</param>
+            <param name="orgRoute">Specifies the initial organization route the application is requesting to display (for token retrieval).</param>
+            <param name="isThirdPartyTokenValid">Flag indicating that the unvalidated token in the security context is a valid third-party token.</param>
+            <param name="createUser">Optionally use the current user info to create a user if missing</param>
+            <returns>an <see cref="T:Soundbite.Api.AppPayload"/> instance containing as much application initialization data as is available.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Services.SpaService.GetAppPayload_Obsolete(System.Boolean,System.Boolean,System.String,System.Boolean)">
+            <summary>
+             TODO: REMOVE WHEN AGED OUT
+            </summary>
+            <param name="includeConfig"></param>
+            <param name="includeUserInfo"></param>
+            <param name="orgRoute"></param>
+            <param name="isThirdPartyTokenValid"></param>
+            <returns></returns>
+            <exception cref="T:Masticore.Exceptions.UserSafeException"></exception>
+        </member>
+        <member name="M:Soundbite.Api.Services.SpaService.LoginFromThirdParty(Masticore.Models.User)">
+            <summary>
+            Attempts a login with a third-party authentication token.
+            </summary>
+            <param name="externalUserInfo">Information about the external user that should be added to soundbite.</param>
+            <returns>an <see cref="T:Soundbite.Api.AppPayload"/> instance containing as much applicaiton initialization data as is available.</returns>
+        </member>
+        <member name="M:Soundbite.Api.Services.SpaService.GetToken(System.String)">
+            <summary>
+            Retrieves a new token for the specified organization.
+            </summary>
+            <param name="orgRoute">Route of the organization for which a token is being sought.</param>
+            <returns>an API token for the organization</returns>
+        </member>
+        <member name="M:Soundbite.Api.Services.SpaService.HandleInitialUserCreation(Soundbite.Api.IAppPayload,System.Boolean)">
+            <summary>
+            Determines whether an initial user should be created based on the request state.
+            </summary>
+            <param name="appPayload">Application payload.</param>
+            <param name="isThirdPartyTokenValid">Flag indicating that the third party token has been validated.</param>
+            <returns>a task indicating success or failure of the operation.</returns>
+        </member>
+        <member name="T:Soundbite.Api.Startup">
+            <summary>
+            Instantiated when the API project starts up, configuring all ASP.Net Core settings
+            </summary>
+        </member>
+        <member name="F:Soundbite.Api.Startup.EnvTest">
+            <summary>
+            Environment name for test.soundbite.cloud
+            </summary>
+        </member>
+        <member name="F:Soundbite.Api.Startup.EnvNgrok">
+            <summary>
+            Environment name for localhost tunneled out to the internet via ngrok (https://ngrok.com/)
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.Startup.IsAirplaneMode">
+            <summary>
+            Gets a flag indicating if the app is running without internet
+            </summary>
+        </member>
+        <member name="P:Soundbite.Api.Startup.Configuration">
+            <summary>
+            Gets the IConfiguration for this setup
+            </summary>
+        </member>
+        <member name="M:Soundbite.Api.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Constructor for capturing the core configuration object
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:Soundbite.Api.Startup.DefaultTokenServiceSettings">
+            <summary>
+            Reads the default token service settings from the application config and places them 
+            into the <see cref="P:Masticore.Token.TokenServiceSettings.DefaultTokenServiceSettings"/> static property.  
+            This is the fallback value used when no other configuration is defined.
+            </summary>        
+        </member>
+        <member name="M:Soundbite.Api.Startup.TeamsAppAzureSettings(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Loads TeamsAppAzureSettings from the application configuration settings.
+            </summary>
+            <param name="services">Reference to the services container for the application.</param>
+        </member>
+        <member name="M:Soundbite.Api.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds services to the app
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:Soundbite.Api.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment,Microsoft.Extensions.Logging.ILogger{Soundbite.Api.Startup})">
+            <summary>
+            Responsible for setting up the HTTP request pipeline.
+            </summary>
+            <param name="app">Application builder reference.</param>
+            <param name="env">Environmental information used to vary setup by environment.</param>
+            <param name="logger">Reference to the logging mechanism.</param>
+        </member>
+        <member name="T:Soundbite.Api.StartupExtensions">
+            <summary>
+            Extensions added by configuring the Blob container via Publish configuration
+            </summary>
+        </member>
+        <member name="T:Soundbite.App.Controllers.OrganizationsController">
+            <summary>
+            Controller with endpoints for interacting with Organizations.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
+        </member>
+        <member name="M:Soundbite.App.Controllers.OrganizationsController.#ctor(Masticore.Services.IOrganizationService,Soundbite.Services.ISbOrganizationService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Soundbite.App.Controllers.OrganizationsController"/> class.
+            </summary>
+            <param name="orgService">IOrganizationService DI reference.</param>
+            <param name="sbOrgService">IOrganizationWithFeedService DI reference.</param>
+        </member>
+        <member name="M:Soundbite.App.Controllers.OrganizationsController.ReadAllAsync">
+            <summary>
+            Gets a list of all the active organizations to which the current user has access.
+            </summary>
+            <returns>a list of all the active organizations to which the current user has access.</returns>
+        </member>
+        <member name="M:Soundbite.App.Controllers.OrganizationsController.CreateAsync(Masticore.Models.Organization)">
+            <summary>
+            Creates a new organization
+            </summary>
+            <param name="organization">Organization to create.</param>
+            <returns>a reference to the new organization populated with any server-side values.</returns>
+        </member>
+        <member name="M:Soundbite.App.Controllers.OrganizationsController.ReadAllAsGodAsync">
+            <summary>
+            Gets an array containing all of the active organizations in the system.
+            </summary>
+            <returns>an array containing all of the active organizations in the system.</returns>
+        </member>
+        <member name="M:Soundbite.App.Controllers.OrganizationsController.ReadAllArchivedAsync">
+            <summary>
+            Gets a list of all the archived organizations to which the current user has access.
+            </summary>
+            <returns>a list of all the archived organizations to which the current user has access.</returns>
+        </member>
+        <member name="M:Soundbite.App.Controllers.OrganizationsController.ReadAsync(System.String)">
+            <summary>
+            Gets an organization by route.
+            </summary>
+            <param name="orgRoute">Route of the organization to retrieve.</param>
+            <returns>a organization instance with feed information if found, otherwise throws an HTTP 404 not found exception.</returns>
+        </member>
+        <member name="M:Soundbite.App.Controllers.OrganizationsController.DeleteAsync(System.String)">
+            <summary>
+            Performs a "soft" delete of the organization.
+            </summary>
+            <param name="orgRoute">Route of the organization to "soft" delete.</param>
+        </member>
+        <member name="M:Soundbite.App.Controllers.OrganizationsController.ReadNotificationSettingsAsync(System.String)">
+            <summary>
+            Read the <see cref="T:Soundbite.OrgNotificationSettings"/> for the given org
+            </summary>
+            <param name="orgRoute"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.App.Controllers.OrganizationsController.ReadSessionSettingsAsync(System.String)">
+            <summary>
+            Read the <see cref="T:Soundbite.OrgSessionSettings"/> for the given org
+            </summary>
+            <param name="orgRoute"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.App.Controllers.OrganizationsController.UpdateNotificationSettingsAsync(System.String,Soundbite.OrgNotificationSettings)">
+            <summary>
+            Update the <see cref="T:Soundbite.OrgNotificationSettings"/> for the given org
+            </summary>
+            <param name="orgRoute"></param>
+            <param name="settings"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.App.Controllers.OrganizationsController.UpdateSessionSettingsAsync(System.String,Soundbite.OrgSessionSettings)">
+            <summary>
+            Update the <see cref="T:Soundbite.OrgSessionSettings"/> for the given org
+            </summary>
+            <param name="orgRoute">Route of the organization to update.</param>
+            <param name="settings">Session settings to apply to the organization.</param>
+            <returns>a <see cref="T:Soundbite.OrgSessionSettings"/> instance with current settings.</returns>
+        </member>
+        <member name="M:Soundbite.App.Controllers.OrganizationsController.ReadAzureSettingsAsync(System.String)">
+            <summary>
+            Read the <see cref="T:Soundbite.OrgAzureSettings"/> for the given org
+            </summary>
+            <param name="orgRoute">Route of the organization whose Azure settings are being requested.</param>
+            <returns>the requested azure settings or <c>null</c> if the settings are not available.</returns>
+        </member>
+        <member name="M:Soundbite.App.Controllers.OrganizationsController.UpdateAzureSettingsAsync(System.String,Soundbite.OrgAzureSettings)">
+            <summary>
+            Update the <see cref="T:Soundbite.OrgAzureSettings"/> for the given org
+            </summary>
+            <param name="orgRoute"></param>
+            <param name="settings"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.App.Controllers.OrganizationsController.ReadPermissionsAsync(System.String)">
+            <summary>
+            Read the <see cref="T:Soundbite.OrgAzureSettings"/> for the given org
+            </summary>
+            <param name="orgRoute"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.App.Controllers.OrganizationsController.UpdatePermissionsAsync(System.String,Soundbite.OrgPermissions)">
+            <summary>
+            Update the <see cref="T:Soundbite.OrgAzureSettings"/> for the given org
+            </summary>
+            <param name="orgRoute"></param>
+            <param name="settings"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.App.Controllers.OrganizationsController.RestoreAsync(System.String)">
+            <summary>
+            Restores an organization that was "soft" deleted.
+            </summary>
+            <param name="orgRoute">Route of the organization to restore.</param>
+            <returns>a organization instance if found, otherwise throws an HTTP 404 not found exception.</returns>
+        </member>
+        <member name="M:Soundbite.App.Controllers.OrganizationsController.PatchAsync(System.String,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument)">
+            <summary>
+            Patches the specified organization according to the patch instructions.
+            </summary>
+            <param name="orgRoute">Route of the organization to patch.</param>
+            <param name="changes">Patch instructions identifying what changes to apply to the organization.</param>
+            <returns>an organization instance containing updated information (if found), otherwise throws an HTTP 404 not found exception.</returns>
+        </member>
+        <member name="M:Soundbite.App.Controllers.OrganizationsController.UploadImageAsync(System.String)">
+            <summary>
+            Uploads an "avatar" image to associate with the organization.  The image sent to this
+            endpoint must be included in the body of the request a FormData file.  Any file name 
+            associated with the image file in the FormData is discarded.
+            </summary>
+            <param name="orgRoute">Route of the organization to which the image is associated.</param>
+            <returns>a string containing the URL at which the image may be retrieved. This value contains a short lived access token.</returns>
+        </member>
+        <member name="M:Soundbite.App.Controllers.OrganizationsController.UpdateThemeAsync(System.String,Soundbite.Settings.Theme)">
+            <summary>
+            Updates the theme for the given org; null theme indicating we want to clear the theme back to default
+            </summary>
+            <param name="orgRoute"></param>
+            <param name="theme"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.App.Controllers.OrganizationsController.SetOrgToken(System.String,System.String)">
+            <summary>
+            Ensures that there is an Azure Media Services account setup and associated with the org.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.App.Controllers.OrganizationsController.SyncOrgTokenWithAmsContentKeyPolicy(System.String)">
+            <summary>
+            Ensures that there is an Azure Media Services account setup and associated with the org.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.App.Controllers.OrganizationsController.EnsureAmsContentKeyPolicy(System.String)">
+            <summary>
+            Ensures that there is an Azure Media Services account setup and associated with the org.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Soundbite.App.Controllers.OrganizationsController.ReadAmsStreamingUrl(System.String)">
+            <summary>
+            Retrieves the Azure Media Services (AMS) streaming URL prefix for the organization.
+            This value is required for the public media player.
+            </summary>
+            <param name="orgRoute">Route of the organization whose AMS streaming URL prefix is being sought.</param>
+            <returns>a string containing the AMS prefix URL or <c>null</c> if the value is not configured.</returns>
+        </member>
+        <member name="T:Soundbite.App.NoSecurityMiddleware">
+            <summary>
+            Middleware responsible for managing security and setting up the <see cref="T:Masticore.Security.ISecurityContext"/> 
+            for the Soundbite application.  
+            </summary>
+            <remarks>
+            THIS IS A WORK IN PROGRESS AND IT DOES NOT YET WORK RELIABLY
+            </remarks>
+        </member>
+        <member name="F:Soundbite.App.NoSecurityMiddleware._next">
+            <summary>
+            Stores a reference to the next item to execute in the middleware pipeline.
+            </summary>
+        </member>
+        <member name="M:Soundbite.App.NoSecurityMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            Creates a new <see cref="T:Soundbite.App.SecurityMiddleware"/> instance.
+            </summary>
+            <param name="next">Reference to the next item to execute in the middleware pipeline.</param>
+        </member>
+        <member name="M:Soundbite.App.NoSecurityMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext,Masticore.Security.ISecurityContext,Masticore.Entity.IIdentityInfrastructure,AutoMapper.IMapper)">
+            <summary>
+            Called when the middleware executes within the middleware pipeline.
+            </summary>
+            <param name="httpContext">HTTP context containing request information.</param>
+            <param name="securityContext">Security context reference.</param>
+            <param name="infrastructure">Infrastructure service reference.</param>
+            <param name="mapper">Mapper reference.</param>
+            <returns>task indicating success or failure of the operation</returns>
+        </member>
+        <member name="T:Soundbite.App.NoSecurityMiddlewareHandler">
+            <summary>
+            This enables running the app locally without internet access by just reading the DB and assuming the current user is the first user and checking routes for other context
+            </summary>
+        </member>
+        <member name="M:Soundbite.App.NoSecurityMiddlewareHandler.#ctor(Microsoft.AspNetCore.Http.HttpContext,Masticore.Security.ISecurityContext,Masticore.Entity.IIdentityInfrastructure,AutoMapper.IMapper)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="httpContext"></param>
+            <param name="securityContext"></param>
+            <param name="infrastructure"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:Soundbite.App.NoSecurityMiddlewareHandler.InvokeAsync">
+            <summary>
+            Called when the middleware executes within the middleware pipeline.
+            </summary>
+        </member>
+        <member name="T:Soundbite.App.SecurityMiddleware">
+            <summary>
+            Middleware responsible for managing security and setting up the <see cref="T:Masticore.Security.ISecurityContext"/> 
+            for the Soundbite application.  
+            </summary>
+        </member>
+        <member name="F:Soundbite.App.SecurityMiddleware._next">
+            <summary>
+            Stores a reference to the next item to execute in the middleware pipeline.
+            </summary>
+        </member>
+        <member name="M:Soundbite.App.SecurityMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            Creates a new <see cref="T:Soundbite.App.SecurityMiddleware"/> instance.
+            </summary>
+            <param name="next">Reference to the next item to execute in the middleware pipeline.</param>
+        </member>
+        <member name="M:Soundbite.App.SecurityMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext,Masticore.Services.ISecurityContextService,Masticore.Security.ISecurityContext,Microsoft.Extensions.Logging.ILogger{Soundbite.App.SecurityMiddleware},Masticore.Services.ITenantService,Masticore.Entity.IIdentityInfrastructure,Masticore.Services.ITokenDataService,Masticore.Services.IUserService,AutoMapper.IMapper,Masticore.Services.IOrganizationService,Masticore.Services.IMemberService)">
+            <summary>
+            Called when the middleware executes within the middleware pipeline.
+            </summary>
+            <param name="httpContext">HTTP context containing request information.</param>
+            <param name="securityContextService">Security context service reference.</param>
+            <param name="securityContext">Security context reference.</param>
+            <param name="logger">Logger service reference.</param>
+            <param name="tenantService">Tenant service reference.</param>
+            <param name="infrastructure">Infrastructure service reference.</param>
+            <param name="tokenDataService">Token data service reference.</param>        
+            <param name="userService">User service reference.</param>
+            <param name="mapper">Mapper reference.</param>
+            <param name="organizationService">Organization service DI reference.</param>
+            <param name="memberService">Member service DI reference.</param>
+            <returns>task indicating success or failure of the operation</returns>
+        </member>
+        <member name="T:Soundbite.App.SecurityMiddlewareHandler">
+            <summary>
+            Contains the processing logic for running the security middleware.  Middleware is only 
+            instantiated once, so methods directly in a middleware class must be treated like static
+            methods, which can make it cumbersome to pass around services and data. This class is
+            instantiated by the middleware on each request to process security logic.
+            </summary>
+        </member>
+        <member name="M:Soundbite.App.SecurityMiddlewareHandler.#ctor(Microsoft.AspNetCore.Http.HttpContext,Masticore.Services.ISecurityContextService,Masticore.Security.ISecurityContext,Microsoft.Extensions.Logging.ILogger{Soundbite.App.SecurityMiddleware},Masticore.Services.ITenantService,Masticore.Entity.IIdentityInfrastructure,Masticore.Services.ITokenDataService,Masticore.Services.IUserService,AutoMapper.IMapper,Masticore.Services.IOrganizationService,Masticore.Services.IMemberService)">
+            <summary>
+            Manages services and properties for the Soundbite Security Middleware.
+            </summary>
+            <param name="httpContext">HTTP context containing request information.</param>
+            <param name="securityContextService">Security context service reference.</param>
+            <param name="securityContext">Security context reference.</param>
+            <param name="logger">Logger service reference.</param>
+            <param name="tenantService">Tenant service reference.</param>
+            <param name="infrastructure">Infrastructure service reference.</param>
+            <param name="tokenDataService">Token data service reference.</param>        
+            <param name="userService">User service reference.</param>
+            <param name="mapper">Mapper reference.</param>
+            <param name="organizationService">Organization service DI reference.</param>
+            <param name="memberService">Member service DI reference.</param>
+        </member>
+        <member name="M:Soundbite.App.SecurityMiddlewareHandler.InvokeAsync">
+            <summary>
+            Called when the middleware executes within the middleware pipeline.
+            </summary>
+            <returns>task indicating success or failure of the operation</returns>
+        </member>
+        <member name="M:Soundbite.App.SecurityMiddlewareHandler.PopulateBearerToken">
+            <summary>
+            Extracts the bearer token from the request and populates it into the security context.
+            </summary>
+            <returns>a string containing the value of the bearer token, or <c>null</c> if no bearer token is found.</returns>
+        </member>
+        <member name="M:Soundbite.App.SecurityMiddlewareHandler.PopulateBearerTokenJwt">
+            <summary>
+            Attempts to parse the raw bearer token into a <see cref="T:System.IdentityModel.Tokens.Jwt.JwtSecurityToken"/>, and stores
+            the JWT token in the security context.
+            </summary>
+            <returns>a boolean value indicating whether the bearer token was succesfully parsed as a JWT.</returns>
+        </member>
+        <member name="M:Soundbite.App.SecurityMiddlewareHandler.GetUnvalidatedClaim(System.String)">
+            <summary>
+            Acquires the value of claim from the unvalidated JWT token.
+            </summary>
+            <param name="claimName">Name of the claim to retrieve.</param>
+            <returns>the value of the claim or <c>null</c> if the claim is not present.</returns>
+        </member>
+        <member name="M:Soundbite.App.SecurityMiddlewareHandler.PopulateSoundbiteToken">
+            <summary>
+            Responsbile for parsing the token using token encryption settings associated with the
+            organization specified in the org route claim.  This establishes the token signature is 
+            valid and claims issued by a trusted source, but no validation has occured on the 
+            organization / user contained in the claims (e.g. they could be disabled, etc).
+            </summary>
+            <returns><c>true</c>if the token has a valid signature, otherwise <c>false</c>.</returns>
+        </member>
+    </members>
+</doc>

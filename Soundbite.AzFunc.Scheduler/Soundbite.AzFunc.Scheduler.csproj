@@ -1,0 +1,55 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<AzureFunctionsVersion>v4</AzureFunctionsVersion>
+		<UserSecretsId>5b3a3ac5-ce13-40a0-82ad-9d30c3342656</UserSecretsId>
+		<PreserveCompilationReferences>true</PreserveCompilationReferences>
+		<PreserveCompilationContext>true</PreserveCompilationContext>
+		<_FunctionsSkipCleanOutput>true</_FunctionsSkipCleanOutput>
+		<Configurations>Debug;Release;DebugWithCodeGen;DebugNoSecurity</Configurations>
+		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+	</PropertyGroup>
+	<ItemGroup>
+	  <None Remove="FFMpeg\bin\ffmpeg.exe" />
+	  <None Remove="FFMpeg\bin\ffprobe.exe" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Content Include="FFMpeg\bin\ffmpeg.exe">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="FFMpeg\bin\ffprobe.exe">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="10.1.1" />
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
+		<PackageReference Include="Azure.Identity" Version="1.10.0" />
+		<PackageReference Include="Microsoft.ApplicationInsights.WorkerService" Version="2.20.0" />
+		<PackageReference Include="Microsoft.AspNetCore.AzureKeyVault.HostingStartup" Version="2.0.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Razor" Version="2.2.0" />
+		<PackageReference Include="Microsoft.Azure.Functions.Extensions" Version="1.1.0" />
+		<PackageReference Include="Microsoft.Azure.WebJobs.Extensions.EventGrid" Version="3.2.1" />
+		<PackageReference Include="Microsoft.Azure.WebJobs.Extensions.Storage" Version="4.0.4" />
+		<PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.1.1" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Soundbite.Api\Soundbite.Api.csproj" />
+		<ProjectReference Include="..\Soundbite.AzFun\Soundbite.AzFun.csproj" />
+		<ProjectReference Include="..\Soundbite.Mail\Soundbite.Messaging.csproj" />
+		<ProjectReference Include="..\Soundbite.Services\Soundbite.Services.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="host.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="local.settings.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToPublishDirectory>Never</CopyToPublishDirectory>
+		</None>
+	</ItemGroup>
+	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+	  <Exec Command="xcopy &quot;..\FFMpeg\&quot; &quot;$(ProjectDir)FFMpeg\&quot; /S /I /R /Y /D" />
+	</Target>
+</Project>

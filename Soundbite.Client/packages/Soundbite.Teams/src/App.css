@@ -1,0 +1,16 @@
+.appContainer {
+}
+
+.appContainerInner {
+}
+
+.tabConfig input {
+  border: solid 1px lightgray;
+  padding: 5px;
+  width: 100%;
+  color: dimgray;
+}
+
+.configLabel {
+  font-size: 12px;
+}

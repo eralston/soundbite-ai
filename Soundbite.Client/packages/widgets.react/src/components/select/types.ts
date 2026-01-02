@@ -1,0 +1,169 @@
+// This file is directly imported from the react-select-async-paginate project due to React version conflicts
+// https://github.com/vtaits/react-select-async-paginate
+// At some point, we should catch up to React 17, then it should be possible to replace these files with the real npm package again
+
+import { ReactElement, Ref } from "react";
+import Select, {
+  InputActionMeta,
+  OptionTypeBase,
+  Props as SelectProps,
+} from "react-select";
+
+// Brought in directly from recent react-select
+// https://github.com/JedWatson/react-select/blob/2d3d6afe18421ea5b6c3f8f0db479ad323c35639/packages/react-select/src/types.ts
+
+export interface GroupBase<Option> {
+  readonly options: readonly Option[];
+  readonly label?: string;
+}
+
+export type OptionsOrGroups<
+  Option,
+  Group extends GroupBase<Option>
+> = readonly (Option | Group)[];
+
+// Original code
+
+export declare type ReduceOptions<
+  OptionType,
+  Group extends GroupBase<OptionType>,
+  Additional
+> = (
+  prevOptions: OptionsOrGroups<OptionType, Group>,
+  loadedOptions: OptionsOrGroups<OptionType, Group>,
+  additional: Additional
+) => OptionsOrGroups<OptionType, Group>;
+export declare type OptionsCacheItem<
+  OptionType,
+  Group extends GroupBase<OptionType>,
+  Additional
+> = {
+  isFirstLoad: boolean;
+  isLoading: boolean;
+  options: OptionsOrGroups<OptionType, Group>;
+  hasMore: boolean;
+  additional?: Additional;
+};
+export declare type OptionsCache<
+  OptionType,
+  Group extends GroupBase<OptionType>,
+  Additional
+> = {
+  [key: string]: OptionsCacheItem<OptionType, Group, Additional>;
+};
+export declare type ShouldLoadMore = (
+  scrollHeight: number,
+  clientHeight: number,
+  scrollTop: number
+) => boolean;
+export declare type Response<
+  OptionType,
+  Group extends GroupBase<OptionType>,
+  Additional
+> = {
+  options: OptionsOrGroups<OptionType, Group>;
+  hasMore?: boolean;
+  additional?: Additional;
+};
+export declare type LoadOptions<
+  OptionType,
+  Group extends GroupBase<OptionType>,
+  Additional
+> = (
+  inputValue: string,
+  options: OptionsOrGroups<OptionType, Group>,
+  additional?: Additional
+) =>
+  | Response<OptionType, Group, Additional>
+  | Promise<Response<OptionType, Group, Additional>>;
+export declare type FilterOption =
+  | ((option: any, rawInput: string) => boolean)
+  | null;
+export declare type UseAsyncPaginateBaseResult<
+  OptionType,
+  Group extends GroupBase<OptionType>
+> = {
+  handleScrolledToBottom: () => void;
+  shouldLoadMore: ShouldLoadMore;
+  isLoading: boolean;
+  isFirstLoad: boolean;
+  options: OptionsOrGroups<OptionType, Group>;
+  filterOption: FilterOption;
+};
+export declare type UseAsyncPaginateResult<
+  OptionType,
+  Group extends GroupBase<OptionType>
+> = UseAsyncPaginateBaseResult<OptionType, Group> & {
+  inputValue: string;
+  menuIsOpen: boolean;
+  onInputChange: (inputValue: string, actionMeta: InputActionMeta) => void;
+  onMenuClose: () => void;
+  onMenuOpen: () => void;
+};
+export declare type UseAsyncPaginateParams<
+  OptionType,
+  Group extends GroupBase<OptionType>,
+  Additional
+> = {
+  loadOptions: LoadOptions<OptionType, Group, Additional>;
+  options?: OptionsOrGroups<OptionType, Group>;
+  defaultOptions?: boolean | OptionsOrGroups<OptionType, Group>;
+  additional?: Additional;
+  defaultAdditional?: Additional;
+  loadOptionsOnMenuOpen?: boolean;
+  debounceTimeout?: number;
+  reduceOptions?: ReduceOptions<OptionType, Group, Additional>;
+  shouldLoadMore?: ShouldLoadMore;
+  filterOption?: FilterOption;
+  inputValue?: string;
+  menuIsOpen?: boolean;
+  defaultInputValue?: string;
+  defaultMenuIsOpen?: boolean;
+  onInputChange?: (newValue: string, actionMeta: InputActionMeta) => void;
+  onMenuClose?: () => void;
+  onMenuOpen?: () => void;
+};
+export declare type UseAsyncPaginateBaseParams<
+  OptionType,
+  Group extends GroupBase<OptionType>,
+  Additional
+> = UseAsyncPaginateParams<OptionType, Group, Additional> & {
+  inputValue: string;
+  menuIsOpen: boolean;
+};
+export declare type ComponentProps<
+  OptionType extends OptionTypeBase,
+  Group extends GroupBase<OptionType>,
+  IsMulti extends boolean
+> = {
+  selectRef?: Ref<Select<OptionType, IsMulti>>;
+  cacheUniqs?: ReadonlyArray<any>;
+};
+export declare type AsyncPaginateProps<
+  OptionType extends OptionTypeBase,
+  Group extends GroupBase<OptionType>,
+  Additional,
+  IsMulti extends boolean
+> = SelectProps<OptionType, IsMulti> &
+  UseAsyncPaginateParams<OptionType, Group, Additional> &
+  ComponentProps<OptionType, Group, IsMulti>;
+export declare type WithAsyncPaginateType = <
+  OptionType extends OptionTypeBase,
+  Group extends GroupBase<OptionType>,
+  Additional,
+  IsMulti extends boolean = false
+>(
+  props: AsyncPaginateProps<OptionType, Group, Additional, IsMulti>
+) => ReactElement;
+
+// CUSTOM CODE FROM SOUNDBITE
+
+export interface IOption {
+  value: string;
+  label: string;
+}
+
+// Regrettable type spaghetti because they abused generics in react-select-async-pagingate
+export type ILoadOptionGroup = GroupBase<IOption>;
+export type ILoadOptionsRequest = OptionsOrGroups<IOption, ILoadOptionGroup>;
+export type ILoadOptionsResponse = Response<IOption, ILoadOptionGroup, any>;

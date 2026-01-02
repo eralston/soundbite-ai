@@ -1,0 +1,31 @@
+<html>
+	<head>
+	</head>
+	<body>
+
+		<script type="text/javascript">
+
+      var x = URL.createObjectURL("NoDuration.webm");
+      alert(x);
+
+			function onDurationChanged(event) {
+				let d = document.getElementById("durationOutput");
+				d.innerHTML = "Duration: " + event.target.duration;
+
+				if (event.target.duration == Infinity) {
+					d.innerHTML = "Duration: infinity and beyond";
+				}
+
+
+				
+
+			}
+		</script>
+
+
+
+		<div id="durationOutput">asdfasdf</div>
+		<video src="NoDuration.webm" controls="controls" ondurationchange="onDurationChanged(event)" />
+
+	</body>
+</html>

@@ -1,0 +1,60 @@
+{
+  "name": "@soundbite/spa-teams",
+  "private": true,
+  "description": "React application that hosts the Microsoft Teams application for Soundbite.",
+  "version": "0.1.0",
+  "author": "Soundbite.AI",
+  "dependencies": {
+    "@emotion/react": "^11.1.5",
+    "@microsoft/teams-js": "^1.6.0",
+    "@soundbite/api": "^1.0.0",
+    "@soundbite/api-axios": "^1.0.0",
+    "@soundbite/widgets-react": "^1.0.0",
+    "mobx": "^6.3.2",
+    "mobx-react-lite": "^3.2.0",
+    "msteams-react-base-component": "1.1.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
+    "react-select": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.0.11",
+    "@types/react": "^17.0.45",
+    "@types/react-dom": "^17.0.17",
+    "@types/react-router-dom": "^5.1.7",
+    "@types/react-select": "^3.0.13",
+    "http-proxy-middleware": "2.0.1",
+    "prettier": "^2.2.1",
+    "react-scripts": "^4.0.3",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.7.4"
+  },
+  "scripts": {
+    "build": "react-scripts --openssl-legacy-provider build",
+    "build:test": "SET \"REACT_APP_TEAMS_WEB_URL=https://teams.test.soundbite.cloud/\" && SET \"REACT_APP_API_URL=https://test.soundbite.cloud/api/v1/\" && npm run clean && react-scripts --openssl-legacy-provider build",
+    "clean": "rimraf ./build",
+    "eject": "react-scripts eject",
+    "format": "prettier --write src/**/*.{ts,tsx,scss,css,json}",
+    "start": "SET \"REACT_APP_TEAMS_WEB_URL=https://soundbite.ai.ngrok.io/\" && SET \"REACT_APP_API_URL=https://soundbite.ai.ngrok.io/api/\" && set PORT=4001 && npm run clean && react-scripts --openssl-legacy-provider start",
+    "test": "echo \"No Tests Configured\" && exit 0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

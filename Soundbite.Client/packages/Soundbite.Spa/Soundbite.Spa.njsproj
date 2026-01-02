@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+	<PropertyGroup>
+		<VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">14.0</VisualStudioVersion>
+		<VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+		<Name>Soundbite.Spa</Name>
+		<RootNamespace>Soundbite.Spa</RootNamespace>
+		<SaveNodeJsSettingsInProjectFile>True</SaveNodeJsSettingsInProjectFile>
+		<JavaScriptTestRoot>.</JavaScriptTestRoot>
+	</PropertyGroup>
+	<Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+	<PropertyGroup>
+		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+		<SchemaVersion>2.0</SchemaVersion>
+		<ProjectGuid>f0158014-bd89-4a36-b455-7f3ef29a5274</ProjectGuid>
+		<ProjectHome>.</ProjectHome>
+		<StartupFile>start.js</StartupFile>
+		<StartWebBrowser>True</StartWebBrowser>
+		<SearchPath>
+		</SearchPath>
+		<WorkingDirectory>.</WorkingDirectory>
+		<OutputPath>.</OutputPath>
+		<TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+		<ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
+		<NodejsPort>1337</NodejsPort>
+		<EnableTypeScript>true</EnableTypeScript>
+		<StartWebBrowser>True</StartWebBrowser>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+		<DebugSymbols>true</DebugSymbols>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+		<DebugSymbols>true</DebugSymbols>
+	</PropertyGroup>
+	<ItemGroup>
+		<Folder Include="build\" />
+		<Folder Include="build\audio\" />
+		<Folder Include="build\img\" />
+		<Folder Include="build\img\avatars\" />
+		<Folder Include="build\img\logos\" />
+		<Folder Include="build\img\Microsoft\" />
+		<Folder Include="build\img\Sessions\" />
+		<Folder Include="build\static\" />
+		<Folder Include="build\static\css\" />
+		<Folder Include="build\static\js\" />
+		<Folder Include="public\" />
+		<Folder Include="public\audio\" />
+		<Folder Include="public\img\" />
+		<Folder Include="public\img\avatars\" />
+		<Folder Include="public\img\logos\" />
+		<Folder Include="public\img\Microsoft\" />
+		<Folder Include="public\img\Sessions\" />
+		<Folder Include="public\js\" />
+		<Folder Include="src\" />
+		<Folder Include="src\%40types\" />
+		<Folder Include="src\admin\" />
+		<Folder Include="src\admin\components\" />
+		<Folder Include="src\admin\components\views\" />
+		<Folder Include="src\admin\store\" />
+		<Folder Include="src\components\" />
+		<Folder Include="src\components\cards\" />
+		<Folder Include="src\components\controls\" />
+		<Folder Include="src\components\controls\__snapshots__\" />
+		<Folder Include="src\components\dialogs\" />
+		<Folder Include="src\components\login\" />
+		<Folder Include="src\components\nav\" />
+		<Folder Include="src\components\views\" />
+		<Folder Include="src\modules\" />
+		<Folder Include="src\sdk\providers\auth\" />
+		<Folder Include="src\sdk\" />
+		<Folder Include="src\sdk\api\" />
+		<Folder Include="src\sdk\api\enums\" />
+		<Folder Include="src\sdk\api\models\" />
+		<Folder Include="src\sdk\api\services\" />
+		<Folder Include="src\sdk\providers\" />
+		<Folder Include="src\sdk\providers\calendar\" />
+		<Folder Include="src\store\" />
+		<Folder Include="src\styles\" />
+	</ItemGroup>
+	<ItemGroup>
+		<Content Include=".env.production" />
+		<Content Include=".env.development" />
+		<Content Include=".gitignore" />
+		<Content Include=".prettierignore" />
+		<Content Include="package-lock.json" />
+		<Content Include="package.json" />
+		<Content Include="public\apple-touch-icon-114x114.png" />
+		<Content Include="public\apple-touch-icon-120x120.png" />
+		<Content Include="public\apple-touch-icon-144x144.png" />
+		<Content Include="public\apple-touch-icon-152x152.png" />
+		<Content Include="public\apple-touch-icon-57x57.png" />
+		<Content Include="public\apple-touch-icon-60x60.png" />
+		<Content Include="public\apple-touch-icon-72x72.png" />
+		<Content Include="public\apple-touch-icon-76x76.png" />
+		<Content Include="public\audio\Amelia Earheart.mp3" />
+		<Content Include="public\audio\Brene Brown.mp3" />
+		<Content Include="public\audio\Les Brown.mp3" />
+		<Content Include="public\audio\Martin Luther King.mp3" />
+		<Content Include="public\audio\Neil Armstrong.mp3" />
+		<Content Include="public\browserconfig.xml" />
+		<Content Include="public\favicon-128.png" />
+		<Content Include="public\favicon-16x16.png" />
+		<Content Include="public\favicon-196x196.png" />
+		<Content Include="public\favicon-32x32.png" />
+		<Content Include="public\favicon-96x96.png" />
+		<Content Include="public\favicon.ico" />
+		<Content Include="public\img\avatars\amelia.png" />
+		<Content Include="public\img\avatars\brene.png" />
+		<Content Include="public\img\avatars\Erik.jpg" />
+		<Content Include="public\img\avatars\les.png" />
+		<Content Include="public\img\avatars\martin.jpg" />
+		<Content Include="public\img\avatars\neil.png" />
+		<Content Include="public\img\default-avatar-big.png" />
+		<Content Include="public\img\default-avatar-group.png" />
+		<Content Include="public\img\default-avatar.png" />
+		<Content Include="public\img\empty-card-art.png" />
+		<Content Include="public\img\logomark_transparent.png" />
+		<Content Include="public\img\logos\soundbite.png" />
+		<Content Include="public\img\logos\stark.png" />
+		<Content Include="public\img\logo_transparent.png" />
+		<Content Include="public\img\logo_white.png" />
+		<Content Include="public\img\Microsoft\Office.svg" />
+		<Content Include="public\img\Sessions\Announcement.png" />
+		<Content Include="public\img\Sessions\Meeting.png" />
+		<Content Include="public\img\Sessions\Survey.png" />
+		<Content Include="public\index.html" />
+		<Content Include="public\js\argon.min.js" />
+		<Content Include="public\manifest.json" />
+		<Content Include="public\mstile-144x144.png" />
+		<Content Include="public\mstile-150x150.png" />
+		<Content Include="public\mstile-310x150.png" />
+		<Content Include="public\mstile-310x310.png" />
+		<Content Include="public\mstile-70x70.png" />
+		<Content Include="README.md" />
+		<Content Include="start.js" />
+		<Content Include="src\registerServiceWorker.js" />
+		<Content Include="src\setupTests.js" />
+		<Content Include="src\styles\argon-dashboard-react.css" />
+		<Content Include="src\styles\custom.css" />
+		<Content Include="src\styles\NavMenu.css" />
+		<Content Include="tsconfig.json" />
+	</ItemGroup>
+	<ItemGroup>
+		<TypeScriptCompile Include="src\%40types\mic-recorder-to-mp3.d.ts" />
+		<TypeScriptCompile Include="src\admin\components\Layout.tsx" />
+		<TypeScriptCompile Include="src\admin\components\views\Home.tsx" />
+		<TypeScriptCompile Include="src\admin\components\views\OrganizationEdit.tsx" />
+		<TypeScriptCompile Include="src\admin\components\views\OrganizationList.tsx" />
+		<TypeScriptCompile Include="src\admin\store\AdminStore.tsx" />
+		<TypeScriptCompile Include="src\admin\store\OrgStore.tsx" />
+		<TypeScriptCompile Include="src\App.tsx" />
+		<TypeScriptCompile Include="src\components\controls\Graph.ts" />
+		<TypeScriptCompile Include="src\components\controls\DateTimePicker.tsx">
+			<SubType>Code</SubType>
+		</TypeScriptCompile>
+		<TypeScriptCompile Include="src\components\controls\ParticipantSummary.tsx" />
+		<TypeScriptCompile Include="src\components\controls\RecurrenceSummary.tsx" />
+		<TypeScriptCompile Include="src\components\controls\RelativeDate.tsx" />
+		<TypeScriptCompile Include="src\components\controls\SeriesDetailsBtn.tsx" />
+		<TypeScriptCompile Include="src\components\controls\OrgTabs.tsx" />
+		<TypeScriptCompile Include="src\components\controls\SoloPlayer.tsx" />
+		<TypeScriptCompile Include="src\components\controls\Toggle.tsx">
+			<SubType>Code</SubType>
+		</TypeScriptCompile>
+		<TypeScriptCompile Include="src\components\dialogs\DeleteOrgDlg.tsx" />
+		<TypeScriptCompile Include="src\components\dialogs\EditTeamDialog.tsx" />
+		<TypeScriptCompile Include="src\components\controls\GroupPicker.tsx" />
+		<TypeScriptCompile Include="src\components\dialogs\DeleteSessionDlg.tsx" />
+		<TypeScriptCompile Include="src\components\dialogs\EditSessionDlg.tsx" />
+		<TypeScriptCompile Include="src\components\login\Authorize.tsx" />
+		<TypeScriptCompile Include="src\components\views\Reports.tsx" />
+		<TypeScriptCompile Include="src\components\views\UnAuthorized.tsx" />
+		<TypeScriptCompile Include="src\components\views\MyCalendar.tsx" />
+		<TypeScriptCompile Include="src\components\views\ViewRouterOrgs.tsx" />
+		<TypeScriptCompile Include="src\index.tsx" />
+		<TypeScriptCompile Include="src\modules\PatchService.ts" />
+		<TypeScriptCompile Include="src\react-app-env.d.ts" />
+		<TypeScriptCompile Include="src\%40types\react-progress.button.d.ts" />
+		<TypeScriptCompile Include="src\components\cards\CalendarCard.tsx" />
+		<TypeScriptCompile Include="src\components\cards\EmptyCardBody.tsx" />
+		<TypeScriptCompile Include="src\components\cards\FeedCard.tsx" />
+		<TypeScriptCompile Include="src\components\cards\MemberCard.tsx" />
+		<TypeScriptCompile Include="src\components\cards\PeopleCard.tsx" />
+		<TypeScriptCompile Include="src\components\cards\TeamsCard.tsx" />
+		<TypeScriptCompile Include="src\components\controls\Avatar.test.tsx" />
+		<TypeScriptCompile Include="src\components\controls\Avatar.tsx" />
+		<TypeScriptCompile Include="src\components\controls\Background.ts" />
+		<TypeScriptCompile Include="src\components\controls\ContactBtn.tsx" />
+		<TypeScriptCompile Include="src\components\controls\EmailPicker.tsx" />
+		<TypeScriptCompile Include="src\components\controls\Error.tsx" />
+		<TypeScriptCompile Include="src\components\controls\FaPrepend.tsx" />
+		<TypeScriptCompile Include="src\components\controls\TimePicker.tsx" />
+		<TypeScriptCompile Include="src\components\controls\ImagePicker.tsx" />
+		<TypeScriptCompile Include="src\components\controls\InviteBtn.tsx" />
+		<TypeScriptCompile Include="src\components\controls\LabelInfo.tsx" />
+		<TypeScriptCompile Include="src\components\controls\Loader.tsx" />
+		<TypeScriptCompile Include="src\components\controls\ParticipantPicker.tsx" />
+		<TypeScriptCompile Include="src\components\controls\PeoplePicker.tsx" />
+		<TypeScriptCompile Include="src\components\controls\PlayBtn.tsx" />
+		<TypeScriptCompile Include="src\components\controls\PlayButton.tsx" />
+		<TypeScriptCompile Include="src\components\controls\RecordAndPlay.tsx" />
+		<TypeScriptCompile Include="src\components\controls\RecordBtn.tsx" />
+		<TypeScriptCompile Include="src\components\controls\RichText.tsx" />
+		<TypeScriptCompile Include="src\components\controls\SchedulePicker.tsx" />
+		<TypeScriptCompile Include="src\components\controls\SessionTypePicker.tsx" />
+		<TypeScriptCompile Include="src\components\controls\SettingsTabs.tsx" />
+		<TypeScriptCompile Include="src\components\controls\ShowWhen.tsx" />
+		<TypeScriptCompile Include="src\components\controls\SoundScrubber.tsx" />
+		<TypeScriptCompile Include="src\components\controls\SupportLink.tsx" />
+		<TypeScriptCompile Include="src\components\controls\TeamPlayer.tsx" />
+		<TypeScriptCompile Include="src\components\controls\TeamPlayerRow.tsx" />
+		<TypeScriptCompile Include="src\components\controls\TeamRecorder.tsx" />
+		<TypeScriptCompile Include="src\components\controls\TeamTabs.tsx" />
+		<TypeScriptCompile Include="src\components\controls\UserMenu.tsx" />
+		<TypeScriptCompile Include="src\components\dialogs\AddMemberDialog.tsx" />
+		<TypeScriptCompile Include="src\components\dialogs\DeleteMemberDlg.tsx" />
+		<TypeScriptCompile Include="src\components\dialogs\DeleteTeamDialog.tsx" />
+		<TypeScriptCompile Include="src\components\dialogs\DeleteUserDialog.tsx" />
+		<TypeScriptCompile Include="src\components\dialogs\DialogBase.tsx" />
+		<TypeScriptCompile Include="src\components\dialogs\ErrorDlg.tsx" />
+		<TypeScriptCompile Include="src\components\dialogs\InviteUserDialog.tsx" />
+		<TypeScriptCompile Include="src\components\dialogs\NewSessionDlg.tsx" />
+		<TypeScriptCompile Include="src\components\dialogs\NewTeamDialog.tsx" />
+		<TypeScriptCompile Include="src\components\dialogs\ProfileDialog.tsx" />
+		<TypeScriptCompile Include="src\components\dialogs\SimpleDlg.tsx" />
+		<TypeScriptCompile Include="src\components\dialogs\SingletonDialogs.tsx" />
+		<TypeScriptCompile Include="src\components\nav\Footer.tsx" />
+		<TypeScriptCompile Include="src\components\nav\Header.tsx" />
+		<TypeScriptCompile Include="src\components\nav\SideNav.tsx" />
+		<TypeScriptCompile Include="src\components\nav\TopNav.tsx" />
+		<TypeScriptCompile Include="src\components\views\Calendar.tsx" />
+		<TypeScriptCompile Include="src\components\views\Feed.tsx" />
+		<TypeScriptCompile Include="src\components\views\Home.tsx" />
+		<TypeScriptCompile Include="src\components\views\Login.tsx" />
+		<TypeScriptCompile Include="src\components\views\MyFeed.tsx" />
+		<TypeScriptCompile Include="src\components\views\People.tsx" />
+		<TypeScriptCompile Include="src\components\views\Private.tsx" />
+		<TypeScriptCompile Include="src\components\views\Public.tsx" />
+		<TypeScriptCompile Include="src\components\views\Team.tsx" />
+		<TypeScriptCompile Include="src\components\views\Teams.tsx" />
+		<TypeScriptCompile Include="src\components\views\Test.tsx" />
+		<TypeScriptCompile Include="src\components\views\ViewRouter.tsx" />
+		<TypeScriptCompile Include="src\components\views\Waiter.tsx" />
+		<TypeScriptCompile Include="src\modules\Recorder.ts" />
+		<TypeScriptCompile Include="src\modules\ShowErrors.ts" />
+		<TypeScriptCompile Include="src\modules\Utils.ts" />
+		<TypeScriptCompile Include="src\sdk\api\enums\CalendarInteractionType.enum.ts" />
+		<TypeScriptCompile Include="src\sdk\api\enums\ClipType.enum.ts" />
+		<TypeScriptCompile Include="src\sdk\api\enums\CodeGenScenarioType.enum.ts" />
+		<TypeScriptCompile Include="src\sdk\api\enums\FileType.enum.ts" />
+		<TypeScriptCompile Include="src\sdk\api\enums\index.ts" />
+		<TypeScriptCompile Include="src\sdk\api\enums\MemberRole.enum.ts" />
+		<TypeScriptCompile Include="src\sdk\api\enums\ParticipantRole.enum.ts" />
+		<TypeScriptCompile Include="src\sdk\api\enums\ParticipantState.enum.ts" />
+		<TypeScriptCompile Include="src\sdk\api\enums\PersonRole.enum.ts" />
+		<TypeScriptCompile Include="src\sdk\api\enums\ProviderType.enum.ts" />
+		<TypeScriptCompile Include="src\sdk\api\enums\Recurrence.enum.ts" />
+		<TypeScriptCompile Include="src\sdk\api\enums\SecurityOpType.enum.ts" />
+		<TypeScriptCompile Include="src\sdk\api\enums\SessionType.enum.ts" />
+		<TypeScriptCompile Include="src\sdk\api\enums\TokenSecurityLevel.enum.ts" />
+		<TypeScriptCompile Include="src\sdk\api\enums\TokenSecurityType.enum.ts" />
+		<TypeScriptCompile Include="src\sdk\api\enums\UserRole.enum.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\AdClientConfig.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\AppPayload.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\CalendarEntry.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\ClientOp.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\ClientOpRunInfo.model.ts">
+			<SubType>Code</SubType>
+		</TypeScriptCompile>
+		<TypeScriptCompile Include="src\sdk\api\models\ClientOpWrapper.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\Clip.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\ClipWithContributor.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\FeatureFlags.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\Group.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\IInvited.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\index.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\Invite.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\InviteResult.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\IResource.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\IRoute.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\Member.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\NewClip.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\NewGroup.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\NewMember.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\NewParticipant.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\NewParticipantGroup.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\NewSession.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\Organization.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\OrganizationDetails.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\OrganizationExtended.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\OrganizationWithFeed.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\Participant.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\ParticipantGroup.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\ParticipantStateUpdate.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\Person.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\Prompt.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\PromptWithClips.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\RecurrencePattern.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\ResourceBase.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\Series.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\SeriesPreview.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\SeriesDetails.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\Session.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\SessionCalendarEntry.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\SessionDetails.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\SpaConfig.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\TokenInfo.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\models\User.model.ts" />
+		<TypeScriptCompile Include="src\sdk\api\services\index.ts" />
+		<TypeScriptCompile Include="src\sdk\api\services\members.service.ts" />
+		<TypeScriptCompile Include="src\sdk\api\services\organizations.service.ts" />
+		<TypeScriptCompile Include="src\sdk\api\services\people.service.ts" />
+		<TypeScriptCompile Include="src\sdk\api\services\series.service.ts" />
+		<TypeScriptCompile Include="src\sdk\api\services\sessions.service.ts" />
+		<TypeScriptCompile Include="src\sdk\api\services\spa.service.ts" />
+		<TypeScriptCompile Include="src\sdk\api\services\teams.service.ts" />
+		<TypeScriptCompile Include="src\sdk\api\services\users.service.ts" />
+		<TypeScriptCompile Include="src\sdk\AppSdk.ts" />
+		<TypeScriptCompile Include="src\sdk\NavService.ts" />
+		<TypeScriptCompile Include="src\sdk\providers\auth\AuthState.ts" />
+		<TypeScriptCompile Include="src\sdk\providers\calendar\CalendarEntryType.ts" />
+		<TypeScriptCompile Include="src\sdk\providers\calendar\AadCalendarProvider.ts" />
+		<TypeScriptCompile Include="src\sdk\providers\calendar\ICalendarProvider.ts" />
+		<TypeScriptCompile Include="src\sdk\providers\ProviderFactory.ts" />
+		<TypeScriptCompile Include="src\sdk\providers\auth\AadAuthProvider.ts" />
+		<TypeScriptCompile Include="src\sdk\providers\auth\IAuthProvider.ts" />
+		<TypeScriptCompile Include="src\sdk\Domain.ts" />
+		<TypeScriptCompile Include="src\sdk\DomainUtils.ts" />
+		<TypeScriptCompile Include="src\sdk\EnvironmentSettings.ts" />
+		<TypeScriptCompile Include="src\sdk\GraphSdk.ts" />
+		<TypeScriptCompile Include="src\sdk\BrowserStorageService.ts" />
+		<TypeScriptCompile Include="src\sdk\PublicError.ts" />
+		<TypeScriptCompile Include="src\sdk\Service.ts" />
+		<TypeScriptCompile Include="src\sdk\HttpService.ts" />
+		<TypeScriptCompile Include="src\sdk\ClientOpService.ts" />
+		<TypeScriptCompile Include="src\sdk\StorageValue.ts" />
+		<TypeScriptCompile Include="src\sdk\ThrowPublic.ts" />
+		<TypeScriptCompile Include="src\store\Spa.Store.ts">
+			<SubType>Code</SubType>
+		</TypeScriptCompile>
+	</ItemGroup>
+	<Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
+	<ProjectExtensions>
+		<VisualStudio>
+			<FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+				<WebProjectProperties>
+					<UseIIS>False</UseIIS>
+					<AutoAssignPort>True</AutoAssignPort>
+					<DevelopmentServerPort>0</DevelopmentServerPort>
+					<DevelopmentServerVPath>/</DevelopmentServerVPath>
+					<IISUrl>http://localhost:48022/</IISUrl>
+					<NTLMAuthentication>False</NTLMAuthentication>
+					<UseCustomServer>True</UseCustomServer>
+					<CustomServerUrl>http://localhost:1337</CustomServerUrl>
+					<SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+				</WebProjectProperties>
+			</FlavorProperties>
+			<FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+				<WebProjectProperties>
+					<StartPageUrl>
+					</StartPageUrl>
+					<StartAction>CurrentPage</StartAction>
+					<AspNetDebugging>True</AspNetDebugging>
+					<SilverlightDebugging>False</SilverlightDebugging>
+					<NativeDebugging>False</NativeDebugging>
+					<SQLDebugging>False</SQLDebugging>
+					<ExternalProgram>
+					</ExternalProgram>
+					<StartExternalURL>
+					</StartExternalURL>
+					<StartCmdLineArguments>
+					</StartCmdLineArguments>
+					<StartWorkingDirectory>
+					</StartWorkingDirectory>
+					<EnableENC>False</EnableENC>
+					<AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+				</WebProjectProperties>
+			</FlavorProperties>
+		</VisualStudio>
+	</ProjectExtensions>
+</Project>

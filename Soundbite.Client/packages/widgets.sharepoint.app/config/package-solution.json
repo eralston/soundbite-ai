@@ -1,0 +1,50 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "Soundbite for Microsoft SharePoint and Viva",
+    "id": "da177017-12c5-47e1-a0cf-f95d091f5e01",
+    "version": "1.0.0.3",
+    "iconPath": "Images/SolutionIcon.png",
+    "includeClientSideAssets": false,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "metadata": {
+      "shortDescription": {
+        "default": "Soundbite™ SharePoint Webpart"
+      },
+      "longDescription": {
+        "default": "Soundbite™ SharePoint Webpart allowing you to display your entire Soundbite™ feed or the feed for a specific group in SharePoint."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "SoundbiteFeedWebPart Feature",
+        "description": "The feature that activates SoundbiteFeedWebPart.",
+        "id": "da177017-12c5-474d-85e2-cec2aec19e01",
+        "version": "1.0.0.3",
+        "componentIds": [
+          "da177017-12c5-474d-85e2-cec2aec19e01"
+        ]
+      }
+    ],
+    "webApiPermissionRequests": [
+      {
+        "resource": "Soundbite™ Platform",
+        "scope": "user_impersonation"
+      }
+    ],
+    "developer": {
+      "name": "Soundbite",
+      "websiteUrl": "https://soundbite.ai/",
+      "privacyUrl": "https://soundbite.ai/privacy-policy/",
+      "termsOfUseUrl": "https://soundbite.ai/terms-of-service/",
+      "mpnId": "6244226"
+    }
+  },
+  "paths": {
+    "zippedPackage": "solution/soundbite-webparts.sppk"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "name": "@soundbite/widgets-react-app",
+  "description": "React application designed to host Soundbite widgets in an iFrame.",
+  "version": "1.0.0",
+  "author": "Soundbite.AI",
+  "keywords": [
+    "soundbite",
+    "soundbite.ai"
+  ],
+  "license": "ISC",
+  "dependencies": {
+    "@emotion/css": "^11.1.3",
+    "@emotion/react": "^11.1.5",
+    "@soundbite/api": "^1.0.0",
+    "@soundbite/api-axios": "^1.0.0",
+    "@soundbite/widgets-api": "^1.0.0",
+    "@soundbite/widgets-react": "^1.0.0",
+    "mobx": "^6.3.2",
+    "mobx-react-lite": "^3.2.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-progress-button": "^5.1.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^4.0.3",
+    "react-scrubber": "^2.0.0",
+    "reactstrap": "^8.9.0",
+    "sanitize-html": "^2.3.3",
+    "web-vitals": "^1.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.0.11",
+    "@types/react": "^17.0.45",
+    "@types/react-dom": "^17.0.17",
+    "@types/react-router-dom": "^5.1.7",
+    "@types/sanitize-html": "^1.27.2",
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.7.4"
+  },
+  "scripts": {
+    "build": "react-scripts --openssl-legacy-provider build",
+    "clean": "rimraf ./build",
+    "eject": "react-scripts eject",
+    "format": "prettier --write src/**/*.{ts,tsx,scss,css,json}",
+    "start": "set PORT=4000 && react-scripts --openssl-legacy-provider start",
+    "test": "echo \"No tests defined\" && exit 0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

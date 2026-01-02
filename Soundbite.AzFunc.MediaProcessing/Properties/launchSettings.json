@@ -1,0 +1,16 @@
+{
+  "profiles": {
+    "Soundbite.Functions": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "SendGridApiKey": "[SENDGRID API KEY]",
+        "SB_HOME_URL": "https://localhost:3000",
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "SB_EMAIL_ENABLED": "true",
+        "SB_IS_AIRPLANE_MODE": "false",
+        "SB_SMS_ENABLED": "false",
+        "SB_TEAMS_NOTIFICATIONS_ENABLED": "true"
+      }
+    }
+  }
+}

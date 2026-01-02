@@ -1,0 +1,18 @@
+{
+  "AssemblyPaths": [
+    "Masticore.DirectorySync.Aad.dll",
+    "Masticore.DirectorySync.dll",
+    "Masticore.DirectorySync.Okta.dll",
+    "Masticore.dll",
+    "Masticore.Entity.dll",
+    "Soundbite.Api.dll",
+    "Soundbite.dll"
+  ],
+  "OutputRootDir": "..\\..\\..\\..\\Soundbite.Client\\packages\\api\\src\\generated",
+  "ControllerOutputDir": "services",
+  "ModelOutputDir": "models",
+  "EnumOutputDir": "enums",
+  "ControllerBaseClass": "Service",
+  "XmlDocFile": "..\\..\\..\\..\\Soundbite.Api\\bin\\DebugWithCodeGen\\net6.0\\Soundbite.Api.xml"
+}
+  

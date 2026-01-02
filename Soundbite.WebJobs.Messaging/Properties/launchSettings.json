@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Soundbite.WebJobs.Messaging": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

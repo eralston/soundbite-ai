@@ -1,0 +1,28 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "da177017-12c5-474d-85e2-cec2aec19e01",
+  "alias": "SoundbiteFeedWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": ["SharePointWebPart"],
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": {
+        "default": "Other"
+      },
+      "title": {
+        "default": "Soundbite Feed"
+      },
+      "description": {
+        "default": "Web part that allows SharePoint content creators to embed a user's Soundbite Feed into a SharePoint page."
+      },
+      "iconImageUrl": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAAAsSAAALEgHS3X78AAAHkElEQVR4nO3db2hVdRzH8Z8ZNGFzFs3NmUMKSdzEK26ijoVoxvSBLilbkLWsLDPdkwX+QRBk5gMJNKRIqqFPplKuHrgRTKOpabMUUlA0M9fmzUCnBq2eGN9Djq3du3twZ+f++bxfENHd5XLO7bzvPff8+f1GTMkvv+sAUQ/wPx7KCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSCADSHlRc+axRWa5y8TwXKS3pfaz75i3X8tVhd/7sxaQuG8I1Ykp++V2l99w2/ppV1a5g3NiYfz/RdsoLARrkdoHskz/exm9mVZS6iU9MCHWZkDxSAdinf9/dnngipVOTtYgImVQABYV5vp435pHRw74sSA0cBYI0qQCu/Nzhenr+Tvi8aOf1UJYHySf3DWBHeQZjgZxo+yHZi4mQyAXwzdfH3JXLV+P+3Q6B2jkBaJA7D3BPpGyqi5QWu4LCfG+Dt90ei4ONX4tsAIDjKBDUSV4LZMZPGOeqXljY+9+dHVHXtO9QUpcplpzcbDe/8ik3s3y6K5wwzrUf+9G1trRxzVJAJHeB1m2pdcvfeH7A412/Rd2amvUps3FNLpnkPmh4zxU+VjDgb3t3H3DbNu1IynJlkpF52UWblVZ4dd0K9/qal2L+LWd0tltU9bRrbmp1d27/Gfqy9VuW3Gz3RWuDezTvkZh/nzaj2I3OzXFHj5wMfdkyidRvANvtebtuxaDPsQhWvzv4c8Kwuu41b1kGY99itk64f1IBlM2Z7ut58yorhn1ZEpm/0N8y+H0eYhP7Bhi4Lx1Lok/eMMTa70/VZU1nHAaFNAKANAKANAKANAKANAKANAKANAKANAKANAKANAKANNkbYoaDXWz38splLic3x3v1ro5r7mDjIdd+/HSmrWrGIICAbN250S1ZtrD/i82OeI9trN2aknebgV2gQNhNNgM2/j7qd2zgsuUURQBDZHduLV+5LOGL2G2YSD0EMESTiyf5uibfru/n7q3UQwAhKvR5Qw7CQwCQRgCQxmFQMTb90+yKUvdk8SRvxaPXrnvjINm4qIoIQIgNCFz1v8O1Nl+a/WODcDV82Oh6/uqRek/YBRIx5uHcARt/XxbB3AVz5N4XAhAxq2JGwhW1GTLVEICIgvHxp4btS22KWAKANAIQ0X3jtq8VjXb9IfW+EIAIP4c5z5w6y1EgZCab+6xpf3PcdbPzATZBoBrOAwg50/6T677R7SqXzPcOe7reaWFPeVPDqn36OwLQY5OFf/R+g/rb0ItdIEjjG0CQXfYwc8507z6G8+cuuu+Pn3Z3biV3SqhkIQAhdkNO/c6Nrmx2pN9K23xo2zbtlLxvmQBE2K2bn7d+FvPuNXvM7ls2ahHwG0DE+i21CW/dXLdlrReKEgIQ4WfiPwvEJuVWQgAi/E6m53ciwUxBAJAmFUBnR9TX85I9SzzCIxVAa8u3vjbuvR/vD2V5kHxSAdjJHjvePZgL5y65PbsJQIXcbwA7zr321fUxvwnavzvjXln6juxZUUWSJ8Jam9tca3OlN5y5XRJgvw3skgAbHgRapM8E27j9jN2vjcOgkEYAkEYAkEYAkEYAIeryeSYa4SGAIbLDp37OLtsJts6Oaym+NnoIYIjspJmfSyd2bf8kxddEEwEEYNf2T92Xg4y5Y9Ok2sk3pB5uiQzIhrX13qTYz1YvcoX/TYZnZ5bt24Fdn9RFAAHizHL6YRcI0vgGCFhB4VhvjP2enn9ctPN3F+26nlHrl2kIICC24VdVL+odc/OeK5evusaGJslxN9MBu0ABsPm3ala9OGDjNxMfL3I1q6pd1qisNFyzzEcAAZj7TLnLynoo7gtZGH7m6EL4CCAAkdKShC9i43GmA7UBAQggJLF2j8J0uMXfiTi1E3YEEBKbgSWZ7Gx1ok/3vbsPyJ20I4AA2JGeRKKdyQ3AzkrXLF0TNwLb+Ldt2hH6ciUbh0EDYBPQ1bxVFPeFbBoiP5PUDTeLYEHZc974n32HQGza1yx7uQYBBMCmHbIJ6CoXzxtwNMgmp2tsOOj9OxXY1auK8wDEQwABsQno7BM2Ulrce8y/++Zt7zFOgqUuAgiQbeg22yLSBz+CIY0AII0AII0AII0AII0AII0AII0AUpTfqzdtYC7cPwJIUXt8DLZlo80x3tDQEECKsuFV7ArNeOyqzg219epv05CNzMsu2pzm65Cxjh456S6cu+imlZb0m+jaRqGre3Oz++XSr+pv0ZCNmJJffjfN1wG4b+wCQRoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQBoBQJdz7l9yh+HJpq2FYwAAAABJRU5ErkJggg==",
+      "properties": {
+        "description": "SoundbiteFeed"
+      }
+    }
+  ]
+}

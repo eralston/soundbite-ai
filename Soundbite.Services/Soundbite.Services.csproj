@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Configurations>Debug;Release;DebugWithCodeGen;DebugNoSecurity</Configurations>
+		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Enums\**" />
+	  <EmbeddedResource Remove="Enums\**" />
+	  <None Remove="Enums\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="File.TypeChecker" Version="1.5.1" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.19" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.19" />
+		<PackageReference Include="TagLibSharp" Version="2.2.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Masticore.Acs\Masticore.Acs.csproj" />
+		<ProjectReference Include="..\Masticore.Ai\Masticore.Ai.csproj" />
+		<ProjectReference Include="..\Masticore.Azure.MediaServices\Masticore.Azure.MediaServices.csproj" />
+		<ProjectReference Include="..\Masticore.DirectorySync.Aad\Masticore.DirectorySync.Aad.csproj" />
+		<ProjectReference Include="..\Masticore.DirectorySync.Interact\Masticore.DirectorySync.Interact.csproj" />
+		<ProjectReference Include="..\Masticore.DirectorySync.Okta\Masticore.DirectorySync.Okta.csproj" />
+		<ProjectReference Include="..\Masticore.Entity\Masticore.Entity.csproj" />
+		<ProjectReference Include="..\Masticore.Queue\Masticore.Queue.csproj" />
+		<ProjectReference Include="..\Masticore.Services\Masticore.Services.csproj" />
+		<ProjectReference Include="..\Masticore.Video\Masticore.Media.csproj" />
+		<ProjectReference Include="..\Masticore\Masticore.csproj" />
+		<ProjectReference Include="..\Soundbite.Entity\Soundbite.Entity.csproj" />
+	</ItemGroup>
+
+</Project>

@@ -1,0 +1,4 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/write-manifests.schema.json",
+  "cdnBasePath": "https://storage.usw.soundbite.cloud/cdn/spfx/autoVersion/v1.0.0.3"
+}

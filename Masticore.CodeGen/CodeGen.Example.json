@@ -1,0 +1,11 @@
+{
+  "AssemblyPaths": [
+    "..\\..\\..\\..\\[Project]\\bin\\Debug\\net6.0\\[Assembly].dll"
+  ],
+  "OutputRootDir": "..\\..\\..\\src",
+  "ControllerOutputDir": "sdk\\api\\services",
+  "ModelOutputDir": "sdk\\api\\models",
+  "EnumOutputDir": "sdk\\api\\enums",
+  "XmlDocFile": "..\\..\\..\\..\\[Project]\\[Project].xml",
+  "ControllerBaseClass": "Service"
+}

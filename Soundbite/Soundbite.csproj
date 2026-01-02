@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Configurations>Debug;Release;DebugWithCodeGen;DebugNoSecurity</Configurations>
+		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Masticore.Mail\Masticore.Mail.csproj" />
+		<ProjectReference Include="..\Masticore.Transcription\Masticore.Transcription.csproj" />
+		<ProjectReference Include="..\Masticore.Video\Masticore.Media.csproj" />
+		<ProjectReference Include="..\Masticore\Masticore.csproj" />
+	</ItemGroup>
+
+</Project>

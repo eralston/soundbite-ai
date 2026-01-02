@@ -1,0 +1,242 @@
+[
+  {
+    "name": "APPINSIGHTS_PROFILERFEATURE_VERSION",
+    "value": "1.0.0",
+    "slotSetting": false
+  },
+  {
+    "name": "APPLICATIONINSIGHTS_CONNECTION_STRING",
+    "value": "InstrumentationKey=4a949745-83d8-4991-a0f3-8586a96b2985;IngestionEndpoint=https://westus2-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westus2.livediagnostics.monitor.azure.com/;ApplicationId=fe64c67a-e398-4f62-a218-1647c4784424",
+    "slotSetting": false
+  },
+  {
+    "name": "ApplicationInsightsAgent_EXTENSION_VERSION",
+    "value": "~2",
+    "slotSetting": false
+  },
+  {
+    "name": "AzureAd:ClientId",
+    "value": "5b9f8382-d360-4309-a5a1-b3b6e5b53a3e",
+    "slotSetting": false
+  },
+  {
+    "name": "AzureAd:ClientSecret",
+    "value": ".ecs91a62o-5Rt.7BOrtJU2_de-FYNzA8i",
+    "slotSetting": false
+  },
+  {
+    "name": "AzureAd:Domain",
+    "value": "soundbite.ai",
+    "slotSetting": false
+  },
+  {
+    "name": "AzureAd:Instance",
+    "value": "https://login.microsoftonline.com/",
+    "slotSetting": false
+  },
+  {
+    "name": "AzureAd:TenantId",
+    "value": "common",
+    "slotSetting": false
+  },
+  {
+    "name": "AzureCommunicationServiceConnectionString",
+    "value": "endpoint=https://sb-usw-tst-acs.communication.azure.com/;accesskey=RhTRaYg5sYE7qCemnN8e6QhXfCK5Xs0zEzz3cjyapvuJXfvN+DErvflY8++z5ZGXQePwIYHLrzRtfpbcDhWbRQ==",
+    "slotSetting": false
+  },
+  {
+    "name": "AzureCommunicationServiceFromEmail",
+    "value": "DoNotReply@ac9d4a3f-4b9f-4638-a068-913b37e6e23a.azurecomm.net",
+    "slotSetting": false
+  },
+  {
+    "name": "AzureCommunicationServiceFromName",
+    "value": "Soundbite.AI (Test)",
+    "slotSetting": false
+  },
+  {
+    "name": "AzureMediaServiceSettings:DefaultPrimaryStorageAccountId",
+    "value": "/subscriptions/64e8005c-5447-427f-853a-ad21affdf7c1/resourceGroups/sb-usw-tst/providers/Microsoft.Storage/storageAccounts/sbuswtststr1",
+    "slotSetting": false
+  },
+  {
+    "name": "AzureMediaServiceSettings:DefaultPrimaryStorageAccountLocation",
+    "value": "West US 2",
+    "slotSetting": false
+  },
+  {
+    "name": "AzureMediaServiceSettings:DefaultResourceGroupName",
+    "value": "sb-usw-tst",
+    "slotSetting": false
+  },
+  {
+    "name": "AzureMediaServiceSettings:MediaServiceAccountName",
+    "value": "sbtstmedia2",
+    "slotSetting": false
+  },
+  {
+    "name": "AzureMediaServiceSettings:MediaTokenAudience",
+    "value": "sbuser",
+    "slotSetting": false
+  },
+  {
+    "name": "AzureMediaServiceSettings:ResourceGroupName",
+    "value": "sb-usw-tst",
+    "slotSetting": false
+  },
+  {
+    "name": "AzureMediaServiceSettings:SubscriptionId",
+    "value": "64e8005c-5447-427f-853a-ad21affdf7c1",
+    "slotSetting": false
+  },
+  {
+    "name": "AzureMediaServiceSettings:TenantId",
+    "value": "e5f75632-637d-4d2e-a8a7-e8f6993acb74",
+    "slotSetting": false
+  },
+  {
+    "name": "AzureTranscriptionSettings:Key",
+    "value": "44aa4f12ac1048638c4b57cc465d226f",
+    "slotSetting": false
+  },
+  {
+    "name": "AzureTranscriptionSettings:Region",
+    "value": "westus",
+    "slotSetting": false
+  },
+  {
+    "name": "AzureWebJobsStorage",
+    "value": "DefaultEndpointsProtocol=https;AccountName=sbuswtstmediafnc;AccountKey=K8VipR07VFdEFn9k2kT+8QgWaQsSEuSiltEpHcqK6JjcRpr3IxCrpVXiHXeKbGgDAkqwvwHgqrdw+ASt0AJzeQ==;BlobEndpoint=https://sbuswtstmediafnc.blob.core.windows.net/;FileEndpoint=https://sbuswtstmediafnc.file.core.windows.net/;TableEndpoint=https://sbuswtstmediafnc.table.core.windows.net/;QueueEndpoint=https://sbuswtstmediafnc.queue.core.windows.net/",
+    "slotSetting": true
+  },
+  {
+    "name": "AzureWebJobsStorage__blob",
+    "value": "https://sbuswtstmediafnc.blob.core.windows.net/",
+    "slotSetting": true
+  },
+  {
+    "name": "AzureWebJobsStorage__file",
+    "value": "https://sbuswtstmediafnc.file.core.windows.net/",
+    "slotSetting": true
+  },
+  {
+    "name": "AzureWebJobsStorage__queue",
+    "value": "https://sbuswtstmediafnc.queue.core.windows.net/",
+    "slotSetting": true
+  },
+  {
+    "name": "AzureWebJobsStorage__table",
+    "value": "https://sbuswtstmediafnc.table.core.windows.net/",
+    "slotSetting": true
+  },
+  {
+    "name": "DiagnosticServices_EXTENSION_VERSION",
+    "value": "~3",
+    "slotSetting": false
+  },
+  {
+    "name": "FUNCTIONS_EXTENSION_VERSION",
+    "value": "~4",
+    "slotSetting": false
+  },
+  {
+    "name": "FUNCTIONS_WORKER_RUNTIME",
+    "value": "dotnet",
+    "slotSetting": false
+  },
+  {
+    "name": "OpenAiSettings__ApiKey",
+    "value": "b651e6b9b8594ff8b8cf13e91a4bbd4d",
+    "slotSetting": false
+  },
+  {
+    "name": "OpenAiSettings__Deployment",
+    "value": "sb-usc-test-aim",
+    "slotSetting": false
+  },
+  {
+    "name": "OpenAiSettings__Endpoint",
+    "value": "https://sb-usc-tst-oai.openai.azure.com/",
+    "slotSetting": false
+  },
+  {
+    "name": "OpenAiSettings__Region",
+    "value": "southcentralus",
+    "slotSetting": false
+  },
+  {
+    "name": "SB_DEFAULT_APP_ID",
+    "value": "5b9f8382-d360-4309-a5a1-b3b6e5b53a3e",
+    "slotSetting": false
+  },
+  {
+    "name": "SB_DEFAULT_APP_SECRET",
+    "value": ".ecs91a62o-5Rt.7BOrtJU2_de-FYNzA8i",
+    "slotSetting": false
+  },
+  {
+    "name": "SB_HOME_URL",
+    "value": "https://test.soundbite.cloud",
+    "slotSetting": false
+  },
+  {
+    "name": "SB_TEAMS_NOTIFICATIONS_ENABLED",
+    "value": "true",
+    "slotSetting": false
+  },
+  {
+    "name": "SbStorage",
+    "value": "DefaultEndpointsProtocol=https;AccountName=sbuswtststr1;AccountKey=01koMCsryjKjaCp5el7gwzz57dW8/7HBFarkipPJVefwMubGbRUIXWXPDLqVP/Wo2ELMhAFpo1qk+AStO7vWdg==;EndpointSuffix=core.windows.net",
+    "slotSetting": false
+  },
+  {
+    "name": "TeamsAppAzureSettings__BaseUrl",
+    "value": "https://teams.microsoft.com/l/entity/da177017-fd24-4cac-bc27-8c9228e6234c/soundbitemyfeed?webUrl=https://www.soundbite.ai",
+    "slotSetting": false
+  },
+  {
+    "name": "TeamsAppAzureSettings__ClientId",
+    "value": "ed1c5618-aa30-4bea-8c78-7295fdf786cd",
+    "slotSetting": false
+  },
+  {
+    "name": "TeamsAppAzureSettings__SecretKey",
+    "value": "JgT7Q~2occRii3coJHcTsHVtTLwDf3O8txY2e",
+    "slotSetting": false
+  },
+  {
+    "name": "TwilioAccountSID",
+    "value": "ACad922139070fc1154753c30dfea98256",
+    "slotSetting": false
+  },
+  {
+    "name": "TwilioAuthToken",
+    "value": "a23a3e3b1ad4e7aa684da1ec96d38906",
+    "slotSetting": false
+  },
+  {
+    "name": "TwilioPhoneNumber",
+    "value": "+12517662363",
+    "slotSetting": false
+  },
+  {
+    "name": "VaultUri",
+    "value": "https://sbuswtstvlt.vault.azure.net/",
+    "slotSetting": true
+  },
+  {
+    "name": "VaultUri__scope",
+    "value": "https://vault.azure.net/.default",
+    "slotSetting": true
+  },
+  {
+    "name": "WEBSITE_RUN_FROM_PACKAGE",
+    "value": "1",
+    "slotSetting": false
+  },
+  {
+    "name": "WEBSITE_USE_PLACEHOLDER_DOTNETISOLATED",
+    "value": "1",
+    "slotSetting": false
+  }
+]

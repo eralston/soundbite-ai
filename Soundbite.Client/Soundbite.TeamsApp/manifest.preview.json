@@ -1,0 +1,83 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.9",
+    "version": "1.0.11",
+    "showLoadingIndicator": false,
+    "id": "da177017-fd24-4cac-bc27-8c9228e6234b",
+    "packageName": "soundbite.teams.app.preview",
+    "developer": {
+        "name": "Soundbite Inc.",
+        "websiteUrl": "https://www.soundbite.ai",
+        "privacyUrl": "https://soundbite.ai/privacy-policy/",
+        "termsOfUseUrl": "https://soundbite.ai/terms-of-service/",
+        "mpnId": "6244226"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "Soundbite™ (Preview)",
+        "full": "Soundbite™ for Microsoft Teams (Preview)"
+    },
+    "description": {
+        "short": "Soundbite™ for Microsoft Teams enables next-gen collaboration and communications",
+        "full": "Soundbite™ for Microsoft Teams & Viva is the short-form communications platform that transforms employee engagement, communications, and collaboration.\r\n\r\nEmployees need the convenience of Soundbite™ to feel deeply connected to their work and hear directly from their leaders. With employee engagement at an all-time low, meeting overload, long form content, and endless emails are no longer best practice.\r\n\r\nMore than legacy communications and collaboration, Soundbite™ lets you share short-form content that engages with people where they work.\r\n\r\nSoundbite™ streamlines short-form content creation, distribution, and engagement for everyone with our beautiful design and unprecedented user experience. Soundbite™ brings a breath of fresh air to communicators and collaborators with a consumer app-like convenience directly from Microsoft Teams.\r\n\r\nWith a unified experience for Microsoft Teams and Viva, Soundbite™ enables internal and external communications and next-generation hybrid collaboration for every type of team. \r\n\r\nBuilt for companies of all sizes and industries, Soundbite™ is a must-have tool for communications, marketing, and collaborative teams that want to communicate better.\r\n\r\nGive it a try today! [https://soundbite.ai/contact/](https://soundbite.ai/contact/)\r\n\r\nNote; you need to have an active Soundbite™ account to use this app."
+    },
+    "accentColor": "#8965E0",
+    "configurableTabs": [
+        {
+            "configurationUrl": "https://teams.preview.soundbite.cloud/FeedTabConfig",
+            "canUpdateConfiguration": true,
+            "scopes": [
+                "team"
+            ],
+            "context": [
+                "channelTab"
+            ]
+        }
+    ],
+    "staticTabs": [
+        {
+            "entityId": "soundbitemyfeed",
+            "name": "My Feed",
+            "contentUrl": "https://teams.preview.soundbite.cloud/FeedTab",
+            "websiteUrl": "https://www.soundbite.ai",
+            "scopes": [
+                "personal"
+            ]
+        },
+        {
+            "entityId": "about",
+            "scopes": [
+                "personal"
+            ]
+        }
+    ],
+	"activities": {
+		"activityTypes": [
+			{
+				"type": "soundbiteCreated",
+				"description": "New Soundbite™",
+				"templateText": "New Soundbite™"
+			}
+		]
+	},
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+	"devicePermissions": [
+		"media",
+		"notifications",
+		"openExternal"
+	],
+    "validDomains": [
+		"preview.soundbite.cloud",	
+		"www.soundbite.ai"
+    ],
+	"webApplicationInfo": {
+		"id": "793bcd25-810d-403c-b553-55b94b52a794",
+		"resource": "api://teams.preview.soundbite.cloud/793bcd25-810d-403c-b553-55b94b52a794"		
+  }
+}

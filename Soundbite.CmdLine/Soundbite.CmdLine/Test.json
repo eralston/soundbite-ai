@@ -1,0 +1,22 @@
+﻿{
+  "Name": "SPFX Build for Test Environment",
+  "Actions": [
+    {
+      "Name": "Build SPFX WebParts",
+      "Params": [
+        {
+          "Name": "VersionStable",
+          "Value": "1.0.0.3"
+        },
+        {
+          "Name": "VersionAuto",
+          "Value": "1.0.0.3"
+        },
+        {
+          "Name": "TargetEnv",
+          "Value": "Test"
+        }
+      ]
+    }
+  ]
+}

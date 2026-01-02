@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.19" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.1.19" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="3.1.19" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.9" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.9" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.19" />    
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Masticore.Services\Masticore.Services.csproj" />
+    <ProjectReference Include="..\Soundbite.EnvConfig\Soundbite.EnvConfig.csproj" />
+    <ProjectReference Include="..\Soundbite.Mail\Soundbite.Messaging.csproj" />
+    <ProjectReference Include="..\Soundbite.Services\Soundbite.Services.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Content Remove="appsettings.*.json" />
+	<Content Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="appsettings.*.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <DependentUpon>appsettings.json</DependentUpon>
+    </Content>
+  </ItemGroup>
+  
+  
+
+</Project>
