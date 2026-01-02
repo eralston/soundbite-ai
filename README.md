@@ -11,6 +11,8 @@ The platform was initially designed to manage secure audio content (MP3 audio) t
 - Microsoft Teams app, including publishing into the MS Teams marketplace
 - M365 SharePoint/Vive widgets
 
+<img width="1920" height="1080" alt="Workflows and Security 2022Q3-917df75d-5ee0-44bc-ab1f-95bc2d6ac1b2" src="https://github.com/user-attachments/assets/64caa7c7-add7-4abf-9ae4-088821b21093" />
+
 The enterprise-ready features includes:
 - Reporting on audience behavior and platform activity
 - SSO and directory data sync (users and groups) with Microsoft Entra (Azure Active Directory) and Okta
