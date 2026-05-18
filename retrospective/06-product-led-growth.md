@@ -12,15 +12,15 @@ Soundbite already contains real PLG DNA: user/person/member invitation flows, re
 
 ### Code-level examples
 - Invite and notification domain:
-  - `/home/runner/work/soundbite-ai/soundbite-ai/Masticore/Services/INotificationService.cs`
-  - `/home/runner/work/soundbite-ai/soundbite-ai/Masticore.Services/Invite.cs`
-  - `/home/runner/work/soundbite-ai/soundbite-ai/Masticore/Models/Invite.cs`
+  - `Masticore/Services/INotificationService.cs`
+  - `Masticore.Services/Invite.cs`
+  - `Masticore/Models/Invite.cs`
 - Frontend invite usage:
-  - `/home/runner/work/soundbite-ai/soundbite-ai/Soundbite.Client/packages/widgets.react/src/store/UserStore.ts`
-  - `/home/runner/work/soundbite-ai/soundbite-ai/Soundbite.Client/packages/widgets.react/src/store/PersonStore.ts`
-  - `/home/runner/work/soundbite-ai/soundbite-ai/Soundbite.Client/packages/widgets.react/src/store/MemberStore.ts`
+  - `Soundbite.Client/packages/widgets.react/src/store/UserStore.ts`
+  - `Soundbite.Client/packages/widgets.react/src/store/PersonStore.ts`
+  - `Soundbite.Client/packages/widgets.react/src/store/MemberStore.ts`
 - Feature flags:
-  - `/home/runner/work/soundbite-ai/soundbite-ai/Soundbite.Api/Models/FeatureFlags.cs`
+  - `Soundbite.Api/Models/FeatureFlags.cs`
   - environment appsettings files under `Soundbite.Api` and `Soundbite.WebJobs.Messaging`
 
 ### Benefits already present
@@ -57,4 +57,3 @@ A communications manager invites colleagues into an organization and team contex
 - Build PLG loops as reusable platform capabilities
 - Align growth events to monetization and expansion models
 - Preserve enterprise trust while reducing onboarding friction
-

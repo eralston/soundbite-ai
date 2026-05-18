@@ -6,19 +6,19 @@ Soundbite’s architecture combines a central .NET API with service-layer domain
 ## Current State in the Codebase
 ### In-depth backend architecture
 - API host:
-  - `/home/runner/work/soundbite-ai/soundbite-ai/Soundbite.Api`
+  - `Soundbite.Api/`
 - Business/domain layer:
-  - `/home/runner/work/soundbite-ai/soundbite-ai/Soundbite.Services`
+  - `Soundbite.Services/`
 - Data layer:
-  - `/home/runner/work/soundbite-ai/soundbite-ai/Soundbite.Entity`
-  - `/home/runner/work/soundbite-ai/soundbite-ai/Masticore.Entity`
+  - `Soundbite.Entity/`
+  - `Masticore.Entity/`
 - Background workers:
   - Azure Functions under `Soundbite.AzFunc.*`
   - Legacy WebJob under `Soundbite.WebJobs.Messaging`
 
 ### In-depth frontend architecture
 - Workspace root:
-  - `/home/runner/work/soundbite-ai/soundbite-ai/Soundbite.Client`
+  - `Soundbite.Client/`
 - Core app packages:
   - `packages/Soundbite.Spa`
   - `packages/Soundbite.Teams`
@@ -63,4 +63,3 @@ A company launching internal short-form executive updates can use the same core 
 - Decouple feed/read scaling early
 - Standardize frontend platform and ownership boundaries
 - Keep enterprise integration depth while reducing platform complexity
-

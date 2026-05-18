@@ -5,8 +5,8 @@ Soundbite evolved into a broad Azure-hosted enterprise media platform with a C#/
 
 ## Current State in the Codebase
 ### In-depth architecture footprint
-- Backend API: `Soundbite.Api` (`/home/runner/work/soundbite-ai/soundbite-ai/Soundbite.Api`)
-- Domain services: `Soundbite.Services` (`/home/runner/work/soundbite-ai/soundbite-ai/Soundbite.Services`)
+- Backend API: `Soundbite.Api` (`Soundbite.Api/`)
+- Domain services: `Soundbite.Services` (`Soundbite.Services/`)
 - Data model: `Soundbite.Entity` + `Masticore.Entity` with EF Core SQL model (`SbDb`)
 - Async processing: Azure Queue + Functions projects:
   - `Soundbite.AzFunc.MediaProcessing`
@@ -57,4 +57,3 @@ An enterprise communications team can publish short-form announcements in a secu
 - Design for cross-platform CI from day one
 - Standardize deployment topology and background processing model early
 - Keep generated contracts, but formalize governance and versioning policy
-

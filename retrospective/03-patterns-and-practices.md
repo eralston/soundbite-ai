@@ -20,14 +20,14 @@ The codebase demonstrates practical enterprise patterns: layered service archite
 
 ### Real examples in repository
 - Security and request context:
-  - `/home/runner/work/soundbite-ai/soundbite-ai/Soundbite.Api/Middleware/SecurityMiddleware.cs`
+  - `Soundbite.Api/Middleware/SecurityMiddleware.cs`
 - Service composition:
-  - `/home/runner/work/soundbite-ai/soundbite-ai/Soundbite.Api/SbApiUtils.cs`
-  - `/home/runner/work/soundbite-ai/soundbite-ai/Soundbite.Services/SbServicesUtils.cs`
+  - `Soundbite.Api/SbApiUtils.cs`
+  - `Soundbite.Services/SbServicesUtils.cs`
 - Queue abstraction:
-  - `/home/runner/work/soundbite-ai/soundbite-ai/Masticore.Queue/AzQueue.cs`
+  - `Masticore.Queue/AzQueue.cs`
 - Contract generation:
-  - `/home/runner/work/soundbite-ai/soundbite-ai/Masticore.CodeGen/Runner.cs`
+  - `Masticore.CodeGen/Runner.cs`
 
 ### Friction points in current practice
 - Many obsolete endpoints/models remain active for compatibility
@@ -57,4 +57,3 @@ An engineering team adding a new notification channel can plug into existing not
 - Remove obsolete code paths on schedule
 - Equalize quality gates across backend and frontend
 - Include security/process checks as first-class CI gates
-

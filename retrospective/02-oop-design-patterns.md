@@ -21,11 +21,11 @@ Soundbite uses classic object-oriented patterns heavily and intentionally: facto
   - `AddSbApi`, `AddMessaging`, `AddOrgSync`, `AddRbac`, etc.
 
 ### Where this appears concretely
-- `/home/runner/work/soundbite-ai/soundbite-ai/Soundbite.Services/DirectorySyncStrategyFactory.cs`
-- `/home/runner/work/soundbite-ai/soundbite-ai/Soundbite.Services/SbServicesUtils.cs`
-- `/home/runner/work/soundbite-ai/soundbite-ai/Soundbite.Api/SbApiUtils.cs`
-- `/home/runner/work/soundbite-ai/soundbite-ai/Soundbite.AzFun/AzFunUtils.cs`
-- `/home/runner/work/soundbite-ai/soundbite-ai/Soundbite.Services/Services/SessionService.cs`
+- `Soundbite.Services/DirectorySyncStrategyFactory.cs`
+- `Soundbite.Services/SbServicesUtils.cs`
+- `Soundbite.Api/SbApiUtils.cs`
+- `Soundbite.AzFun/AzFunUtils.cs`
+- `Soundbite.Services/Services/SessionService.cs`
 
 ### Benefits and tradeoffs observed
 - Benefits:
@@ -59,4 +59,3 @@ When adding or changing directory sync providers, engineering can route behavior
 - Enforce deprecation SLAs and removals
 - Standardize interface granularity to avoid over-abstraction
 - Add architecture linting and dependency graph CI checks
-

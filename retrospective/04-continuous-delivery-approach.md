@@ -6,14 +6,14 @@ The current pipeline successfully builds, tests, and packages major backend/fron
 ## Current State in the Codebase
 ### In-depth current delivery approach
 - Primary CI definition:
-  - `/home/runner/work/soundbite-ai/soundbite-ai/azure-pipelines.yml`
+  - `azure-pipelines.yml`
 - Key behavior:
   - Trigger on `trunk`
   - Backend restore/test/build/publish
   - Frontend Node install/build
   - Artifact publishing for API, Functions, WebJobs, UI bundles
 - Test behavior:
-  - .NET test projects executed with a `Heavy!=true` filter in pipeline config
+  - .NET test projects executed with a `Heavy != true` filter in pipeline config
 
 ### Strengths
 - Unified pipeline handling backend and frontend
@@ -51,4 +51,3 @@ For the engineering team, the build pipeline provides predictable packaging outp
 - Add formal release policies and quality gates
 - Tie deploy progression to live reliability metrics
 - Keep deployment definitions versioned and transparent with code
-
