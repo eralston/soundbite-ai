@@ -51,4 +51,3 @@ The engineering team could deliver differentiated capabilities (Teams integratio
 3. Operationalize reliability and security as first-class product capabilities.
 4. Keep abstractions, but reduce unnecessary surface area.
 5. Build growth instrumentation and experimentation into the platform from day one.
-

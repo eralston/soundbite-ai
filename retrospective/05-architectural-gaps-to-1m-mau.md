@@ -48,4 +48,3 @@ A large enterprise campaign publishes many short videos in a day and expects imm
 - Build event replay/idempotency in by default
 - Design global media delivery from the first enterprise launch
 - Operationalize reliability as a product requirement
-
